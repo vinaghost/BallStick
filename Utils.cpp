@@ -49,6 +49,7 @@ void Utils::gotoXY(int pX, int pY) {
 	coord.Y = pY;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
+
 COORD Utils::getCursor() {
 	CONSOLE_SCREEN_BUFFER_INFO cbsi;
 	if (GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cbsi)) {

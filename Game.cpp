@@ -38,7 +38,7 @@ bool Game::isContinue() {
 	return tiepTuc;
 }
 
-char Game::waitKeyBoard() {
+int Game::waitKeyBoard() {
 	command = toupper(_getch());
 	return command;
 }

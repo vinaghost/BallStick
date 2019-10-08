@@ -6,7 +6,7 @@ class Game {
 private:
 	int command;
 	bool tiepTuc;
-	Ball b;
+	Ball* b;
 public:
 	Game();
 	~Game();

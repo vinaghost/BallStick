@@ -3,13 +3,23 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <conio.h>
+#include <Windows.h>
 
+namespace {
+	const int FPS = 50;
+	const int MAX_FRAME_TIME = 5 * 1000 / FPS;
+}
 
 Game::Game() {
 	command = 0;
 	tiepTuc = true;
 	
-	int count = 0;
+	b = new Ball(7, 10, 10);
+
+
+	b->spawn();
+	DWORD startTime, nextTime = 0;
+
 	while (isContinue()) {
 		waitKeyBoard();
 		switch (getCommand()) {
@@ -19,13 +29,23 @@ Game::Game() {
 			case 13: // enter
 				return;
 		}
+		
+		startTime = GetTickCount();
+
+		if (startTime  > nextTime) {
+			b->update();
+
+			nextTime = startTime + 100;
+		}
+		
 	}
 
-
+	b->despawn();
 }
 
 
 Game::~Game() {
+	delete b;
 }
 
 int Game::getCommand() {

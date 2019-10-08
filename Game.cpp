@@ -1,28 +1,24 @@
 #include "Game.h"
 
-#include <stdio.h>
-#include <ctype.h>
-#include <conio.h>
-
 
 Game::Game() {
 	command = 0;
 	tiepTuc = true;
-
+	Stick a;
 	while (isContinue()) {
 		waitKeyBoard();
 		switch (getCommand()) {
-			case 27: // esc
-				tiepTuc = false;
-				break;
-			case 'A':
-				moveLeft();
-				break;
-			case 'D':
-				moveRight();
-				break;
-			case 13: // enter
-				return;
+		case 27: // esc
+			tiepTuc = false;
+			break;
+		case 'A':
+			moveLeft(a);
+			break;
+		case 'D':
+			moveRight(a);
+			break;
+		case 13: // enter
+			return;
 		}
 	}
 }
@@ -43,9 +39,9 @@ int Game::waitKeyBoard() {
 	return command;
 }
 
-void Game::moveRight() {
-
+void Game::moveRight(Stick& a) {
+	a.toRight_Duoi();
 }
-void Game::moveLeft() {
-
+void Game::moveLeft(Stick& a) {
+	a.toLeft_Duoi();
 }

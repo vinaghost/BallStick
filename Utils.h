@@ -1,6 +1,9 @@
 ﻿#pragma once
 #include <windows.h>
 
+#define WIDTH 40	// Chiều rộng tối đa của khung chơi
+#define HEIGHT 24	// Chiều dài tối đa của khung chơi
+
 class Utils {
 public:
 
@@ -47,5 +50,13 @@ public:
 	* @noreturn
 	*/
 	static void clearScreen();
+	/**
+	* Hiện bàn chơi ra màn hình
+	*
+	* Dùng vòng for để in kí hiệu đến từng vị trí của khung chơi 
+	* được giới hạn trước
+	* 
+	*/
+	static void showTable();
 };
 

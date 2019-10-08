@@ -39,8 +39,13 @@ bool Game::isContinue() {
 }
 
 int Game::waitKeyBoard() {
-	command = toupper(_getch());
-	return command;
+	if (kbhit()) {
+		command = toupper(_getch());
+
+		return command;
+	}
+
+	return 0;
 }
 
 void Game::moveRight() {

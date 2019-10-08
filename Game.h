@@ -1,9 +1,12 @@
 ﻿#pragma once
+#include "Ball.h"
+
 
 class Game {
 private:
 	int command;
 	bool tiepTuc;
+	Ball b;
 public:
 	Game();
 	~Game();

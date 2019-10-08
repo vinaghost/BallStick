@@ -8,23 +8,20 @@
 Game::Game() {
 	command = 0;
 	tiepTuc = true;
-
+	
+	int count = 0;
 	while (isContinue()) {
 		waitKeyBoard();
 		switch (getCommand()) {
 			case 27: // esc
 				tiepTuc = false;
 				break;
-			case 'A':
-				moveLeft();
-				break;
-			case 'D':
-				moveRight();
-				break;
 			case 13: // enter
 				return;
 		}
 	}
+
+
 }
 
 
@@ -39,7 +36,7 @@ bool Game::isContinue() {
 }
 
 int Game::waitKeyBoard() {
-	if (kbhit()) {
+	if (_kbhit()) {
 		command = toupper(_getch());
 
 		return command;

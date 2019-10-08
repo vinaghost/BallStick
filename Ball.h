@@ -51,5 +51,17 @@ public:
 	* @return (int) tung độ cho Ball
 	**/
 	int getY();
+
+	/**
+	* Trả về khoảng cách trước và sau khi update Ball
+	*
+	* @note Toạ độ trong Console:	trục hoành hướng sang phải
+	*								trục tung hướng xuống dưới
+	* @param x	hoành độ
+	* @param y	tung độ
+	*
+	* @return (double) khoảng cách trước và sau khi update Ball
+	**/
+	double update(int x, int y);
 };
 

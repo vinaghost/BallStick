@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Utils.h"
 
 #include <stdio.h>
 #include <ctype.h>
@@ -14,8 +15,14 @@ Game::Game() {
 	command = 0;
 	tiepTuc = true;
 	
-	b = new Ball(7, 10, 10);
+	b = new Ball(7, 10, 20);
 
+	for (int i = 0; i < 10; i++) {
+		Utils::gotoXY(7, 10 + i);
+		
+
+			for (int j = 0; j < 10 + 20; j++) putchar('=');
+	}
 
 	b->spawn();
 	DWORD startTime, nextTime = 0;

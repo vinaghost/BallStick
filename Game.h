@@ -1,6 +1,13 @@
 ﻿#pragma once
 
-class Game {
+#include "Stick.h"
+#include "Uniti.h"
+#include <stdio.h>
+#include <ctype.h>
+#include <conio.h>
+
+class Game
+{
 private:
 	int command;
 	bool tiepTuc;
@@ -11,7 +18,7 @@ public:
 	/**
 	* Trả về giá trị của Game::command
 	*
-	* @note 
+	* @note
 	*
 	* @return mã ASCII của nút đã nhập
 	**/
@@ -20,7 +27,7 @@ public:
 	/**
 	* Trả về giá trị của Game::tiepTuc
 	*
-	* @note 
+	* @note
 	*
 	*
 	* @return giá trị true hoặc false của Game::tiepTuc
@@ -47,7 +54,7 @@ public:
 	*
 	* @noreturn
 	**/
-	void moveRight();
+	void moveRight(Stick& a);
 
 	/**
 	* Gọi khi nút qua trái được bấm
@@ -57,6 +64,5 @@ public:
 	*
 	* @noreturn
 	**/
-	void moveLeft();
+	void moveLeft(Stick& a);
 };
-

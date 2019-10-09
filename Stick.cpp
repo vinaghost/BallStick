@@ -24,7 +24,7 @@ Stick::~Stick()
 
 }
 
-void Stick::toLeft_Duoi()
+void Stick::SticktoLeft_Duoi()
 {
 	Utils a;
 	a.gotoXY(diemDau, HEIGHT);
@@ -53,7 +53,7 @@ void Stick::toLeft_Duoi()
 	}
 }
 
-void Stick::toRight_Duoi()
+void Stick::SticktoRight_Duoi()
 {
 	Utils a;
 	a.gotoXY(diemDau, HEIGHT);
@@ -82,7 +82,7 @@ void Stick::toRight_Duoi()
 	}
 }
 
-void Stick::toLeft_Tren()
+void Stick::SticktoLeft_Tren()
 {
 	Utils a;
 	a.gotoXY(diemDau, 0);
@@ -111,7 +111,7 @@ void Stick::toLeft_Tren()
 	}
 }
 
-void Stick::toRight_Tren()
+void Stick::SticktoRight_Tren()
 {
 	Utils a;
 	a.gotoXY(diemDau, 0);

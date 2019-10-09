@@ -19,7 +19,7 @@ public:
 	*
 	* @noreturn
 	**/
-	void toLeft_Duoi();
+	void SticktoLeft_Duoi();
 	/**
 	* Điều khiển thanh dưới qua phải
 	*
@@ -27,7 +27,7 @@ public:
 	*
 	* @noreturn
 	**/
-	void toRight_Duoi();
+	void SticktoRight_Duoi();
 	/**
 	* Điều khiển thanh trên qua trái
 	*
@@ -35,7 +35,7 @@ public:
 	*
 	* @noreturn
 	**/
-	void toLeft_Tren();
+	void SticktoLeft_Tren();
 	/**
 	* Điều khiển thanh trên qua phải
 	*
@@ -43,5 +43,5 @@ public:
 	*
 	* @noreturn
 	**/
-	void toRight_Tren();
+	void SticktoRight_Tren();
 };

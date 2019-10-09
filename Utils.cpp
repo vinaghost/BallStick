@@ -68,7 +68,7 @@ void Utils::clearScreen() {
 	gotoXY(0, 0);
 }
 
-void Utils::showTable()
+void Utils::showTablePlay()
 {
 
 	// Rào trên

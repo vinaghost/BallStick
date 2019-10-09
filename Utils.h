@@ -57,6 +57,6 @@ public:
 	* 
 	* @noteturn
 	*/
-	static void showTable();
+	static void showTablePlay();
 };
 

@@ -1,6 +1,9 @@
 ﻿#pragma once
 #include <windows.h>
 
+#define WIDTH 40	// Chiều rộng tối đa của khung chơi
+#define HEIGHT 24	// Chiều dài tối đa của khung chơi
+
 class Utils {
 public:
 
@@ -9,7 +12,7 @@ public:
 	*
 	* @note size của console: 900 x 700
 	*
-	* @noreturn 
+	* @noreturn
 	**/
 	static void fixConsoleWindow();
 
@@ -22,7 +25,7 @@ public:
 	* @param x		hoành độ
 	* @param y		tung độ
 	*
-	* @noreturn 
+	* @noreturn
 	**/
 	static void gotoXY(int x, int y);
 
@@ -33,19 +36,27 @@ public:
 	*								trục tung hướng xuống dưới
 	*
 	*
-	* @return struct COORD { short x,  y} với x, y lần lượt là hoành và tung độ của con trỏ 
+	* @return struct COORD { short x,  y} với x, y lần lượt là hoành và tung độ của con trỏ
 	**/
 	static COORD getCursor();
 
 	/**
-	* Xoá màn hình 
-	* 
-	* @note In liên tục 20 '\n' để có xoá màn hình, 
-	*		phải chạy hàm fixConsoleWindow() trước 
+	* Xoá màn hình
+	*
+	* @note In liên tục 20 '\n' để có xoá màn hình,
+	*		phải chạy hàm fixConsoleWindow() trước
 	*		để hoạt động hiệu quả
 	*
 	* @noreturn
 	*/
 	static void clearScreen();
+	/**
+	* Hiện bàn chơi ra màn hình
+	*
+	* @note
+	* 
+	* @noteturn
+	*/
+	static void showTable();
 };
 

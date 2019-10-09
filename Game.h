@@ -11,7 +11,7 @@ class Game
 private:
 	int command;
 	bool tiepTuc;
-	Stick a;
+	Stick b;
 public:
 	Game();
 	~Game();
@@ -55,7 +55,7 @@ public:
 	*
 	* @noreturn
 	**/
-	void moveRight(Stick& a);
+	void moveRight(Stick& b);
 
 	/**
 	* Gọi khi nút qua trái được bấm
@@ -65,5 +65,5 @@ public:
 	*
 	* @noreturn
 	**/
-	void moveLeft(Stick& a);
+	void moveLeft(Stick& b);
 };

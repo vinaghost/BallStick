@@ -50,13 +50,5 @@ public:
 	* @noreturn
 	*/
 	static void clearScreen();
-	/**
-	* Hiện bàn chơi ra màn hình
-	*
-	* @note
-	* 
-	* @noteturn
-	*/
-	static void showTablePlay();
 };
 

@@ -4,44 +4,38 @@
 #include <cstdio>
 #include <ctype.h>
 #include <conio.h>
+#include "Graphic.h"
 
 class Stick
 {
 private:
 	int diemDau, diemCuoi;
+	Utils a;
 public:
 	Stick();
 	~Stick();
 	/**
-	* Điều khiển thanh dưới qua trái
-	*
-	* @note 
-	*
-	* @noreturn
-	**/
-	void SticktoLeft_Duoi();
-	/**
-	* Điều khiển thanh dưới qua phải
+	* Khởi tạo vị trí ban đầu cho Stick
 	*
 	* @note
 	*
 	* @noreturn
 	**/
-	void SticktoRight_Duoi();
+	void setPlace(int x, int y);
 	/**
-	* Điều khiển thanh trên qua trái
+	* Điều khiển thanh qua trái
 	*
 	* @note
 	*
 	* @noreturn
 	**/
-	void SticktoLeft_Tren();
+	void moveLeft();
 	/**
-	* Điều khiển thanh trên qua phải
+	* Điều khiển thanh  qua phải
 	*
 	* @note
 	*
 	* @noreturn
 	**/
-	void SticktoRight_Tren();
+	void moveRight();
 };

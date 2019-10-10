@@ -1,5 +1,10 @@
 #include "Game.h"
+#include "Utils.h"
 
+#include <stdio.h>
+#include <ctype.h>
+#include <conio.h>
+#include <Windows.h>
 
 Game::Game() {
 	command = 0;

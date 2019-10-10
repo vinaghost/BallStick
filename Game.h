@@ -1,4 +1,6 @@
 ﻿#pragma once
+#include "Ball.h"
+
 
 #include <stdio.h>
 #include <ctype.h>
@@ -9,6 +11,7 @@ class Game
 private:
 	int command;
 	bool tiepTuc;
+	Ball* b;
 public:
 	Game();
 	~Game();

@@ -1,7 +1,8 @@
 ﻿#pragma once
 #include "Ball.h"
 
-
+#include "Stick.h"
+#include "Utils.h"
 #include <stdio.h>
 #include <ctype.h>
 #include <conio.h>
@@ -12,6 +13,7 @@ private:
 	int command;
 	bool tiepTuc;
 	Ball* b;
+	Stick a;
 public:
 	Game();
 	~Game();

@@ -4,7 +4,6 @@
 Game::Game() {
 	command = 0;
 	tiepTuc = true;
-	Stick a;
 	while (isContinue()) {
 		waitKeyBoard();
 		switch (getCommand()) {
@@ -12,10 +11,10 @@ Game::Game() {
 			tiepTuc = false;
 			break;
 		case 'A':
-			moveLeft(a);
+			moveLeft();
 			break;
 		case 'D':
-			moveRight(a);
+			moveRight();
 			break;
 		case 13: // enter
 			return;
@@ -39,9 +38,7 @@ int Game::waitKeyBoard() {
 	return command;
 }
 
-void Game::moveRight(Stick& a) {
-	a.toRight_Duoi();
+void Game::moveRight() {
 }
-void Game::moveLeft(Stick& a) {
-	a.toLeft_Duoi();
+void Game::moveLeft() {
 }

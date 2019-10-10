@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#include "Stick.h"
-#include "Uniti.h"
 #include <stdio.h>
 #include <ctype.h>
 #include <conio.h>
@@ -54,7 +52,7 @@ public:
 	*
 	* @noreturn
 	**/
-	void moveRight(Stick& a);
+	void moveRight();
 
 	/**
 	* Gọi khi nút qua trái được bấm
@@ -64,5 +62,5 @@ public:
 	*
 	* @noreturn
 	**/
-	void moveLeft(Stick& a);
+	void moveLeft();
 };

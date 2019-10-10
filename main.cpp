@@ -1,4 +1,5 @@
-#include "Game.h"
+#include "Menu.h"
+#include <iostream>
 
 #include <cstdio> 
 int main() {

@@ -14,9 +14,12 @@ public:
 	~Game();
 
 	/**
-	* Trả về giá trị của Game::command
+	* Lấy nút nhập từ bàn phím
 	*
-	* @note
+	* @note Dùng hàm _getch() làm hàm nhập nên
+	*		không hiện nút đã nhập lên bàn phím đồng
+	*		thời không cần phải nhấn Enter
+	*
 	*
 	* @return mã ASCII của nút đã nhập
 	**/
@@ -44,6 +47,15 @@ public:
 	**/
 	int waitKeyBoard();
 
+	/**
+	* Xử lí các sự kiện trong game
+	*
+	* @note 
+	*
+	*
+	* @noreturn
+	**/
+	void loop();
 	/**
 	* Gọi khi nút qua phải được bấm
 	*

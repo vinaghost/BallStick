@@ -15,6 +15,7 @@ Game::Game() {
 
 
 Game::~Game() {
+	delete b;
 }
 
 void Game::loop() {

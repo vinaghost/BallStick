@@ -11,7 +11,6 @@ class Game
 private:
 	int command;
 	bool tiepTuc;
-	Stick a;
 public:
 	Game();
 	~Game();

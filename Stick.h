@@ -9,11 +9,60 @@
 class Stick
 {
 private:
-	int diemDau, diemCuoi;
-	Utils a;
+	static int x, y, size;
+	static int height, width;
 public:
-	Stick();
+	Stick() = delete;
+	Stick(int height, int width);
 	~Stick();
+	/**
+	* Gán hoành độ cho điểm đầu của Stick
+	*
+	* @note  Toạ độ trong Console:	trục hoành hướng sang phải
+	*								trục tung hướng xuống dưới
+	* @param x	hoành độ
+	* @noreturn
+	**/
+	void setX(int x);
+	/**
+	* Gán tung độ cho điểm đầu của Stick
+	*
+	* @note  Toạ độ trong Console:	trục hoành hướng sang phải
+	*								trục tung hướng xuống dưới
+	* @param x	hoành độ
+	*
+	* @noreturn
+	**/
+	void setY(int y);
+	/**
+	* Khởi tạo đồ dài cho Stick
+	*
+	* @note Toạ độ trong Console:	trục hoành hướng sang phải
+	*								trục tung hướng xuống dưới
+	* @param y	tung độ
+	* @noreturn
+	**/
+	void setSize(int size);
+	/**
+	* Trả về hoành độ cho điểm đầu của Stick
+	*
+	* @note Toạ độ trong Console:	trục hoành hướng sang phải
+	*								trục tung hướng xuống dưới
+	* @param x	hoành độ
+	*
+	* @return (int) hoành độ cho Stick
+	**/
+	int getX();
+	/**
+	* Trả về tung độ cho điểm đầu của Stick
+	*
+	* @note Toạ độ trong Console:	trục hoành hướng sang phải
+	*								trục tung hướng xuống dưới
+	* @param y	tung độ
+	*
+	* @return (int) tung độ cho Stick
+	**/
+	int getY();
 	/**
 	* Khởi tạo vị trí ban đầu cho Stick
 	*
@@ -21,21 +70,13 @@ public:
 	*
 	* @noreturn
 	**/
-	void setPlace(int x, int y);
+	void setPlace();
 	/**
-	* Điều khiển thanh qua trái
+	* Thay đổi vị trí của Stick
 	*
-	* @note
-	*
+	* @note  Toạ độ trong Console:	trục hoành hướng sang phải
+	*								trục tung hướng xuống dưới
 	* @noreturn
 	**/
-	void moveLeft();
-	/**
-	* Điều khiển thanh  qua phải
-	*
-	* @note
-	*
-	* @noreturn
-	**/
-	void moveRight();
+	static void update(int chon);
 };

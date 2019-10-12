@@ -9,12 +9,11 @@
 
 
 
-Stick::Stick()
+Stick::Stick(int height, int width	)
 {
-	a.gotoXY(0, 0);
-	diemDau = 0;
-	diemCuoi = 6;
-	Graphic::drawStick(diemDau, diemCuoi);
+	x = 0;
+	y = 0;
+	size = 0;
 }
 
 Stick::~Stick()
@@ -22,50 +21,74 @@ Stick::~Stick()
 
 }
 
-void Stick::setPlace(int x, int y)
+void Stick::setX(int x)
 {
-	a.gotoXY(x, y);
-	diemDau = x;
-	diemCuoi = x + 6;
-	Graphic::drawStick(diemDau, diemCuoi);
+	this->x = x;
 }
 
-void Stick::moveLeft()
+void Stick::setY(int y)
 {
-	Utils a;
-	a.gotoXY(diemDau, HEIGHT);
-	Graphic::deleteStick(diemDau, diemCuoi);
-	diemDau = diemDau - 1;
-	if (diemDau > 0)
-	{
-		diemCuoi = diemCuoi - 1;
-		a.gotoXY(diemDau, HEIGHT);
-		Graphic::drawStick(diemDau, diemCuoi);
-	}
-	else if (diemDau == 0)
-	{
-		diemDau = diemDau + 1;
-		a.gotoXY(diemDau, HEIGHT);
-		Graphic::drawStick(diemDau, diemCuoi);
-	}
+	this->y = y;
 }
 
-void Stick::moveRight()
+int Stick::getX()
 {
-	Utils a;
-	a.gotoXY(diemDau, HEIGHT);
-	Graphic::deleteStick(diemDau, diemCuoi);
-	diemCuoi = diemCuoi + 1;
-	if (diemCuoi < WIDTH)
+	return this->x;
+}
+
+int Stick::getY()
+{
+	return this->y;
+}
+
+void Stick::setSize(int size)
+{
+	this->size = size;
+}
+
+void Stick::setPlace()
+{
+	Utils::gotoXY(x, y);
+}
+
+void Stick::update(int chon)
+{
+	if (chon == 1) //moveLeft
 	{
-		diemDau = diemDau + 1;
-		a.gotoXY(diemDau, HEIGHT);
-		Graphic::drawStick(diemDau, diemCuoi);
+		Utils::gotoXY(x, height);
+		Graphic::deleteStick(x, x + size);
+		x = x - 1;
+		int a = x + size;
+		if (x > 0)
+		{
+			a = a - 1;
+			Utils::gotoXY(x, height);
+			Graphic::drawStick(x, a);
+		}
+		else if (x == 0)
+		{
+			x = x + 1;
+			Utils::gotoXY(x, height);
+			Graphic::drawStick(x, a);
+		}
 	}
-	else if (diemCuoi == WIDTH)
+	else if (chon == 2)  //moveRight
 	{
-		diemCuoi = diemCuoi - 1;
-		a.gotoXY(diemDau, HEIGHT);
-		Graphic::drawStick(diemDau, diemCuoi);
+		int a = x + size;
+		Utils::gotoXY(x, height);
+		Graphic::deleteStick(x, a);
+		a = a + 1;
+		if (a < width)
+		{
+			x = x + 1;
+			Utils::gotoXY(x, height);
+			Graphic::drawStick(x, a);
+		}
+		else if (a = width)
+		{
+			a = a - 1;
+			Utils::gotoXY(x, height);
+			Graphic::drawStick(x, a);
+		}
 	}
 }

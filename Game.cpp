@@ -5,7 +5,7 @@ Game::Game() {
 	tiepTuc = true;
 	while (isContinue()) {
 		waitKeyBoard();
-		switch (getCommand()) {
+		switch (getCommand()) {	
 		case 27: // esc
 			tiepTuc = false;
 			break;
@@ -38,8 +38,8 @@ int Game::waitKeyBoard() {
 }
 
 void Game::moveRight() {
-	a.SticktoLeft_Duoi();
+	Stick::update(1);
 }
 void Game::moveLeft() {
-	a.SticktoRight_Duoi();
+	Stick::update(2);
 }

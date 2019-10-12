@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Utils.h"
+#include "Menu.h"
 
 #include <stdio.h>
 #include <ctype.h>
@@ -7,8 +8,8 @@
 #include <Windows.h>
 
 Game::Game() {
-	command = 0;
-	tiepTuc = true;
+	this->command = 0;
+	this->tiepTuc = true;
 	
 	this->loop();
 }
@@ -20,18 +21,29 @@ Game::~Game() {
 
 void Game::loop() {
 
+	int choice;
+
+	Menu menuMain;
+
+	menuMain.addItem("Start");
+	menuMain.addItem("Exit");
+
+	menuMain.setCoordItem(20, 10);
+
 	while (isContinue()) {
-		switch (getCommand()) {
-			case 27: // esc
-				tiepTuc = false;
+
+		menuMain.show();
+		choice = menuMain.getChoice();
+
+		switch (choice) {
+			case 0:
 				break;
-			case 'A':
-				moveLeft();
-				break;
-			case 'D':
-				moveRight();
+			case 1:
+				this->tiepTuc = false;
 				break;
 		}
+
+		
 	}
 }
 int Game::getCommand() {

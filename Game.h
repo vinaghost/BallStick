@@ -13,7 +13,7 @@ private:
 	int command;
 	bool tiepTuc;
 	Ball* b;
-	Stick a;
+	Stick player1;
 public:
 	Game();
 	~Game();

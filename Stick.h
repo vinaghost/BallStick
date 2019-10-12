@@ -9,8 +9,8 @@
 class Stick
 {
 private:
-	static int x, y, size;
-	static int height, width;
+	int x, y, size;
+	int height, width;
 public:
 	Stick() = delete;
 	Stick(int height, int width);
@@ -64,6 +64,30 @@ public:
 	**/
 	int getY();
 	/**
+	* Trả về độ dài của Stick
+	*
+	* @note 
+	*
+	* @return (int) độ dài cho Stick
+	**/
+	int getsize();
+	/**
+	* Trả về chiều dài của bàn chơi
+	*
+	* @note
+	*
+	* @return (int) chiều dài của bàn chơi
+	**/
+	int getHeight();
+	/**
+	* Trả về chiều rộng của bàn chơi
+	*
+	* @note
+	*
+	* @return (int) chiều rộng của bàn chơi
+	**/
+	int getWidth();
+	/**
 	* Khởi tạo vị trí ban đầu cho Stick
 	*
 	* @note
@@ -78,5 +102,5 @@ public:
 	*								trục tung hướng xuống dưới
 	* @noreturn
 	**/
-	static void update(int chon);
+	void update(int chon);
 };

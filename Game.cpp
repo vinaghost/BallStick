@@ -38,8 +38,8 @@ int Game::waitKeyBoard() {
 }
 
 void Game::moveRight() {
-	Stick::update(1);
+	a.update(2);
 }
 void Game::moveLeft() {
-	Stick::update(2);
+	a.update(1);
 }

@@ -7,13 +7,11 @@
 #include <conio.h>
 
 
-
-
-Stick::Stick(int height, int width	)
+Stick::Stick(int height, int width):  height(height), width(width)
 {
-	x = 0;
-	y = 0;
-	size = 0;
+	x = width/2;
+	y = height;
+	size = 3;
 }
 
 Stick::~Stick()
@@ -46,6 +44,21 @@ void Stick::setSize(int size)
 	this->size = size;
 }
 
+int Stick::getHeight()
+{
+	return this->height;
+}
+
+int Stick::getWidth()
+{
+	return this->width;
+}
+
+int Stick::getsize()
+{
+	return this->size;
+}
+
 void Stick::setPlace()
 {
 	Utils::gotoXY(x, y);
@@ -55,40 +68,30 @@ void Stick::update(int chon)
 {
 	if (chon == 1) //moveLeft
 	{
-		Utils::gotoXY(x, height);
-		Graphic::deleteStick(x, x + size);
+		Graphic::deleteStick(x, size, height);
 		x = x - 1;
-		int a = x + size;
 		if (x > 0)
 		{
-			a = a - 1;
-			Utils::gotoXY(x, height);
-			Graphic::drawStick(x, a);
+			Graphic::drawStick(x, size, height);
 		}
 		else if (x == 0)
 		{
 			x = x + 1;
-			Utils::gotoXY(x, height);
-			Graphic::drawStick(x, a);
+			Graphic::drawStick(x, size, height);
 		}
 	}
 	else if (chon == 2)  //moveRight
 	{
-		int a = x + size;
-		Utils::gotoXY(x, height);
-		Graphic::deleteStick(x, a);
-		a = a + 1;
-		if (a < width)
+		Graphic::deleteStick(x, size, height);
+		x = x + 1;
+		if (x + size < width)
 		{
-			x = x + 1;
-			Utils::gotoXY(x, height);
-			Graphic::drawStick(x, a);
+			Graphic::drawStick(x, size, height);
 		}
-		else if (a = width)
+		else if ((x + size) == width)
 		{
-			a = a - 1;
-			Utils::gotoXY(x, height);
-			Graphic::drawStick(x, a);
+			x = x - 1;
+			Graphic::drawStick(x, size, height);
 		}
 	}
 }

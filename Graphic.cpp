@@ -1,16 +1,18 @@
 #include "Graphic.h"
 
-void Graphic::drawStick(int x, int y)
+void Graphic::drawStick(int x, int y, int z)
 {
-	for (int i = x; i <= y; i++)
+	Utils::gotoXY(x, z);
+	for (int i = x; i <= x + y; i++)
 	{
 		putchar('*');
 	}
 }
 
-void Graphic::deleteStick(int x, int y)
+void Graphic::deleteStick(int x, int y, int z)
 {
-	for (int i = x; i <= y; i++)
+	Utils::gotoXY(x, z);
+	for (int i = x; i <= x + y; i++)
 	{
 		putchar(' ');
 	}

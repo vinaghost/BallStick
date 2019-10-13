@@ -1,4 +1,4 @@
-#include <cstdio>
+﻿#include <cstdio>
 
 #include "Graphic.h"
 #include "Utils.h"
@@ -27,20 +27,43 @@ void Graphic::deleteBall(Ball b) {
 	Utils::gotoXY(b.getX(), b.getY());
 	putchar(' ');
 }
-void Graphic::drawStick(int x, int y, int z)
-{
-	Utils::gotoXY(x, z);
-	for (int i = x; i <= x + y; i++)
-	{
-		putchar('*');
-	}
-}
 
-void Graphic::deleteStick(int x, int y, int z)
+void Graphic::drawBoard(Board a)
 {
-	Utils::gotoXY(x, z);
-	for (int i = x; i <= x + y; i++)
+	pair<int, int> b, c;
+	// Rào trên
+	b = a.getTopLeft();
+	c = a.getTopRight();
+	for (int x = b.first; x <= c.first; x++)
 	{
-		putchar(' ');
+		Utils::gotoXY(x, b.second);
+		putchar(219);
+	}
+
+	// Rào dưới
+	b = a.getBotLeft();
+	c = a.getBotRight();
+	for (int x = b.first; x <= c.first; x++)
+	{
+		Utils::gotoXY(x, b.second);
+		putchar(219);
+	}
+
+	// Rào trái
+	b = a.getTopLeft();
+	c = a.getBotLeft();
+	for (int y = b.second; y <= c.second; y++)
+	{
+		Utils::gotoXY(b.first, y);
+		putchar(219);
+	}
+
+	// Rào phải
+	b = a.getTopRight();
+	c = a.getBotRight();
+	for (int y = b.second; y <= c.second; y++)
+	{
+		Utils::gotoXY(b.first, y);
+		putchar(219);
 	}
 }

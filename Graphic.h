@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "Ball.h"
+#include "Board.h"
 
 #include "Stick.h"
 class Graphic {
@@ -17,6 +18,15 @@ public:
 	* @noreturn
 	**/
 	static void drawGameName();
+	/**
+	* Hiện thị bảng game lên màn hình console
+	*
+	* @note 
+	*
+	*
+	* @noreturn
+	**/
+	static void drawBoard(Board a);
 	static void drawStick(int x, int y, int z);
 	static void deleteStick(int x, int y, int z);
 };

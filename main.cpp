@@ -1,13 +1,14 @@
 #include "Menu.h"
+#include "Board.h"
 #include <iostream>
 
 #include <cstdio> 
 int main() {
 
-	Game g;
+	Board a;
+	a.setPlace();
+	a.showBoard();
 
-
-	getchar();
 	getchar();
 	return 0;
 }

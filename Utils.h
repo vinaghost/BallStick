@@ -1,8 +1,7 @@
 ﻿#pragma once
 #include <windows.h>
+#include "Stick.h"
 
-#define WIDTH 40	// Chiều rộng tối đa của khung chơi
-#define HEIGHT 24	// Chiều dài tối đa của khung chơi
 
 class Utils {
 public:

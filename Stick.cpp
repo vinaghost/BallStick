@@ -7,16 +7,11 @@
 #include <conio.h>
 
 
-
-
-Stick::Stick()
+Stick::Stick(int height, int width):  height(height), width(width)
 {
-	diemDau = (WIDTH / 2);
-	diemCuoi = (WIDTH / 2) + 5;
-	for (int i = diemDau; i <= diemCuoi; i++)
-	{
-		putchar('*');
-	}
+	x = width/2;
+	y = height;
+	size = 3;
 }
 
 Stick::~Stick()
@@ -24,118 +19,79 @@ Stick::~Stick()
 
 }
 
-void Stick::SticktoLeft_Duoi()
+void Stick::setX(int x)
 {
-	Utils a;
-	a.gotoXY(diemDau, HEIGHT);
-	for (int i = diemDau; i <= diemCuoi; i++)
-	{
-		putchar('_');
-	}
-	diemDau = diemDau - 1;
-	if (diemDau > 0)
-	{
-		diemCuoi = diemCuoi - 1;
-		a.gotoXY(diemDau, HEIGHT);
-		for (int i = diemDau; i <= diemCuoi; i++)
-		{
-			putchar('*');
-		}
-	}
-	else if (diemDau == 0)
-	{
-		diemDau = diemDau + 1;
-		a.gotoXY(diemDau, HEIGHT);
-		for (int i = diemDau; i <= diemCuoi; i++)
-		{
-			putchar('*');
-		}
-	}
+	this->x = x;
 }
 
-void Stick::SticktoRight_Duoi()
+void Stick::setY(int y)
 {
-	Utils a;
-	a.gotoXY(diemDau, HEIGHT);
-	for (int i = diemDau; i <= diemCuoi; i++)
-	{
-		putchar('_');
-	}
-	diemCuoi = diemCuoi + 1;
-	if (diemCuoi < WIDTH)
-	{
-		diemDau = diemDau + 1;
-		a.gotoXY(diemDau, HEIGHT);
-		for (int i = diemDau; i <= diemCuoi; i++)
-		{
-			putchar('*');
-		}
-	}
-	else if (diemCuoi == WIDTH)
-	{
-		diemCuoi = diemCuoi - 1;
-		a.gotoXY(diemDau, HEIGHT);
-		for (int i = diemDau; i <= diemCuoi; i++)
-		{
-			putchar('*');
-		}
-	}
+	this->y = y;
 }
 
-void Stick::SticktoLeft_Tren()
+int Stick::getX()
 {
-	Utils a;
-	a.gotoXY(diemDau, 0);
-	for (int i = diemDau; i <= diemCuoi; i++)
-	{
-		putchar('_');
-	}
-	diemDau = diemDau - 1;
-	if (diemDau > 0)
-	{
-		diemCuoi = diemCuoi - 1;
-		a.gotoXY(diemDau, 0);
-		for (int i = diemDau; i <= diemCuoi; i++)
-		{
-			putchar('*');
-		}
-	}
-	else if (diemDau == 0)
-	{
-		diemDau = diemDau + 1;
-		a.gotoXY(diemDau, 0);
-		for (int i = diemDau; i <= diemCuoi; i++)
-		{
-			putchar('*');
-		}
-	}
+	return this->x;
 }
 
-void Stick::SticktoRight_Tren()
+int Stick::getY()
 {
-	Utils a;
-	a.gotoXY(diemDau, 0);
-	for (int i = diemDau; i <= diemCuoi; i++)
+	return this->y;
+}
+
+void Stick::setSize(int size)
+{
+	this->size = size;
+}
+
+int Stick::getHeight()
+{
+	return this->height;
+}
+
+int Stick::getWidth()
+{
+	return this->width;
+}
+
+int Stick::getsize()
+{
+	return this->size;
+}
+
+void Stick::setPlace()
+{
+	Utils::gotoXY(x, y);
+}
+
+void Stick::update(int chon)
+{
+	if (chon == 1) //moveLeft
 	{
-		putchar('_');
-	}
-	diemCuoi = diemCuoi + 1;
-	if (diemCuoi < WIDTH)
-	{
-		diemDau = diemDau + 1;
-		a.gotoXY(diemDau, 0);
-		for (int i = diemDau; i <= diemCuoi; i++)
+		Graphic::deleteStick(x, size, height);
+		x = x - 1;
+		if (x > 0)
 		{
-			putchar('*');
+			Graphic::drawStick(x, size, height);
+		}
+		else if (x == 0)
+		{
+			x = x + 1;
+			Graphic::drawStick(x, size, height);
 		}
 	}
-	else if (diemCuoi == WIDTH)
+	else if (chon == 2)  //moveRight
 	{
-		diemCuoi = diemCuoi - 1;
-		a.gotoXY(diemDau, 0);
-		for (int i = diemDau; i <= diemCuoi; i++)
+		Graphic::deleteStick(x, size, height);
+		x = x + 1;
+		if (x + size < width)
 		{
-			putchar('*');
+			Graphic::drawStick(x, size, height);
+		}
+		else if ((x + size) == width)
+		{
+			x = x - 1;
+			Graphic::drawStick(x, size, height);
 		}
 	}
 }

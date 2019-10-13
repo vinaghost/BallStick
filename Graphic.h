@@ -2,6 +2,7 @@
 
 #include "Ball.h"
 
+#include "Stick.h"
 class Graphic {
 public:
 	static void drawBall(Ball b);
@@ -16,5 +17,7 @@ public:
 	* @noreturn
 	**/
 	static void drawGameName();
+	static void drawStick(int x, int y, int z);
+	static void deleteStick(int x, int y, int z);
 };
 

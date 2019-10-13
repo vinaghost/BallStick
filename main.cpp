@@ -3,7 +3,6 @@
 
 #include <cstdio> 
 int main() {
-
 	Game g;
 
 

@@ -13,7 +13,7 @@ private:
 	Stick *player1;
 	Stick *player2;
 
-	Board* board;
+	Board board;
 
 	Menu menuMain;
 
@@ -64,23 +64,44 @@ public:
 	* @noreturn
 	**/
 	void loop();
-	/**
-	* Gọi khi nút qua phải được bấm
-	*
-	* @note
-	*
-	*
-	* @noreturn
-	**/
-	void moveRight();
 
 	/**
-	* Gọi khi nút qua trái được bấm
+	* Gọi khi nút qua phải của player 1 được bấm
 	*
 	* @note
 	*
 	*
 	* @noreturn
 	**/
-	void moveLeft();
+	void moveRight_Player1();
+
+	/**
+	* Gọi khi nút qua trái của player 2 được bấm
+	*
+	* @note
+	*
+	*
+	* @noreturn
+	**/
+	void moveLeft_Player1();
+
+	/**
+	* Gọi khi nút qua phải của player 2 được bấm
+	*
+	* @note
+	*
+	*
+	* @noreturn
+	**/
+	void moveRight_Player2();
+
+	/**
+	* Gọi khi nút qua trái của player 2 được bấm
+	*
+	* @note
+	*
+	*
+	* @noreturn
+	**/
+	void moveLeft_Player2();
 };

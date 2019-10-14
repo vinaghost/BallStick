@@ -53,16 +53,16 @@ pair<int, int> Board::getBotRight()
 
 void Board::setPlace()
 {
-	this->setTopleft(10,5);
-	this->setTopRight(40,5);
-	this->setBotLeft(10,15);
-	this->setBotRight(40,15);
+	this->setTopleft(10,10);
+	this->setTopRight(40,10);
+	this->setBotLeft(10,20);
+	this->setBotRight(40,20);
 }
 
 void Board::showBoard()
 {
 	
 	Graphic::drawBoard(*this);
-	Utils::gotoXY(this->topLeft.first + 1, this->topLeft.second + 1);
+	Utils::gotoXY(0, 0);
 	Graphic::drawGameName();
 }

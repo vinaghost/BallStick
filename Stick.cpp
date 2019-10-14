@@ -14,7 +14,7 @@
 Stick::Stick(int height, int width):  height(height), width(width)
 {
 	x = width/2;
-	y = height;
+	y = height + 1;
 	size = 3;
 }
 

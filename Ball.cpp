@@ -112,7 +112,7 @@ Direction Ball::getNext() {
 	}
 
 	// chạm biên phải
-	if (this->x >= this->left + this->size + 20 - 1) {
+	if (this->x >= this->left + this->width - 1) {
 		switch (this->direction) {
 			case BOT_RIGHT:
 				return BOT_LEFT;
@@ -134,7 +134,7 @@ Direction Ball::getNext() {
 	}
 
 	//chạm biên dưới
-	if (this->y >= this->top + this->size - 1) {
+	if (this->y >= this->top + this->height - 1) {
 		switch (this->direction) {
 			case BOT_LEFT:
 				return TOP_LEFT;

@@ -6,7 +6,7 @@
 #include <cfloat>
 
 
-Ball::Ball(int top, int left, int size) : top(top), left(left), size(size), x(top + 3) , y(left + 2) {
+Ball::Ball(int left, int top, int width, int height) : left(left), top(top), width(width), height(height), x(left + width/2), y(top + height/2) {
 	this->spawned = false;
 	this->direction = BOT_LEFT;
 }

@@ -14,11 +14,10 @@ enum Direction {
 
 class Ball {
 private:
-	int x;
-	int y;
+	int x, y;
 
-	int top, left;
-	int size;
+	int left, top;
+	int width, height;
 
 	bool spawned;
 
@@ -35,7 +34,7 @@ private:
 
 public:
 	Ball() = delete;
-	Ball(int top, int left, int size);
+	Ball(int left, int top, int width, int height);
 	~Ball();
 
 	/**

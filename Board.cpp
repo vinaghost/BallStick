@@ -1,6 +1,6 @@
 #include "Board.h"
 
-
+#include "Graphic.h"
 
 Board::Board()
 {

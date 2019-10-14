@@ -1,8 +1,7 @@
-﻿#include <cstdio>
-
-#include "Graphic.h"
+﻿#include "Graphic.h"
 #include "Utils.h"
 
+#include <cstdio>
 #include <iostream>
 
 using std::cout;
@@ -65,5 +64,19 @@ void Graphic::drawBoard(Board a)
 	{
 		Utils::gotoXY(b.first, y);
 		putchar(219);
+	}
+}
+void Graphic::drawStick(Stick s) {
+	Utils::gotoXY(s.getX(), s.getY());
+	for (int i = s.getX(); i <= s.getX() + s.getY(); i++) {
+		putchar('*');
+	}
+}
+
+void Graphic::deleteStick(Stick s) {
+
+	Utils::gotoXY(s.getX(), s.getY());
+	for (int i = s.getX(); i <= s.getX() + s.getY(); i++) {
+		putchar(' ');
 	}
 }

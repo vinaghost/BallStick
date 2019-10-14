@@ -11,6 +11,11 @@ Game::Game() {
 	this->command = 0;
 	this->tiepTuc = true;
 	
+	menuMain.addItem("Start");
+	menuMain.addItem("Exit");
+
+	menuMain.setCoordItem(20, 10);
+
 	this->loop();
 }
 
@@ -22,13 +27,6 @@ Game::~Game() {
 void Game::loop() {
 
 	int choice;
-
-	Menu menuMain;
-
-	menuMain.addItem("Start");
-	menuMain.addItem("Exit");
-
-	menuMain.setCoordItem(20, 10);
 
 	while (isContinue()) {
 

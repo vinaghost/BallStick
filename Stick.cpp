@@ -1,6 +1,10 @@
 #include "Stick.h"
-#include "Game.h"
+
+
+#include "Graphic.h"
 #include "Utils.h"
+
+
 #include <windows.h>
 #include <cstdio>
 #include <ctype.h>
@@ -64,34 +68,12 @@ void Stick::setPlace()
 	Utils::gotoXY(x, y);
 }
 
-void Stick::update(int chon)
-{
-	if (chon == 1) //moveLeft
-	{
-		Graphic::deleteStick(x, size, height);
-		x = x - 1;
-		if (x > 0)
-		{
-			Graphic::drawStick(x, size, height);
-		}
-		else if (x == 0)
-		{
-			x = x + 1;
-			Graphic::drawStick(x, size, height);
-		}
-	}
-	else if (chon == 2)  //moveRight
-	{
-		Graphic::deleteStick(x, size, height);
-		x = x + 1;
-		if (x + size < width)
-		{
-			Graphic::drawStick(x, size, height);
-		}
-		else if ((x + size) == width)
-		{
-			x = x - 1;
-			Graphic::drawStick(x, size, height);
-		}
-	}
+void Stick::update(int x, int y) {
+	
+	Graphic::deleteStick(*this);
+
+	this->setX(x);
+	this->setX(y);
+
+	Graphic::drawStick(*this);
 }

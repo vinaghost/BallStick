@@ -1,19 +1,22 @@
 ﻿#pragma once
 #include "Ball.h"
-
 #include "Stick.h"
-#include "Utils.h"
-#include <stdio.h>
-#include <ctype.h>
-#include <conio.h>
+#include "Board.h"
+#include "Menu.h"
 
 class Game
 {
 private:
 	int command;
 	bool tiepTuc;
-	Ball* b;
-	Stick player1;
+	Ball* ball;
+	Stick *player1;
+	Stick *player2;
+
+	Board* board;
+
+	Menu menuMain;
+
 public:
 	Game();
 	~Game();

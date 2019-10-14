@@ -67,35 +67,3 @@ void Utils::clearScreen() {
 	}
 	gotoXY(0, 0);
 }
-
-void Utils::showTablePlay()
-{
-
-	// Rào trên
-	for (int x = 0; x <= WIDTH; x++)
-	{
-		gotoXY(x, 0);
-		putchar('-');
-	}
-
-	// Rào dưới
-	for (int x = 0; x <= WIDTH; x++)
-	{
-		gotoXY(x, HEIGHT);
-		putchar('_');
-	}
-
-	// Rào trái
-	for (int y = 0; y <= HEIGHT; y++)
-	{
-		gotoXY(0, y);
-		putchar('|');
-	}
-
-	// Rào phải
-	for (int y = 0; y <= HEIGHT; y++)
-	{
-		gotoXY(WIDTH, y);
-		putchar('|');
-	}
-}

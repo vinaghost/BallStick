@@ -1,6 +1,5 @@
 ﻿#pragma once
-#include "Graphic.h"
-#include "Utils.h"
+
 #include <utility>
 
 using std::pair;

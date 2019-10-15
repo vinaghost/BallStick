@@ -8,14 +8,14 @@ using std::cout;
 
 void Graphic::drawGameName() {
 	                              
-	cout << " _____\n";
-	cout << "|  __ \\ \n";
-	cout << "| |__) |__  _ __   __ _\n";
-	cout << "|  ___/ _ \\| '_ \\ / _` |\n";
-	cout << "| |   |(_) | | | | (_| |\n";
-	cout << "|_|   \\___/|_| |_|\\__, |\n";
-	cout << "                   __/ |\n";
-	cout << "                  |___/\n";
+	cout << "\t _____\n";
+	cout << "\t|  __ \\ \n";
+	cout << "\t| |__) |__  _ __   __ _\n";
+	cout << "\t|  ___/ _ \\| '_ \\ / _` |\n";
+	cout << "\t| |   |(_) | | | | (_| |\n";
+	cout << "\t|_|   \\___/|_| |_|\\__, |\n";
+	cout << "\t                   __/ |\n";
+	cout << "\t                  |___/\n";
 
 }
 void Graphic::drawBall(Ball b) {

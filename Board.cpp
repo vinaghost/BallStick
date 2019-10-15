@@ -2,13 +2,16 @@
 
 #include "Graphic.h"
 
-Board::Board()
-{
+Board::Board(pair<int, int> topLeft, int width, int height) : topLeft(topLeft){
+	this->botLeft = { this->topLeft.first, this->topLeft.second + height };
+
+	this->topRight = { this->topLeft.first + width, this->topLeft.second };
+
+	this->botRight = { this->topRight.first, this->topRight.second + height};
 }
 
 
-Board::~Board()
-{
+Board::~Board() {
 }
 
 void Board::setTopleft(int x, int y)
@@ -51,18 +54,18 @@ pair<int, int> Board::getBotRight()
 	return this->botRight;
 }
 
-void Board::setPlace()
+int Board::getHeight()
 {
-	this->setTopleft(10,10);
-	this->setTopRight(40,10);
-	this->setBotLeft(10,20);
-	this->setBotRight(40,20);
+	return this->getBotLeft().second - this->getTopLeft().second;
+}
+
+int Board::getWidth()
+{
+	return this->getTopRight().first - this->getTopLeft().first;
 }
 
 void Board::showBoard()
 {
-	
-	Graphic::drawBoard(*this);
-	Utils::gotoXY(0, 0);
 	Graphic::drawGameName();
+	Graphic::drawBoard(*this);
 }

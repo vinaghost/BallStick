@@ -11,7 +11,9 @@ private:
 	pair<int, int> topRight;
 	pair<int, int> botRight;
 public:
-	Board();
+	Board() = delete;
+	Board(pair<int, int> topLeft, int width, int height);
+
 	~Board();
 	/**
 	* Tạo tọa độ điểm phía trên bên trái của bảng game
@@ -86,14 +88,24 @@ public:
 	**/
 	pair<int, int> getBotRight();
 	/**
-	* Tạo vị trí của bảng game
+	* Trả lại chiều dài của bảng game
 	*
 	* @note
 	*
 	*
-	* @noreturn
+	* @return (int) chiều dài
 	**/
-	void setPlace();
+	int getHeight();
+	/**
+	* Trả lại chiều rộng của bảng game
+	*
+	* @note
+	*
+	*
+	* @return (int) chiều rộng
+	**/
+	int getWidth();
+
 	/**
 	* Hiện bảng game lên màn hình console 
 	*

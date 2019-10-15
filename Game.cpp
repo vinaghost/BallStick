@@ -9,9 +9,13 @@
 #include <Windows.h>
 
 Game::Game() {
-	this->command = 0;
 	this->tiepTuc = true;
-	
+
+	board = NULL;
+	player1 = NULL;
+	player2 = NULL;
+	ball = NULL;
+
 	menuMain.addItem("Start");
 	menuMain.addItem("Exit");
 
@@ -22,10 +26,18 @@ Game::Game() {
 
 
 Game::~Game() {
-	delete ball;
-
-	delete player1;
-	delete player2;
+	if (board != NULL) {
+		delete board;
+	}
+	if (player1 != NULL) {
+		delete player1;
+	}
+	if (player2 != NULL) {
+		delete player2;
+	}
+	if (ball != NULL) {
+		delete ball;
+	}
 }
 
 void Game::loop() {
@@ -44,21 +56,35 @@ void Game::loop() {
 
 
 				Utils::showConsoleCursor(false);
-				board.setPlace();
+				if (board != NULL) {
+					delete board;
+				}
+				board = new Board({ 10, 9 }, 20, 10);
 
-				player1 = new Stick(board.getTopLeft().first, board.getTopLeft().second, board.getBotLeft().second - board.getTopLeft().second, board.getTopRight().first - board.getTopLeft().first, 3);
-				player2 = new Stick(board.getTopLeft().first, board.getTopLeft().second, board.getBotLeft().second - board.getTopLeft().second, board.getTopRight().first - board.getTopLeft().first, 3);
+				if (player1 != NULL) {
+					delete player1;
+				}
+				player1 = new Stick(board->getTopLeft().first, board->getTopLeft().second, board->getWidth(), board->getHeight(), 3);
 
-				player1->setX(board.getTopLeft().first);
-				player1->setY(board.getTopLeft().second + 1);
+				if (player2 != NULL) {
+					delete player2;
+				}
+				player2 = new Stick(board->getTopLeft().first, board->getTopLeft().second, board->getWidth(), board->getHeight(), 3);
 
-				player1->setX(board.getBotLeft().first);
-				player1->setY(board.getBotLeft().second - 1);
+				player1->setX( board->getTopLeft().first + board->getWidth() / 2 - player1->getsize()/2);
+				player1->setY(board->getTopLeft().second + 1);
 
-				ball = new Ball(board.getTopLeft().first, board.getTopLeft().second, 20, 30);
+				player2->setX(board->getBotLeft().first + board->getWidth() / 2 - player2->getsize()/2);
+				player2->setY(board->getBotLeft().second - 1);
+
+				if (ball != NULL) {
+					delete ball;
+				}
+				ball = new Ball(board->getTopLeft().first, board->getTopLeft().second, board->getWidth(), board->getHeight());
+
 				Utils::clearScreen();
 
-				board.showBoard();
+				board->showBoard();
 				
 				player1->spawn();
 				player2->spawn();
@@ -109,14 +135,6 @@ void Game::loop() {
 
 		
 	}
-}
-int Game::getCommand() {
-	if (_kbhit()) {
-		command = toupper(_getch());
-		return command;
-	}
-
-	return 0;
 }
 bool Game::isContinue() {
 	return tiepTuc;

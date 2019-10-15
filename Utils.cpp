@@ -70,8 +70,12 @@ COORD Utils::getCursor() {
 }
 
 void Utils::clearScreen() {
+	/*
 	for (int i = 0; i < 80; i++) {
 		printf("\n");
 	}
 	gotoXY(0, 0);
+	*/
+
+	system("cls");
 }

@@ -1,14 +1,19 @@
 ﻿#pragma once
 
-class Stick
-{
+class Stick {
 private:
 	int x, y, size;
-	int height, width;
+
+	int left, top;
+	int width, height;
+
+	bool spawned;
+
 public:
 	Stick() = delete;
-	Stick(int height, int width);
+	Stick(int left, int top, int width, int height, int size);
 	~Stick();
+
 	/**
 	* Gán hoành độ cho điểm đầu của Stick
 	*
@@ -18,77 +23,77 @@ public:
 	* @noreturn
 	**/
 	void setX(int x);
+
 	/**
 	* Gán tung độ cho điểm đầu của Stick
 	*
 	* @note  Toạ độ trong Console:	trục hoành hướng sang phải
 	*								trục tung hướng xuống dưới
-	* @param x	hoành độ
+	* @param y	tung độ
 	*
 	* @noreturn
 	**/
 	void setY(int y);
+
 	/**
-	* Khởi tạo đồ dài cho Stick
+	* Gán độ dài cho Stick
 	*
 	* @note Toạ độ trong Console:	trục hoành hướng sang phải
 	*								trục tung hướng xuống dưới
-	* @param y	tung độ
+	*		Stick sẽ dài ra về hướng bên phải màn hình
+	* @param size	độ dài
 	* @noreturn
 	**/
 	void setSize(int size);
+
 	/**
 	* Trả về hoành độ cho điểm đầu của Stick
 	*
 	* @note Toạ độ trong Console:	trục hoành hướng sang phải
 	*								trục tung hướng xuống dưới
-	* @param x	hoành độ
 	*
 	* @return (int) hoành độ cho Stick
 	**/
 	int getX();
+
 	/**
 	* Trả về tung độ cho điểm đầu của Stick
 	*
 	* @note Toạ độ trong Console:	trục hoành hướng sang phải
 	*								trục tung hướng xuống dưới
-	* @param y	tung độ
 	*
 	* @return (int) tung độ cho Stick
 	**/
 	int getY();
+
+
 	/**
 	* Trả về độ dài của Stick
 	*
-	* @note 
+	* @note Stick sẽ dài về hướng bên phải màn hình
 	*
 	* @return (int) độ dài cho Stick
 	**/
 	int getsize();
+
 	/**
-	* Trả về chiều dài của bàn chơi
+	* Hiển thị stick lên màn hình
 	*
-	* @note
+	* @note 
 	*
-	* @return (int) chiều dài của bàn chơi
+	* @noreturn
 	**/
-	int getHeight();
+	void spawn();
+
 	/**
-	* Trả về chiều rộng của bàn chơi
-	*
-	* @note
-	*
-	* @return (int) chiều rộng của bàn chơi
-	**/
-	int getWidth();
-	/**
-	* Khởi tạo vị trí ban đầu cho Stick
+	* Xoá stick khỏi màn hình
 	*
 	* @note
 	*
 	* @noreturn
 	**/
-	void setPlace();
+	void despawn();
+
 	/**
 	* Thay đổi vị trí của Stick
 	*

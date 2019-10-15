@@ -1,79 +1,67 @@
-#include "Stick.h"
-
-
+﻿#include "Stick.h"
 #include "Graphic.h"
-#include "Utils.h"
 
 
-#include <windows.h>
-#include <cstdio>
-#include <ctype.h>
-#include <conio.h>
 
+Stick::Stick(int left, int top, int width, int height, int size) : left(left), top(top), height(height), width(width), size(size) {
+	this->spawned = false;
 
-Stick::Stick(int height, int width):  height(height), width(width)
-{
-	x = width/2;
-	y = height + 1;
-	size = 3;
+	x = left;
+	y = top;
 }
 
-Stick::~Stick()
-{
+Stick::~Stick() {}
 
+void Stick::setX(int x) {
+	if (x > this->left && x + this->size < this->left + this->width) 
+		this->x = x;
 }
 
-void Stick::setX(int x)
-{
-	this->x = x;
+void Stick::setY(int y) {
+	if (y > this->top && y < this->top + this->height)
+		this->y = y;
 }
 
-void Stick::setY(int y)
-{
-	this->y = y;
-}
-
-int Stick::getX()
-{
-	return this->x;
-}
-
-int Stick::getY()
-{
-	return this->y;
-}
-
-void Stick::setSize(int size)
-{
+void Stick::setSize(int size) {
 	this->size = size;
 }
 
-int Stick::getHeight()
-{
-	return this->height;
+int Stick::getX() {
+	return this->x;
 }
 
-int Stick::getWidth()
-{
-	return this->width;
+int Stick::getY() {
+	return this->y;
 }
 
-int Stick::getsize()
-{
+
+int Stick::getsize() {
 	return this->size;
 }
 
-void Stick::setPlace()
-{
-	Utils::gotoXY(x, y);
+void Stick::spawn() {
+	// đã xuất hiện trên màn hình
+	if (this->spawned) return;
+
+
+	Graphic::drawStick(*this);
+	this->spawned = true;
+}
+
+void Stick::despawn() {
+	// đã biến mất khỏi màn hình
+	if (!this->spawned) return;
+
+
+	Graphic::deleteStick(*this);
+	this->spawned = false;
 }
 
 void Stick::update(int x, int y) {
-	
-	Graphic::deleteStick(*this);
-
+	this->despawn();
+		
 	this->setX(x);
-	this->setX(y);
+	this->setY(y);
 
-	Graphic::drawStick(*this);
+	this->spawn();
 }

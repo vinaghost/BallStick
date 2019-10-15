@@ -42,7 +42,15 @@ void Utils::fixConsoleWindow() {
 	SetCurrentConsoleFontEx(handle, FALSE, &cfi);
 
 }
+void Utils::showConsoleCursor(bool show) {
+	HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
 
+	CONSOLE_CURSOR_INFO     cursorInfo;
+
+	GetConsoleCursorInfo(out, &cursorInfo);
+	cursorInfo.bVisible = show;
+	SetConsoleCursorInfo(out, &cursorInfo);
+}
 void Utils::gotoXY(int pX, int pY) {
 	COORD coord;
 	coord.X = pX;

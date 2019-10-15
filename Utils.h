@@ -15,6 +15,16 @@ public:
 	**/
 	static void fixConsoleWindow();
 
+
+	
+	
+	
+	
+	static void showConsoleCursor(bool show);
+
+
+
+
 	/**
 	* Di chuyển con trỏ
 	*

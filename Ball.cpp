@@ -64,16 +64,16 @@ int Ball::update(Stick top, Stick bot) {
 	Direction directNext;
 
 	// đụng vào stick trên
-	// x nằm bên trái top.getX && x nằm bên phải top.getX + top.getsize && y nằm bên dưới 1 ô so với top.getY
-	if (top.getX() <= this->x && top.getX() + top.getsize() >= this->x && top.getY() - 1 == this->y) {
-		directNext = getNext(1);
+	// x nằm bên phải top.getX && x nằm bên trái top.getX + top.getsize && y nằm bên dưới 1 ô so với top.getY
+	if ( top.getX() <= this->x  && this->x <= top.getX() + top.getsize()  && top.getY() + 1 == this->y) {
+		directNext = getNext(2);
 		result = 5;
 	}
 
 	// đụng vào stick dưới
-	// x nằm bên trái bot.getX && x nằm bên phải bot.getX + bot.getsize && y nằm bên trên 1 ô so với bot.getY
-	else if (bot.getX() <= this->x && bot.getX() + bot.getsize() >= this->x && bot.getY()  + 1 == this->y) {
-		directNext = getNext(2);
+	// x nằm bên phải bot.getX && x nằm bên trái bot.getX + bot.getsize && y nằm bên trên 1 ô so với bot.getY
+	else if (bot.getX() <= this->x && this->x <= bot.getX() + bot.getsize() && bot.getY() - 1 == this->y) {
+		directNext = getNext(3);
 		result = 6;
 	}
 	// đụng vào biên trái

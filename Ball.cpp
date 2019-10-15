@@ -15,11 +15,13 @@ Ball::Ball(int left, int top, int width, int height) : left(left), top(top), wid
 Ball::~Ball() {}
 
 void Ball::setX(int x) {
-	this->x = x;
+	if( x > this->left || x < this->left + this->width)
+		this->x = x;
 }
 
 void Ball::setY(int y) {
-	this->y = y;
+	if (y > this->top || y < this->top + this->height)
+		this->y = y;
 }
 
 void Ball::setDirect(Direction direction) {
@@ -168,9 +170,17 @@ Direction Ball::getNext(int truongHop) {
 			//chạm stick trên
 			switch (this->direction) {
 				case TOP_LEFT:
+					//góc trái
+					if (this->x <= this->left + 1) 
+						return BOT_RIGHT;
+
 					return BOT_LEFT;
 
 				case TOP_RIGHT:
+					//góc phải
+					if (this->x >= this->left + this->width - 1)
+						return BOT_LEFT;
+
 					return BOT_RIGHT;
 			}
 			break;
@@ -178,9 +188,15 @@ Direction Ball::getNext(int truongHop) {
 			//chạm stick dưới
 			switch (this->direction) {
 				case BOT_LEFT:
+					//góc trái
+					if (this->x <= this->left + 1)
+						return TOP_RIGHT;
 					return TOP_LEFT;
 
 				case BOT_RIGHT:
+					//góc phải
+					if (this->x >= this->left + this->width - 1)
+						return TOP_LEFT;
 					return TOP_RIGHT;
 			}
 			break;

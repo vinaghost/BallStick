@@ -41,7 +41,6 @@ void Game::loop() {
 
 		switch (choice) {
 			case 0:
-				board.setPlace();
 
 				player1 = new Stick(board.getBotLeft().second - board.getTopLeft().second, board.getTopRight().first - board.getTopLeft().first);
 				player2 = new Stick(board.getBotLeft().second - board.getTopLeft().second, board.getTopRight().first - board.getTopLeft().first);

@@ -4,6 +4,14 @@
 
 Board::Board()
 {
+	this->topLeft.first = 0;
+	this->topLeft.second = 10;
+	this->topRight.first = 40;
+	this->topRight.second = 10;
+	this->botLeft.first = 0;
+	this->botLeft.second = 26;
+	this->botRight.first = 40;
+	this->botRight.second = 26;
 }
 
 
@@ -51,18 +59,27 @@ pair<int, int> Board::getBotRight()
 	return this->botRight;
 }
 
-void Board::setPlace()
+int Board::getHeight()
 {
-	this->setTopleft(10,10);
-	this->setTopRight(40,10);
-	this->setBotLeft(10,20);
-	this->setBotRight(40,20);
+	return this->getBotLeft().second - this->getTopLeft().second;
+}
+
+int Board::getWidth()
+{
+	return this->getTopRight().first - this->getTopLeft().first;
+}
+
+void Board::setPlace(int x1, int y1, int x2, int y2, int x3, int y3)
+{
+	this->setTopleft(x1,y1);
+	this->setTopRight(x2,y2);
+	this->setBotLeft(x3,y3);
+	this->setBotRight(x2,y3);
 }
 
 void Board::showBoard()
 {
-	
-	Graphic::drawBoard(*this);
-	Utils::gotoXY(0, 0);
+	Utils::gotoXY((this->getBotRight().first - 26)/2, 0);
 	Graphic::drawGameName();
+	Graphic::drawBoard(*this);
 }

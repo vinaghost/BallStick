@@ -86,14 +86,34 @@ public:
 	**/
 	pair<int, int> getBotRight();
 	/**
-	* Tạo vị trí của bảng game
+	* Trả lại chiều dài của bảng game
 	*
 	* @note
 	*
 	*
+	* @return (int) chiều dài
+	**/
+	int getHeight();
+	/**
+	* Trả lại chiều rộng của bảng game
+	*
+	* @note
+	*
+	*
+	* @return (int) chiều rộng
+	**/
+	int getWidth();
+	/**
+	* Khỏi tạo lại tọa độ các điểm của Board 
+	*
+	* @note (x1, x2) tọa độ topLeft
+	*       (x2, y2) tọa độ topRight
+	*       (x3, y3) tọa độ botLeft
+	*
+	*
 	* @noreturn
 	**/
-	void setPlace();
+	void setPlace(int x1, int y1, int x2, int y2, int x3, int y3);
 	/**
 	* Hiện bảng game lên màn hình console 
 	*

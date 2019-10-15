@@ -31,8 +31,8 @@ Game::~Game() {
 void Game::loop() {
 
 	int choice;
-	DWORD startTime = GetTickCount() + 200;
-	DWORD curTime;
+	ULONGLONG  startTime = GetTickCount64() + 50;
+	ULONGLONG  curTime;
 
 	while (true) {
 		Utils::clearScreen();
@@ -41,6 +41,9 @@ void Game::loop() {
 
 		switch (choice) {
 			case 0:
+
+
+				Utils::showConsoleCursor(false);
 				board.setPlace();
 
 				player1 = new Stick(board.getTopLeft().first, board.getTopLeft().second, board.getBotLeft().second - board.getTopLeft().second, board.getTopRight().first - board.getTopLeft().first, 3);
@@ -56,44 +59,48 @@ void Game::loop() {
 				Utils::clearScreen();
 
 				board.showBoard();
-
-				Graphic::drawStick(*player1);
-				Graphic::drawStick(*player2);
+				
+				player1->spawn();
+				player2->spawn();
 
 				ball->spawn();
 				
-				getchar();
-
 				while (isContinue()) {
 					
-					switch (getCommand()) {
-						case 'A':
-							moveLeft_Player1();
-							break;
-						case 'D':
-							moveLeft_Player1();
-							break;
-						case 'J':
-							moveLeft_Player2();
-							break;
-						case 'L':
-							moveLeft_Player2();
-							break;
-						case 27:  //esc
+					curTime = GetTickCount64();
+
+					if (curTime > startTime) {
+
+
+						if (GetKeyState('A') & 0x8000) {
+							player1->update(player1->getX() - 1, player1->getY());
+						}
+
+						if (GetKeyState('D') & 0x8000) {
+							player1->update(player1->getX() + 1, player1->getY());
+						}
+
+						if (GetKeyState('J') & 0x8000) {
+							player2->update(player2->getX() - 1, player2->getY());
+						}
+
+						if (GetKeyState('L') & 0x8000) {
+							player2->update(player2->getX() + 1, player2->getY());
+						}
+
+						if (GetKeyState(VK_ESCAPE) & 0x8000) {
 							this->tiepTuc = false;
-							break;
-					}
+						}
 
-					curTime = GetTickCount();
-
-					if (startTime > curTime) {
-						startTime = curTime + 200;
 						ball->update();
+
+						startTime = curTime + 50;
 					}
 
 					
 				}
 
+				Utils::showConsoleCursor(true);
 
 				break;
 			case 1:

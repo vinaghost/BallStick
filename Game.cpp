@@ -43,13 +43,14 @@ void Game::loop() {
 			case 0:
 				board.setPlace();
 
-				player1 = new Stick(board.getBotLeft().second - board.getTopLeft().second, board.getTopRight().first - board.getTopLeft().first);
-				player2 = new Stick(board.getBotLeft().second - board.getTopLeft().second, board.getTopRight().first - board.getTopLeft().first);
+				player1 = new Stick(board.getTopLeft().first, board.getTopLeft().second, board.getBotLeft().second - board.getTopLeft().second, board.getTopRight().first - board.getTopLeft().first, 3);
+				player2 = new Stick(board.getTopLeft().first, board.getTopLeft().second, board.getBotLeft().second - board.getTopLeft().second, board.getTopRight().first - board.getTopLeft().first, 3);
 
 				player1->setX(board.getTopLeft().first);
 				player1->setY(board.getTopLeft().second + 1);
-				player2->setX(board.getBotLeft().first);
-				player2->setY(board.getBotLeft().second - 1);
+
+				player1->setX(board.getBotLeft().first);
+				player1->setY(board.getBotLeft().second - 1);
 
 				ball = new Ball(board.getTopLeft().first, board.getTopLeft().second, 20, 30);
 				Utils::clearScreen();

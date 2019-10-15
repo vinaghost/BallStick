@@ -15,6 +15,9 @@ private:
 
 	Board *board;
 
+	int point_player1;
+	int point_player2;
+
 	Menu menuMain;
 
 	unsigned long long startTime_player;
@@ -23,6 +26,8 @@ private:
 
 	const int tick_player = 50;
 	const int tick_ball = 400;
+
+	int tick_ball_game;
 
 public:
 	Game();

@@ -1,4 +1,4 @@
-#include "Game.h"
+﻿#include "Game.h"
 #include "Utils.h"
 #include "Graphic.h"
 #include "Menu.h"
@@ -13,10 +13,15 @@ Game::Game() {
 	this->startTime_player = 0;
 	this->startTime_ball = 0;
 
+	this->tick_ball_game = this->tick_ball;
+
 	board = NULL;
 	player1 = NULL;
 	player2 = NULL;
 	ball = NULL;
+
+	point_player1 = 0;
+	point_player2 = 1;
 
 	menuMain.addItem("Start");
 	menuMain.addItem("Exit");
@@ -124,9 +129,40 @@ void Game::loop() {
 
 					if (this->curTime > this->startTime_ball) {
 
-						ball->update();
+						int result = ball->update(*player1, *player2);
 
-						this->startTime_ball = this->curTime + this->tick_ball;
+						switch (result) {
+							//chạm biên trên, player 2 thua
+							case 3:
+								point_player1++;
+								this->tick_ball_game = this->tick_ball;
+
+								ball->despawn();
+								ball->setX(board->getTopLeft().first + board->getWidth() / 2);
+								ball->setY(board->getTopLeft().second + board->getHeight() / 2);
+								ball->spawn();
+
+								break;
+								//chạm biên trên, player 1 thua
+							case 4:
+								point_player2++;
+								this->tick_ball_game = this->tick_ball;
+								ball->despawn();
+								ball->setX(board->getTopLeft().first + board->getWidth() / 2);
+								ball->setY(board->getTopLeft().second + board->getHeight() / 2);
+								ball->spawn();
+								ball->update(*player1, *player2);
+								break;
+
+							//chạm stick trên
+							case 5:
+							//chạm stick dưới
+							case 6:
+								// tăng 10% tốc độ
+								this->tick_ball_game -= this->tick_ball / 10; 
+								break;
+						}
+						this->startTime_ball = this->curTime + this->tick_ball_game;
 
 					}
 					

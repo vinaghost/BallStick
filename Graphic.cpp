@@ -66,9 +66,10 @@ void Graphic::drawBoard(Board a)
 		putchar(219);
 	}
 }
+
 void Graphic::drawStick(Stick s) {
 	Utils::gotoXY(s.getX(), s.getY());
-	for (int i = s.getX(); i <= s.getX() + s.getY(); i++) {
+	for (int i = 0; i <= s.getsize(); i++) {
 		putchar('*');
 	}
 }
@@ -76,7 +77,7 @@ void Graphic::drawStick(Stick s) {
 void Graphic::deleteStick(Stick s) {
 
 	Utils::gotoXY(s.getX(), s.getY());
-	for (int i = s.getX(); i <= s.getX() + s.getY(); i++) {
+	for (int i = 0; i <= s.getsize(); i++) {
 		putchar(' ');
 	}
 }

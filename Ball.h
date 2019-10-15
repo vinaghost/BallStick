@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "Stick.h"
+
 enum Direction {
 	NONE,
 	TOP,
@@ -26,11 +28,18 @@ private:
 	/**
 	* Trả về hướng tiếp theo của Ball khi va chạm
 	*
-	* @note 
+	* @note trường hợp va chạm gồm 
+	*	0 = va chạm biên trái
+	*	1 = va chạm biên phải
+	*	2 = va chạm Stick trên
+	*	3 = va chạm Stick dưới
+	*
+	*
+	* @param truongHop	trường hợp va chạm
 	*
 	* @return (Direction) Hướng tiếp theo của Ball
 	**/
-	Direction getNext();
+	Direction getNext(int truongHop);
 
 public:
 	Ball() = delete;
@@ -126,11 +135,18 @@ public:
 	*
 	* @note Toạ độ trong Console:	trục hoành hướng sang phải
 	*								trục tung hướng xuống dưới
-	* @param speed tốc độ Ball
+	* @param top	Stick nằm trên
+	* @param bot	Stick nằm dưới
 	*
-	* @return (double) khoảng cách trước và sau khi update Ball
+	* @return (int) 0 nếu ball không đụng gì 
+	*				1 nếu ball đụng biên trái
+	*				2 nếu ball đụng biên phải
+	*				3 nếu ball đụng biên trên
+	*				4 nếu ball đụng biên dưới
+	*				5 nếu ball đụng stick trên
+	*				6 nếu ball đụng stick dưới
 	**/
-	double update(double speed = 1.0);
+	int update(Stick top, Stick boy);
 
 };
 

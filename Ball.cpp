@@ -46,12 +46,52 @@ bool Ball::despawn() {
 	this->spawned = false;
 	return false;
 }
-double Ball::update(double speed) {
+int Ball::update(Stick top, Stick bot) {
 	
+	// đụng biên trên
+	if (this->y <= this->top + 1) {
+		return 3;
+	}
+	// đụng biên dưới
+	if (this->y >= this->top + this->height - 1) {
+		return 4;
+	}
+
 	int x = 0;
 	int y = 0;
 
-	Direction directNext = getNext();
+	int result;
+	Direction directNext;
+
+	// đụng vào stick trên
+	// x nằm bên trái top.getX && x nằm bên phải top.getX + top.getsize && y nằm bên dưới 1 ô so với top.getY
+	if (top.getX() <= this->x && top.getX() + top.getsize() >= this->x && top.getY() - 1 == this->y) {
+		directNext = getNext(1);
+		result = 5;
+	}
+
+	// đụng vào stick dưới
+	// x nằm bên trái bot.getX && x nằm bên phải bot.getX + bot.getsize && y nằm bên trên 1 ô so với bot.getY
+	else if (bot.getX() <= this->x && bot.getX() + bot.getsize() >= this->x && bot.getY()  + 1 == this->y) {
+		directNext = getNext(2);
+		result = 6;
+	}
+	// đụng vào biên trái
+	else if (this->x <= this->left + 1 ) {
+		directNext = getNext(0);
+		result = 1;
+	}
+	// đụng vào biên phải
+	else if (this->x >= this->left + this->width - 1) {
+		directNext = getNext(1);
+		result = 2;
+	}
+	else {
+		directNext = this->direction;
+		result = 0;
+	}
+	
+
 	this->setDirect(directNext);
 
 	switch (directNext) {
@@ -84,7 +124,6 @@ double Ball::update(double speed) {
 			y = -1;
 			break;
 	}
-	double dist = sqrt( (x) * (x) + (y) * (y) );
 
 
 	despawn();
@@ -94,55 +133,57 @@ double Ball::update(double speed) {
 
 	spawn();
 
-	return dist;
+	return result ;
 }
 
 
-Direction Ball::getNext() {
+Direction Ball::getNext(int truongHop) {
 
-	// chạm biên trái
-	if (this->x <= this->left + 1) {
-		switch (this->direction) {
-			case BOT_LEFT: 
-				return BOT_RIGHT;
-				
-			case TOP_LEFT:
-				return TOP_RIGHT;
-		}
+	switch (truongHop) {
+		case 0:
+			// chạm biên trái
+			if (this->x <= this->left + 1) {
+				switch (this->direction) {
+					case BOT_LEFT:
+						return BOT_RIGHT;
+
+					case TOP_LEFT:
+						return TOP_RIGHT;
+				}
+			}
+			break;
+		case 1:
+			// chạm biên phải
+			if (this->x >= this->left + this->width - 1) {
+				switch (this->direction) {
+					case BOT_RIGHT:
+						return BOT_LEFT;
+
+					case TOP_RIGHT:
+						return TOP_LEFT;
+				}
+			}
+			break;
+		case 2:
+			//chạm stick trên
+			switch (this->direction) {
+				case TOP_LEFT:
+					return BOT_LEFT;
+
+				case TOP_RIGHT:
+					return BOT_RIGHT;
+			}
+			break;
+		case 3:
+			//chạm stick dưới
+			switch (this->direction) {
+				case BOT_LEFT:
+					return TOP_LEFT;
+
+				case BOT_RIGHT:
+					return TOP_RIGHT;
+			}
+			break;
 	}
-
-	// chạm biên phải
-	if (this->x >= this->left + this->width - 1) {
-		switch (this->direction) {
-			case BOT_RIGHT:
-				return BOT_LEFT;
-
-			case TOP_RIGHT:
-				return TOP_LEFT;
-		}
-	}
-
-	//chạm biên trên 
-	if (this->y <= this->top + 1) {
-		switch (this->direction) {
-			case TOP_LEFT:
-				return BOT_LEFT;
-
-			case TOP_RIGHT:
-				return BOT_RIGHT;
-		}
-	}
-
-	//chạm biên dưới
-	if (this->y >= this->top + this->height - 1) {
-		switch (this->direction) {
-			case BOT_LEFT:
-				return TOP_LEFT;
-
-			case BOT_RIGHT:
-				return TOP_RIGHT;
-		}
-	}
-
 	return this->direction;
 }

@@ -4,12 +4,14 @@
 #include "Menu.h"
 
 #include <stdio.h>
-#include <ctype.h>
-#include <conio.h>
 #include <Windows.h>
 
 Game::Game() {
 	this->tiepTuc = true;
+	this->choice = 0;
+
+	this->startTime_player = 0;
+	this->startTime_ball = 0;
 
 	board = NULL;
 	player1 = NULL;
@@ -41,11 +43,7 @@ Game::~Game() {
 }
 
 void Game::loop() {
-
-	int choice;
-	ULONGLONG  startTime = GetTickCount64() + 50;
-	ULONGLONG  curTime;
-
+	
 	while (true) {
 		Utils::clearScreen();
 		menuMain.show();
@@ -53,8 +51,7 @@ void Game::loop() {
 
 		switch (choice) {
 			case 0:
-
-
+				
 				Utils::showConsoleCursor(false);
 				if (board != NULL) {
 					delete board;
@@ -90,12 +87,14 @@ void Game::loop() {
 				player2->spawn();
 
 				ball->spawn();
-				
+
+				this->tiepTuc = true;
+
 				while (isContinue()) {
 					
-					curTime = GetTickCount64();
+					this->curTime = GetTickCount64();
 
-					if (curTime > startTime) {
+					if (this->curTime > this->startTime_player) {
 
 
 						if (GetKeyState('A') & 0x8000) {
@@ -118,11 +117,18 @@ void Game::loop() {
 							this->tiepTuc = false;
 						}
 
-						ball->update();
+						
 
-						startTime = curTime + 50;
+						this->startTime_player = this->curTime + this->tick_player;
 					}
 
+					if (this->curTime > this->startTime_ball) {
+
+						ball->update();
+
+						this->startTime_ball = this->curTime + this->tick_ball;
+
+					}
 					
 				}
 

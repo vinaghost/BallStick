@@ -6,6 +6,8 @@
 
 class Game {
 private:
+
+	int choice;
 	bool tiepTuc;
 	Ball* ball;
 	Stick *player1;
@@ -14,6 +16,13 @@ private:
 	Board *board;
 
 	Menu menuMain;
+
+	unsigned long long startTime_player;
+	unsigned long long startTime_ball;
+	unsigned long long curTime;
+
+	const int tick_player = 50;
+	const int tick_ball = 400;
 
 public:
 	Game();

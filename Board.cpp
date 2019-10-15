@@ -79,7 +79,6 @@ void Board::setPlace(int x1, int y1, int x2, int y2, int x3, int y3)
 
 void Board::showBoard()
 {
-	Utils::gotoXY((this->getBotRight().first - 26)/2, 0);
 	Graphic::drawGameName();
 	Graphic::drawBoard(*this);
 }

@@ -79,7 +79,7 @@ void Menu::moveUp() {
 }
 
 void Menu::moveDown() {
-	if (choice < this->itemName.size() ) {
+	if (choice < this->itemName.size() - 1 ) {
 		choice++;
 		Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + choice * 2);
 	}

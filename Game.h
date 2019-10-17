@@ -20,19 +20,19 @@ private:
 
 	Menu menuMain;
 
-	unsigned long long startTime_player;
-	unsigned long long startTime_ball;
-	unsigned long long curTime;
+	unsigned long startTime_player;
+	unsigned long startTime_ball;
+	unsigned long curTime;
 
-	const int tick_player = 50;
-	const int tick_ball = 400;
+	const int tick_player = 0;
+	const int tick_ball = 200;
 
 	int tick_ball_game;
 
 public:
 	Game();
 	~Game();
-	
+
 	/**
 	* Trả về giá trị của Game::tiepTuc
 	*
@@ -46,7 +46,7 @@ public:
 	/**
 	* Xử lí các sự kiện trong game
 	*
-	* @note 
+	* @note
 	*
 	*
 	* @noreturn

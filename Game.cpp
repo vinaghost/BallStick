@@ -7,6 +7,7 @@
 #include <Windows.h>
 
 Game::Game() {
+	Utils::fixConsoleWindow();
 	this->tiepTuc = true;
 	this->choice = 0;
 
@@ -20,8 +21,6 @@ Game::Game() {
 	player2 = NULL;
 	ball = NULL;
 
-	point_player1 = 0;
-	point_player2 = 1;
 
 	menuMain.addItem("Start");
 	menuMain.addItem("Exit");
@@ -48,7 +47,7 @@ Game::~Game() {
 }
 
 void Game::loop() {
-	
+
 	while (true) {
 		Utils::clearScreen();
 		menuMain.show();
@@ -56,22 +55,22 @@ void Game::loop() {
 
 		switch (choice) {
 			case 0:
-				
+
 				Utils::showConsoleCursor(false);
 				if (board != NULL) {
 					delete board;
 				}
-				board = new Board({ 10, 9 }, 20, 10);
+				board = new Board({ 10, 9 }, 30, 20);
 
 				if (player1 != NULL) {
 					delete player1;
 				}
-				player1 = new Stick(board->getTopLeft().first, board->getTopLeft().second, board->getWidth(), board->getHeight(), 3);
+				player1 = new Stick(board->getTopLeft().first, board->getTopLeft().second, board->getWidth(), board->getHeight(), 15);
 
 				if (player2 != NULL) {
 					delete player2;
 				}
-				player2 = new Stick(board->getTopLeft().first, board->getTopLeft().second, board->getWidth(), board->getHeight(), 3);
+				player2 = new Stick(board->getTopLeft().first, board->getTopLeft().second, board->getWidth(), board->getHeight(), 15);
 
 				player1->setX( board->getTopLeft().first + board->getWidth() / 2 - player1->getsize()/2);
 				player1->setY(board->getTopLeft().second + 1);
@@ -86,18 +85,29 @@ void Game::loop() {
 
 				Utils::clearScreen();
 
+
+				point_player1 = 0;
+				point_player2 = 0;
+
 				board->showBoard();
-				
+
 				player1->spawn();
 				player2->spawn();
 
 				ball->spawn();
 
+
+				Utils::gotoXY(5, board->getTopLeft().second + 5);
+				printf("%d\t\t", point_player2);
+
+				Utils::gotoXY(5, board->getBotLeft().second - 5);
+				printf("%d\t\t", point_player1);
+
 				this->tiepTuc = true;
 
 				while (isContinue()) {
-					
-					this->curTime = GetTickCount64();
+
+					this->curTime = GetTickCount();
 
 					if (this->curTime > this->startTime_player) {
 
@@ -122,8 +132,6 @@ void Game::loop() {
 							this->tiepTuc = false;
 						}
 
-						
-
 						this->startTime_player = this->curTime + this->tick_player;
 					}
 
@@ -142,8 +150,10 @@ void Game::loop() {
 								ball->setY(board->getTopLeft().second + board->getHeight() / 2);
 								ball->spawn();
 
+								Utils::gotoXY(5, board->getBotLeft().second - 5);
+								printf("%d\t\t", point_player1);
 								break;
-								//chạm biên trên, player 1 thua
+								//chạm biên dưới, player 1 thua
 							case 4:
 								point_player2++;
 								this->tick_ball_game = this->tick_ball;
@@ -152,6 +162,10 @@ void Game::loop() {
 								ball->setY(board->getTopLeft().second + board->getHeight() / 2);
 								ball->spawn();
 								ball->update(*player1, *player2);
+
+
+								Utils::gotoXY(5, board->getTopLeft().second + 5);
+								printf("%d\t\t", point_player2);
 								break;
 
 							//chạm stick trên
@@ -159,13 +173,13 @@ void Game::loop() {
 							//chạm stick dưới
 							case 6:
 								// tăng 10% tốc độ
-								this->tick_ball_game -= this->tick_ball / 10; 
+								this->tick_ball_game -= this->tick_ball / 10;
 								break;
 						}
 						this->startTime_ball = this->curTime + this->tick_ball_game;
 
 					}
-					
+
 				}
 
 				Utils::showConsoleCursor(true);
@@ -175,7 +189,7 @@ void Game::loop() {
 				return;
 		}
 
-		
+
 	}
 }
 bool Game::isContinue() {

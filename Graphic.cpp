@@ -7,7 +7,7 @@
 using std::cout;
 
 void Graphic::drawGameName() {
-	                              
+
 	cout << "\t _____\n";
 	cout << "\t|  __ \\ \n";
 	cout << "\t| |__) |__  _ __   __ _\n";

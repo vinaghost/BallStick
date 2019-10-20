@@ -16,7 +16,7 @@ void Utils::fixConsoleWindow() {
 	RECT r;
 	GetWindowRect(consoleWindow, &r);
 
-	MoveWindow(consoleWindow, r.left, r.top, 900, 700, TRUE);
+	MoveWindow(consoleWindow, r.left, r.top, 630, 700, TRUE);
 
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -29,6 +29,11 @@ void Utils::fixConsoleWindow() {
 		(short int)(info.srWindow.Bottom - info.srWindow.Top + 1),
 	};
 	SetConsoleScreenBufferSize(handle, new_size);
+
+
+	/*http://www.cplusplus.com/forum/beginner/95699/*/
+
+	SetWindowPos(consoleWindow, 0, 300, 0, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
 	/*https://stackoverflow.com/questions/33975912/how-to-set-console-font-to-raster-font-programmatically*/
 	CONSOLE_FONT_INFOEX cfi;

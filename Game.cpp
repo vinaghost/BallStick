@@ -14,7 +14,7 @@ Game::Game() {
 	this->startTime_player = 0;
 	this->startTime_ball = 0;
 
-	this->tick_ball_game = this->tick_ball;
+	this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
 
 	board = NULL;
 	player1 = NULL;
@@ -23,9 +23,10 @@ Game::Game() {
 
 
 	menuMain.addItem("Start");
+	menuMain.addItem("Setting");
 	menuMain.addItem("Exit");
 
-	menuMain.setCoordItem(20, 10);
+	menuMain.setCoordItem(30, 10);
 
 	this->loop();
 }
@@ -60,17 +61,17 @@ void Game::loop() {
 				if (board != NULL) {
 					delete board;
 				}
-				board = new Board({ 10, 9 }, 30, 20);
-
+				board = new Board(setting::boardTopLeft[menuSetting.getSizeBoard()], setting::boardWidth[menuSetting.getSizeBoard()], setting::boardHeight[menuSetting.getSizeBoard()]);
+				
 				if (player1 != NULL) {
 					delete player1;
 				}
-				player1 = new Stick(board->getTopLeft().first, board->getTopLeft().second, board->getWidth(), board->getHeight(), 15);
+				player1 = new Stick(board->getTopLeft().first, board->getTopLeft().second, board->getWidth(), board->getHeight(), setting::lengthStick[menuSetting.getLengthStick()]);
 
 				if (player2 != NULL) {
 					delete player2;
 				}
-				player2 = new Stick(board->getTopLeft().first, board->getTopLeft().second, board->getWidth(), board->getHeight(), 15);
+				player2 = new Stick(board->getTopLeft().first, board->getTopLeft().second, board->getWidth(), board->getHeight(), setting::lengthStick[menuSetting.getLengthStick()]);
 
 				player1->setX( board->getTopLeft().first + board->getWidth() / 2 - player1->getsize()/2);
 				player1->setY(board->getTopLeft().second + 1);
@@ -132,7 +133,7 @@ void Game::loop() {
 							this->tiepTuc = false;
 						}
 
-						this->startTime_player = this->curTime + this->tick_player;
+						this->startTime_player = this->curTime + setting::tick_player[menuSetting.getSpeedStick()];
 					}
 
 					if (this->curTime > this->startTime_ball) {
@@ -143,7 +144,7 @@ void Game::loop() {
 							//chạm biên trên, player 2 thua
 							case 3:
 								point_player1++;
-								this->tick_ball_game = this->tick_ball;
+								this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
 
 								ball->despawn();
 								ball->setX(board->getTopLeft().first + board->getWidth() / 2);
@@ -156,7 +157,7 @@ void Game::loop() {
 								//chạm biên dưới, player 1 thua
 							case 4:
 								point_player2++;
-								this->tick_ball_game = this->tick_ball;
+								this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
 								ball->despawn();
 								ball->setX(board->getTopLeft().first + board->getWidth() / 2);
 								ball->setY(board->getTopLeft().second + board->getHeight() / 2);
@@ -173,7 +174,7 @@ void Game::loop() {
 							//chạm stick dưới
 							case 6:
 								// tăng 10% tốc độ
-								this->tick_ball_game -= this->tick_ball / 10;
+								this->tick_ball_game -= setting::tick_ball[menuSetting.getSpeedBall()] / 10;
 								break;
 						}
 						this->startTime_ball = this->curTime + this->tick_ball_game;
@@ -186,6 +187,9 @@ void Game::loop() {
 
 				break;
 			case 1:
+				menuSetting.show();
+				break;
+			case 2:
 				return;
 		}
 

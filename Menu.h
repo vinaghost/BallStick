@@ -100,7 +100,7 @@ public:
 	* @noreturn
 	**/
 	void addItem(string itemName);
-
+	
 	/**
 	* Hiển thị menu ra Console
 	*
@@ -112,7 +112,7 @@ public:
 	*
 	* @noreturn
 	**/
-	void show();
+	virtual void show();
 
 	/**
 	* Trả về lựa chọn item

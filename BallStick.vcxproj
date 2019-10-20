@@ -120,6 +120,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphic.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuSetting.cpp" />
     <ClCompile Include="Stick.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Utils.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphic.h" />
+    <ClInclude Include="MenuSetting.h" />
     <ClInclude Include="Stick.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Utils.h" />

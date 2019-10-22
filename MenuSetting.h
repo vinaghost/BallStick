@@ -10,7 +10,7 @@ Setting:
 - tốc độ thanh
 */
 
-enum {
+enum itemSetting {
 	MODE,
 	LENGTH_STICK,
 	SIZE_BOARD,

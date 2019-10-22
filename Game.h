@@ -3,10 +3,31 @@
 #include "Stick.h"
 #include "Board.h"
 #include "Menu.h"
+#include "MenuSetting.h"
+
+namespace setting {
+	
+	//length stick
+	const int lengthStick[3] = { 3, 5, 9 };
+
+	//size board 
+	const pair<int, int> boardTopLeft[3] = {
+		{26 , 10},
+		{20 , 10},
+		{14 , 10}
+	};
+
+	const int boardWidth[3] = { 20, 30, 40 };
+	const int boardHeight[3] = { 20, 25, 30 };
+
+
+	const int tick_player[3] = { 50, 30, 0 };
+	const int tick_ball[3] = { 500, 200, 100 };
+
+};
 
 class Game {
 private:
-
 	int choice;
 	bool tiepTuc;
 	Ball* ball;
@@ -15,17 +36,18 @@ private:
 
 	Board *board;
 
+	bool mode;
+
 	int point_player1;
 	int point_player2;
 
 	Menu menuMain;
+	MenuSetting menuSetting;
 
 	unsigned long startTime_player;
 	unsigned long startTime_ball;
 	unsigned long curTime;
 
-	const int tick_player = 0;
-	const int tick_ball = 200;
 
 	int tick_ball_game;
 

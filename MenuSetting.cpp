@@ -111,21 +111,14 @@ void MenuSetting::show() {
 
 void MenuSetting::changeItem(int item, int direction) {
 	
-	//kiểm tra nếu là phần  tử đầu và cuối thì không thay đổi
-	//item MODE có 2 phần tử còn lại thì có 3
-
-	// không là phần tử đầu và cuối
-	if (!((item == MODE && itemSetting[item] > 1) || (item != MODE && itemSetting[item] > 2) || itemSetting[item] == 0)) {
-		switch (direction) {
-			case 0:
-				//tăng
-				itemSetting[item]++;
-				break;
-			case 1:
-				//giảm
-				itemSetting[item]--;
-				break;
-		}
+	//di chuyển giảm nhưng không phải phần tử đầu
+	if (direction == 1 && itemSetting[item] != 0) {
+		itemSetting[item]--;
+	}
+	//di chuyển tăng nhưng không phải phần tử cuối
+	//mode chỉ có 2 trong khi còn lại thì có 3
+	else if (direction == 0 && !((item == MODE && itemSetting[item] == 1) || (item != MODE && itemSetting[item] == 2))) {
+		itemSetting[item]++;
 	}
 	
 	//đi tới toạ độ của phần tử

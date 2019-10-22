@@ -15,13 +15,12 @@ enum {
 	LENGTH_STICK,
 	SIZE_BOARD,
 	SPEED_BALL,
-	SPEED_STICK
+	SPEED_STICK,
+	SAVE
 };
 
 class MenuSetting :	public Menu {
 private:
-	
-	const int saveItem = 5;
 
 	char mode[2][4] = {
 		"PVP",
@@ -51,15 +50,35 @@ private:
 	/**
 	* Thay đổi tên item
 	*
-	* @note
+	* @note xoá item có sẵn bằng 50 khoảng trắng sau đó 
+	* in lại cái mới
 	*
 	* @param item - số thứ tự item
+	* @param direction - 0 = tăng - 1 = giảm số thứ tự item
 	*
 	* @noreturn
 	**/
-	void changeItem(int item);
+	void changeItem(int item, int direction = 0);
 
+	/**
+	* Gọi khi nút qua trái được bấm
+	*
+	* @note
+	*
+	*
+	* @noreturn
+	**/
+	virtual void moveLeft();
 
+	/**
+	* Gọi khi nút qua phải được bấm
+	*
+	* @note
+	*
+	*
+	* @noreturn
+	**/
+	virtual void moveRight();
 
 public:
 	MenuSetting();

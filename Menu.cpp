@@ -89,3 +89,7 @@ void Menu::moveDown() {
 		Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + choice * 2);
 	}
 }
+
+void Menu::moveLeft() {}
+
+void Menu::moveRight() {}

@@ -13,16 +13,26 @@ MenuSetting::MenuSetting() : Menu() {
 	this->setTitle("Setting");
 
 	this->setCoordItem(25, 10);
+
 	this->addItem("Mode: ");
+	//giá trị mặc định
 	itemSetting.push_back(0);
+
 	this->addItem("Do dai cua thanh: ");
+	//giá trị mặc định
 	itemSetting.push_back(1);
+
 	this->addItem("Do to cua san choi: ");
+	//giá trị mặc định
 	itemSetting.push_back(1);
+
 	this->addItem("Toc do cua banh khi bat dau: ");
+	//giá trị mặc định
 	itemSetting.push_back(1);
 	this->addItem("Toc do cua thanh khi di chuyen: ");
+	//giá trị mặc định
 	itemSetting.push_back(1);
+
 	this->addItem("Luu");
 	
 }
@@ -38,38 +48,40 @@ int MenuSetting::getSpeedBall(){ return itemSetting[SPEED_BALL]; }
 int MenuSetting::getSpeedStick(){ return itemSetting[SPEED_STICK]; }
 
 void MenuSetting::show() {
-
+	// xoá màn hình
 	Utils::clearScreen();
+	
+	//hiện tên game
 	Graphic::drawGameName();
 
+	//hiện tên menu
 	Utils::gotoXY(this->titleCoord.first, this->titleCoord.second);
 	cout << this->title;
 
-	int item = 0;
 
-	//Mode
-	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + item * 2);
-	cout << "\b[ ] " << this->itemName[item] << mode[this->itemSetting[item]];
-	item++;
-	//Độ dài của thanh
-	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + item * 2);
-	cout << "\b[ ] " << this->itemName[item] << length[this->itemSetting[item]];
-	item++;
-	//Độ to của sân chơi
-	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + item * 2);
-	cout << "\b[ ] " << this->itemName[item] << size[this->itemSetting[item]];
-	item++;
-	//Tốc độ của banh
-	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + item * 2);
-	cout << "\b[ ] " << this->itemName[item] << speed[this->itemSetting[item]];
-	item++;
-	//tốc độ của thanh
-	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + item * 2);
-	cout << "\b[ ] " << this->itemName[item] << speed[this->itemSetting[item]];
-	item++;
-
-	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + item * 2);
-	cout << "\b[ ] " << this->itemName[item];
+	//hiện item Mode
+	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + MODE * 2);
+	cout << "\b[ ] " << this->itemName[MODE] << mode[this->itemSetting[MODE]];
+	
+	//hiện item Độ dài của thanh
+	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + LENGTH_STICK * 2);
+	cout << "\b[ ] " << this->itemName[LENGTH_STICK] << length[this->itemSetting[LENGTH_STICK]];
+	
+	//hiện item Độ to của sân chơi
+	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + SIZE_BOARD * 2);
+	cout << "\b[ ] " << this->itemName[SIZE_BOARD] << size[this->itemSetting[SIZE_BOARD]];
+	
+	//hiện item Tốc độ của banh
+	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + SPEED_BALL * 2);
+	cout << "\b[ ] " << this->itemName[SPEED_BALL] << speed[this->itemSetting[SPEED_BALL]];
+	
+	//hiện item tốc độ của thanh
+	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + SPEED_STICK * 2);
+	cout << "\b[ ] " << this->itemName[SPEED_STICK] << speed[this->itemSetting[SPEED_STICK]];
+	
+	//hiện nút lưu
+	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + SAVE * 2);
+	cout << "\b[ ] " << this->itemName[SAVE];
 
 	this->choice = 0;
 	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second);
@@ -83,31 +95,51 @@ void MenuSetting::show() {
 			case 'S':
 				moveDown();
 				break;
+			case 'A':
+				moveLeft();
+				break;
+			case 'D':
+				moveRight();
+				break;
 			case 13:
-				if (this->choice == saveItem) {
+				if (this->choice == SAVE) {
 					return;
-				}
-				else {
-					changeItem(this->choice);
 				}
 		}
 	}
 }
 
-void MenuSetting::changeItem(int item) {
+void MenuSetting::changeItem(int item, int direction) {
 	
-	itemSetting[item]++;
-	if ((item == 0 && itemSetting[item] > 1) || (item != 0 && itemSetting[item] > 2)) itemSetting[item] = 0;
+	//kiểm tra nếu là phần  tử đầu và cuối thì không thay đổi
+	//item MODE có 2 phần tử còn lại thì có 3
+
+	// không là phần tử đầu và cuối
+	if (!((item == MODE && itemSetting[item] > 1) || (item != MODE && itemSetting[item] > 2) || itemSetting[item] == 0)) {
+		switch (direction) {
+			case 0:
+				//tăng
+				itemSetting[item]++;
+				break;
+			case 1:
+				//giảm
+				itemSetting[item]--;
+				break;
+		}
+	}
 	
+	//đi tới toạ độ của phần tử
 	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + item * 2);
 	
+	//xoá nó đi
 	for( int i = 0; i < 50; i++)	cout << " ";
 
+	//quay lại chỗ cũ vì khi xoá con trỏ đã dịch chuyển đi vị trí khác
 	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + item * 2);
 
+	// in lại phần tử
 	switch (item) {
 		case MODE:
-
 			cout << "\b[ ] " << this->itemName[item] << mode[this->itemSetting[item]];
 			break;
 		case LENGTH_STICK:
@@ -123,6 +155,16 @@ void MenuSetting::changeItem(int item) {
 			cout << "\b[ ] " << this->itemName[item] << speed[this->itemSetting[item]];
 			break;
 	}
-
+	//quay con trỏ về vị trí cũ vì khi in đã làm thay đổi vị trí
 	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + item * 2);
+}
+
+void MenuSetting::moveLeft() {
+	//thay đổi phần tử giảm
+	changeItem(this->choice, 1);
+}
+
+void MenuSetting::moveRight() {
+	//thay đổi phần tử tăng
+	changeItem(this->choice, 0);
 }

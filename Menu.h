@@ -36,7 +36,7 @@ protected:
 	*
 	* @noreturn
 	**/
-	void moveUp();
+	virtual void moveUp();
 
 	/**
 	* Gọi khi nút xuống dưới được bấm
@@ -46,7 +46,27 @@ protected:
 	*
 	* @noreturn
 	**/
-	void moveDown();
+	virtual void moveDown();
+
+	/**
+	* Gọi khi nút qua trái được bấm
+	*
+	* @note
+	*
+	*
+	* @noreturn
+	**/
+	virtual void moveLeft();
+	
+	/**
+	* Gọi khi nút qua phải được bấm
+	*
+	* @note
+	*
+	*
+	* @noreturn
+	**/
+	virtual void moveRight();
 
 
 public:

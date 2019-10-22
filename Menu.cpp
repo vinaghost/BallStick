@@ -1,4 +1,4 @@
-#include "Menu.h"
+﻿#include "Menu.h"
 
 #include "Utils.h"
 #include "Graphic.h"
@@ -38,20 +38,25 @@ void Menu::addItem(string itemName) {
 }
 
 void Menu::show() {
-
+	// Xóa màn hình
 	Utils::clearScreen();
+	// In tên game
 	Graphic::drawGameName();
 
+	// Đến vị trí in tiêu đề
 	Utils::gotoXY(this->titleCoord.first, this->titleCoord.second);
+	// In tiêu đề
 	cout << this->title;
 
+	// In tên sự lựa chọn
 	for (int item = 0; item < itemName.size(); item++) {
 		Utils::gotoXY(this->itemCoord.first, this->itemCoord.second + item * 2);
 
 		cout << "\b[ ] " << this->itemName[item];
 	}
 
-	this->choice = 0;		
+	this->choice = 0;	
+	// Di chuyển đến vị trí lựa chọn đầu tiên
 	Utils::gotoXY(this->itemCoord.first, this->itemCoord.second);
 
 

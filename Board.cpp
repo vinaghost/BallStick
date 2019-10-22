@@ -1,12 +1,16 @@
-#include "Board.h"
+﻿#include "Board.h"
 
 #include "Graphic.h"
 
-Board::Board(pair<int, int> topLeft, int width, int height) : topLeft(topLeft){
+Board::Board(pair<int, int> topLeft, int width, int height) : topLeft(topLeft)  // Khởi tạo độ điểm trên bên trái và độ dài bàn chơi
+{
+	// Khởi tạo tọa độ điểm dưới bên trái
 	this->botLeft = { this->topLeft.first, this->topLeft.second + height };
 
+    // Khởi tạo tọa độ điểm trên bên phải
 	this->topRight = { this->topLeft.first + width, this->topLeft.second };
 
+	// Khởi tạo tọa độ điểm dưới bên phải
 	this->botRight = { this->topRight.first, this->topRight.second + height};
 }
 
@@ -56,16 +60,20 @@ pair<int, int> Board::getBotRight()
 
 int Board::getHeight()
 {
+	// Height = (tọa độ y của điểm dưới bên trái) - (tọa độ y của điển trên bên trái)
 	return this->getBotLeft().second - this->getTopLeft().second;
 }
 
 int Board::getWidth()
 {
+	// Width = (tọa độ x của điểm trên bên phải) - (tọa độ x của điểm trên bên trái)
 	return this->getTopRight().first - this->getTopLeft().first;
 }
 
 void Board::showBoard()
 {
+	// Hiển thị tên trò chơi
 	Graphic::drawGameName();
+	// Hiển thị bàn chơi
 	Graphic::drawBoard(*this);
 }

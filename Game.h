@@ -36,6 +36,8 @@ private:
 
 	Board *board;
 
+	bool mode;
+
 	int point_player1;
 	int point_player2;
 

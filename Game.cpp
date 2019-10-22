@@ -21,6 +21,7 @@ Game::Game() {
 	player2 = NULL;
 	ball = NULL;
 
+	this->mode = true;
 
 	menuMain.addItem("Start");
 	menuMain.addItem("Setting");
@@ -105,6 +106,7 @@ void Game::loop() {
 				printf("%d\t\t", point_player1);
 
 				this->tiepTuc = true;
+				this->mode = menuSetting.getMode();
 
 				while (isContinue()) {
 
@@ -121,17 +123,26 @@ void Game::loop() {
 							player1->update(player1->getX() + 1, player1->getY());
 						}
 
-						if (GetKeyState('J') & 0x8000) {
+						if (GetKeyState('J') & 0x8000 && this->mode == 0) {
 							player2->update(player2->getX() - 1, player2->getY());
 						}
 
-						if (GetKeyState('L') & 0x8000) {
+						if (GetKeyState('L') & 0x8000 && this->mode == 0) {
 							player2->update(player2->getX() + 1, player2->getY());
 						}
 
 						if (GetKeyState(VK_ESCAPE) & 0x8000) {
 							this->tiepTuc = false;
 						}
+
+						//xử lí bot
+						if (this->mode == 1) {
+							if (ball->getX() > player2->getX())
+								player2->update(player2->getX() + 1, player2->getY());
+							else if (ball->getX() < player2->getX())
+								player2->update(player2->getX() - 1, player2->getY());
+						}
+
 
 						this->startTime_player = this->curTime + setting::tick_player[menuSetting.getSpeedStick()];
 					}
@@ -153,6 +164,7 @@ void Game::loop() {
 
 								Utils::gotoXY(5, board->getBotLeft().second - 5);
 								printf("%d\t\t", point_player1);
+								
 								break;
 								//chạm biên dưới, player 1 thua
 							case 4:
@@ -167,6 +179,8 @@ void Game::loop() {
 
 								Utils::gotoXY(5, board->getTopLeft().second + 5);
 								printf("%d\t\t", point_player2);
+								
+
 								break;
 
 							//chạm stick trên
@@ -177,6 +191,8 @@ void Game::loop() {
 								this->tick_ball_game -= setting::tick_ball[menuSetting.getSpeedBall()] / 10;
 								break;
 						}
+
+						
 						this->startTime_ball = this->curTime + this->tick_ball_game;
 
 					}

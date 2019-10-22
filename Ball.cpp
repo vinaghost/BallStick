@@ -5,9 +5,11 @@
 #include <cmath>
 #include <cfloat>
 
-
+// Khởi tạo tạo độ ban đầu của Ball, giới hạn di chuyển của Ball
 Ball::Ball(int left, int top, int width, int height) : left(left), top(top), width(width), height(height), x(left + width/2), y(top + height/2) {
+	// Xét sự tồn tại của Ball
 	this->spawned = false;
+	// Hướng di chuyển ban đầu của Ball
 	this->direction = BOT_LEFT;
 }
 
@@ -15,11 +17,13 @@ Ball::Ball(int left, int top, int width, int height) : left(left), top(top), wid
 Ball::~Ball() {}
 
 void Ball::setX(int x) {
+	// Xét điều kiện: tạo độ x nhập vào nằm bên trong bàn chơi
 	if( x > this->left || x < this->left + this->width)
 		this->x = x;
 }
 
 void Ball::setY(int y) {
+	// Xét điều kiện: tạo độ y nhập vào nằm bên trong bàn chơi
 	if (y > this->top || y < this->top + this->height)
 		this->y = y;
 }

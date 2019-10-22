@@ -47,23 +47,29 @@ void Utils::showConsoleCursor(bool show) {
 
 	CONSOLE_CURSOR_INFO     cursorInfo;
 
+	// Lấy thông tin con trỏ tại giao diện điều khiển
 	GetConsoleCursorInfo(out, &cursorInfo);
 	cursorInfo.bVisible = show;
+	// Cung cấp thông tin mới cho con trỏ
 	SetConsoleCursorInfo(out, &cursorInfo);
 }
 void Utils::gotoXY(int pX, int pY) {
 	COORD coord;
 	coord.X = pX;
 	coord.Y = pY;
+	// Di chuyển con trỏ tới vị trí coord 
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
 COORD Utils::getCursor() {
 	CONSOLE_SCREEN_BUFFER_INFO cbsi;
+	// Lấy thông tin con trỏ tại bộ đệm
 	if (GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cbsi)) {
+		// Trả lại vị trí con trỏ hiện tại
 		return cbsi.dwCursorPosition;
 	}
 	else {
+		// Khai bao vị trí mặc định (0,0)
 		COORD invalid = { 0, 0 };
 		return invalid;
 	}

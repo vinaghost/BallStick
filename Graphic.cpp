@@ -83,7 +83,7 @@ void Graphic::drawStick(Stick s) {
 	// Di chuyển đến tọa độ cần vẽ 
 	Utils::gotoXY(s.getX(), s.getY());
 	// Vẽ Stick
-	for (int i = 0; i <= s.getsize(); i++) {
+	for (int i = 0; i <= s.getSize(); i++) {
 		putchar('*');
 	}
 }
@@ -92,7 +92,7 @@ void Graphic::deleteStick(Stick s) {
 	// Di chuyển đến tọa độ cần xóa
 	Utils::gotoXY(s.getX(), s.getY());
 	// Xóa Stick
-	for (int i = 0; i <= s.getsize(); i++) {
+	for (int i = 0; i <= s.getSize(); i++) {
 		putchar(' ');
 	}
 }

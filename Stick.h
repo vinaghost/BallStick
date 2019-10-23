@@ -4,36 +4,25 @@ class Stick {
 private:
 	int x, y, size;
 
-	int left, top;
-	int width, height;
+	int left;
+	int width;
 
 	bool spawned;
 
 public:
-	Stick() = delete;
-	Stick(int left, int top, int width, int height, int size);
-	~Stick();
+	Stick();
 
 	/**
 	* Gán hoành độ cho điểm đầu của Stick
 	*
-	* @note  Toạ độ trong Console:	trục hoành hướng sang phải
+	* @note Toạ độ trong Console:	trục hoành hướng sang phải
 	*								trục tung hướng xuống dưới
+	*		Stick di chuyển ngang, không thay đổi y
+	*
 	* @param x	hoành độ
 	* @noreturn
 	**/
 	void setX(int x);
-
-	/**
-	* Gán tung độ cho điểm đầu của Stick
-	*
-	* @note  Toạ độ trong Console:	trục hoành hướng sang phải
-	*								trục tung hướng xuống dưới
-	* @param y	tung độ
-	*
-	* @noreturn
-	**/
-	void setY(int y);
 
 	/**
 	* Gán độ dài cho Stick
@@ -41,16 +30,32 @@ public:
 	* @note Toạ độ trong Console:	trục hoành hướng sang phải
 	*								trục tung hướng xuống dưới
 	*		Stick sẽ dài ra về hướng bên phải màn hình
+	*
 	* @param size	độ dài
 	* @noreturn
 	**/
 	void setSize(int size);
 
 	/**
+	* Cấu hình khung cho Stick
+	*
+	* @note Toạ độ trong Console:	trục hoành hướng sang phải
+	*								trục tung hướng xuống dưới
+	*		Stick sẽ dài ra về hướng bên phải màn hình
+	*		Stick di chuyển ngang, không thay đổi y
+	*
+	* @param left	tung độ gốc trái khung
+	* @param width	độ dài của khung
+	* @noreturn
+	**/
+	void setBoard(int left, int width);
+
+	/**
 	* Trả về hoành độ cho điểm đầu của Stick
 	*
 	* @note Toạ độ trong Console:	trục hoành hướng sang phải
 	*								trục tung hướng xuống dưới
+	*		Stick di chuyển ngang, không thay đổi y
 	*
 	* @return (int) hoành độ cho Stick
 	**/
@@ -61,6 +66,7 @@ public:
 	*
 	* @note Toạ độ trong Console:	trục hoành hướng sang phải
 	*								trục tung hướng xuống dưới
+	*		Stick di chuyển ngang, không thay đổi y
 	*
 	* @return (int) tung độ cho Stick
 	**/
@@ -74,12 +80,12 @@ public:
 	*
 	* @return (int) độ dài cho Stick
 	**/
-	int getsize();
+	int getSize();
 
 	/**
 	* Hiển thị stick lên màn hình
 	*
-	* @note 
+	* @note Thay đổi cách xuất hiện Stick ở Graphic.h
 	*
 	* @noreturn
 	**/
@@ -88,7 +94,7 @@ public:
 	/**
 	* Xoá stick khỏi màn hình
 	*
-	* @note
+	* @note Thay đổi cách xoá Stick ở Graphic.h
 	*
 	* @noreturn
 	**/
@@ -97,11 +103,13 @@ public:
 	/**
 	* Thay đổi vị trí của Stick
 	*
-	* @note  Toạ độ trong Console:	trục hoành hướng sang phải
+	* @note Toạ độ trong Console:	trục hoành hướng sang phải
 	*								trục tung hướng xuống dưới
+	*		Stick di chuyển ngang, không thay đổi y
+	*
 	* @param x  hoành độ mới của Stick
-	* @param y	tung độ mới của Stick
+	*
 	* @noreturn
 	**/
-	void update(int x, int y);
+	void update(int x);
 };

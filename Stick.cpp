@@ -1,18 +1,7 @@
 ﻿#include "Stick.h"
 #include "Graphic.h"
 
-// Hàm khởi tạo điểm đầu của Stick và các giá trị về kích thước Stick, giới hạn di chuyển của Stick(giới hạn bàn chơi).
-Stick::Stick(int left, int top, int width, int height, int size) : left(left), top(top), height(height), width(width), size(size) 
-{
-	//Xét sự tồn tại của Stick.
-	this->spawned = false;
-	
-	//Khởi tạo tọa độ điểm đầu của Stick(x,y).
-	x = left;
-	y = top;
-}
-
-Stick::~Stick() {}
+Stick::Stick() : x(0), y(0), size(0), left(0), width(0), spawned(false) {}
 
 void Stick::setX(int x) {
 	//Xét điều kiện: tọa độ x được nhập vào phải nằm trong chiều rộng của bàn và độ dài Stick lúc này không vượt qua chiều dài của bàn.
@@ -20,28 +9,17 @@ void Stick::setX(int x) {
 		this->x = x;
 }
 
-void Stick::setY(int y) {
-	//Xét điều kiện: tọa độ y được nhập vào phải nằm trong chiều dài của bàn.
-	if (y > this->top && y < this->top + this->height)
-		this->y = y;
-}
+void Stick::setSize(int size) {	this->size = size > 0 ? size : 0; }
 
-void Stick::setSize(int size) {
-	this->size = size;
+void Stick::setBoard(int left, int width) {
+	this->left = left > 0 ? left : 0;
+	this->width = width > 0 > width : 0;
 }
+int Stick::getX() {	return this->x; }
 
-int Stick::getX() {
-	return this->x;
-}
+int Stick::getY() {	return this->y; }
 
-int Stick::getY() {
-	return this->y;
-}
-
-
-int Stick::getsize() {
-	return this->size;
-}
+int Stick::getSize() { return this->size; }
 
 void Stick::spawn() {
 	// đã xuất hiện trên màn hình.
@@ -61,11 +39,10 @@ void Stick::despawn() {
 	this->spawned = false;
 }
 
-void Stick::update(int x, int y) {
+void Stick::update(int x) {
 	this->despawn();
 		
 	this->setX(x);
-	this->setY(y);
 
 	this->spawn();
 }

@@ -6,15 +6,7 @@
 #include <cfloat>
 
 // Khởi tạo tạo độ ban đầu của Ball, giới hạn di chuyển của Ball
-Ball::Ball(int left, int top, int width, int height) : left(left), top(top), width(width), height(height), x(left + width/2), y(top + height/2) {
-	// Xét sự tồn tại của Ball
-	this->spawned = false;
-	// Hướng di chuyển ban đầu của Ball
-	this->direction = BOT_LEFT;
-}
-
-
-Ball::~Ball() {}
+Ball::Ball() : left(0), top(0), width(0), height(0), x(0), y(0), spawned(false), direction(BOT_LEFT) {}
 
 void Ball::setX(int x) {
 	// Xét điều kiện: tạo độ x nhập vào nằm bên trong bàn chơi
@@ -31,26 +23,29 @@ void Ball::setY(int y) {
 void Ball::setDirect(Direction direction) {
 	this->direction = direction;
 }
+void Ball::setBoard(int left, int top, int width, int height) {
+	this->left = left > 0 ? left : 0;
+	this->top = top > 0 ? top : 0;
+	this->width = width > 0 ? width : 0;
+	this->height = height > 0 ? height : 0;
+}
+int Ball::getX() { return this->x; }
 
-int Ball::getX() {
-	return this->x;
-}
+int Ball::getY() { return this->y; }
 
-int Ball::getY() {
-	return this->y;
-}
-Direction Ball::getDirect() {
-	return this->direction;
-}
+Direction Ball::getDirect() { return this->direction; }
+
 bool Ball::spawn() {
+
 	Graphic::drawBall(*this);
 	this->spawned = true;
-	return true;
+
+	return this->spawned;
 }
 bool Ball::despawn() {
 	Graphic::deleteBall(*this);
 	this->spawned = false;
-	return false;
+	return this->spawned;
 }
 int Ball::update(Stick top, Stick bot) {
 	
@@ -101,29 +96,17 @@ int Ball::update(Stick top, Stick bot) {
 	this->setDirect(directNext);
 
 	switch (directNext) {
-		case TOP:
-			y = -1;
-			break;
 		case TOP_RIGHT:
 			x = 1;
 			y = -1;
-			break;
-		case RIGHT:
-			y = 1;
 			break;
 		case BOT_RIGHT:
 			x = 1;
 			y = 1;
 			break;
-		case BOT:
-			y = 1;
-			break;
 		case BOT_LEFT:
 			x = -1;
 			y = 1;
-			break;
-		case LEFT:
-			x = -1;
 			break;
 		case TOP_LEFT:
 			x = -1;

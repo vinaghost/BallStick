@@ -3,14 +3,9 @@
 #include "Stick.h"
 
 enum Direction {
-	NONE,
-	TOP,
 	TOP_RIGHT,
-	RIGHT,
 	BOT_RIGHT,
-	BOT,
 	BOT_LEFT,
-	LEFT,
 	TOP_LEFT
 };
 
@@ -42,10 +37,7 @@ private:
 	Direction getNext(int truongHop);
 
 public:
-	Ball() = delete;
-	Ball(int left, int top, int width, int height);
-	~Ball();
-
+	Ball();
 	/**
 	* Gán hoành độ cho Ball
 	* 
@@ -78,6 +70,19 @@ public:
 	* @noreturn
 	**/
 	void setDirect(Direction direction);
+
+	/**
+	* Cấu hình khung cho Ball
+	*
+	* @note Toạ độ trong Console:	trục hoành hướng sang phải
+	*								trục tung hướng xuống dưới
+	*		Ball sẽ dài ra về hướng bên phải màn hình
+	*
+	* @param left	tung độ gốc trái khung
+	* @param width	độ dài của khung
+	* @noreturn
+	**/
+	void setBoard(int left, int top, int width, int height);
 
 	/**
 	* Trả về hoành độ cho Ball

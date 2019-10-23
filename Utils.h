@@ -9,20 +9,23 @@ public:
 	/**
 	* Không cho thay đổi kích thước console chương trình
 	*
-	* @note size của console: 900 x 700
+	* @note size của console: 630 x 700
 	*
 	* @noreturn
 	**/
 	static void fixConsoleWindow();
 
 
-	
-	
-	
-	
+	/**
+	* Hiện/Ẩn con trỏ trên màn hình console
+	*
+	* @note size của console: 630 x 700
+	*
+	* @param show   true = hiện con trỏ, false = ẩn con trỏ
+	* 
+	* @noreturn
+	**/	
 	static void showConsoleCursor(bool show);
-
-
 
 
 	/**

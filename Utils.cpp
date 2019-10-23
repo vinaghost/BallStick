@@ -7,35 +7,45 @@
 
 void Utils::fixConsoleWindow() {
 
+	/* Khoá phóng to và co giãn cửa sổ console */
+
+	// lấy id console 
 	HWND consoleWindow = GetConsoleWindow();
+	// lấy giá trị cấu hình cửa sổ
 	LONG style = GetWindowLong(consoleWindow, GWL_STYLE);
+	//tắt nút phóng to và co giãn console
 	style = style & ~(WS_MAXIMIZEBOX) & ~(WS_THICKFRAME);
+	// Đặt lại giá trị cấu hình của cửa sổ
 	SetWindowLong(consoleWindow, GWL_STYLE, style);
 
 	/*https://stackoverflow.com/questions/21238806/how-to-set-output-console-width-in-visual-studio*/
-	RECT r;
-	GetWindowRect(consoleWindow, &r);
+	/* Cấu hình kích thước  */
+	MoveWindow(consoleWindow, 0, 0, 630, 700, TRUE);
+	
+	/*http://www.cplusplus.com/forum/beginner/95699/*/
+	/* Cấu hình vị trí cửa sổ trên màn hình */
+	SetWindowPos(consoleWindow, 0, 300, 0, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 
-	MoveWindow(consoleWindow, r.left, r.top, 630, 700, TRUE);
-
+	//lấy con trỏ giữ màn hình
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	/*https://cboard.cprogramming.com/cplusplus-programming/97959-[ask]-how-remove-scrollbar.html*/
+	/*Xoá thanh trượt*/
 	CONSOLE_SCREEN_BUFFER_INFO info;
 
+	//Lấy cấu hình buffer của màn hình
 	GetConsoleScreenBufferInfo(handle, &info);
+	//Cấu hình lại sao cho buffer của màn hình giống với kích thước của màn hình
 	COORD new_size = {
 		(short int)(info.srWindow.Right - info.srWindow.Left + 1),
 		(short int)(info.srWindow.Bottom - info.srWindow.Top + 1),
 	};
+	//Đặt lại theo cấu hình mới
 	SetConsoleScreenBufferSize(handle, new_size);
 
 
-	/*http://www.cplusplus.com/forum/beginner/95699/*/
-
-	SetWindowPos(consoleWindow, 0, 300, 0, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
-
 	/*https://stackoverflow.com/questions/33975912/how-to-set-console-font-to-raster-font-programmatically*/
+	/* Cấu hình font của cửa sổ để hiện phần tên game ổn định */
 	CONSOLE_FONT_INFOEX cfi;
 	cfi.cbSize = sizeof cfi;
 	cfi.nFont = 0;
@@ -43,7 +53,9 @@ void Utils::fixConsoleWindow() {
 	cfi.dwFontSize.Y = 16;
 	cfi.FontFamily = FF_DONTCARE;
 	cfi.FontWeight = FW_NORMAL;
+	//Font chạy ổn định nhất: Lucida Console
 	wcscpy(cfi.FaceName, L"Lucida Console");
+
 	SetCurrentConsoleFontEx(handle, FALSE, &cfi);
 
 }
@@ -81,12 +93,9 @@ COORD Utils::getCursor() {
 }
 
 void Utils::clearScreen() {
-	/*
+	
 	for (int i = 0; i < 80; i++) {
 		printf("\n");
 	}
 	gotoXY(0, 0);
-	*/
-
-	system("cls");
 }

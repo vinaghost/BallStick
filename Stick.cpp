@@ -13,7 +13,7 @@ void Stick::setSize(int size) {	this->size = size > 0 ? size : 0; }
 
 void Stick::setBoard(int left, int width) {
 	this->left = left > 0 ? left : 0;
-	this->width = width > 0 > width : 0;
+	this->width = width > 0 ? width : 0;
 }
 int Stick::getX() {	return this->x; }
 

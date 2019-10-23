@@ -2,21 +2,7 @@
 
 #include "Graphic.h"
 
-Board::Board(pair<int, int> topLeft, int width, int height) : topLeft(topLeft)  // Khởi tạo độ điểm trên bên trái và độ dài bàn chơi
-{
-	// Khởi tạo tọa độ điểm dưới bên trái
-	this->botLeft = { this->topLeft.first, this->topLeft.second + height };
-
-    // Khởi tạo tọa độ điểm trên bên phải
-	this->topRight = { this->topLeft.first + width, this->topLeft.second };
-
-	// Khởi tạo tọa độ điểm dưới bên phải
-	this->botRight = { this->topRight.first, this->topRight.second + height};
-}
-
-
-Board::~Board() {
-}
+Board::Board() : topLeft({ 0, 0 }), topRight({ 0, 0 }), botLeft({ 0, 0 }), botRight({ 0, 0 }) {}
 
 void Board::setTopleft(int x, int y)
 {
@@ -37,7 +23,19 @@ void Board::setBotRight(int x, int y)
 {
 	this->botRight = std::make_pair(x, y);
 }
+void Board::setBoard(int top, int left, int width, int height) {
+	//trên trái
+	this->topLeft = std::make_pair(top, left);
+	
+	//dưới trái
+	this->botLeft = { this->topLeft.first, this->topLeft.second + height };
 
+	//trên phải
+	this->topRight = { this->topLeft.first + width, this->topLeft.second };
+
+	//dưới phải
+	this->botRight = { this->topRight.first, this->topRight.second + height };
+}
 pair<int, int> Board::getTopLeft()
 {
 	return this->topLeft;

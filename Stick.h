@@ -44,7 +44,7 @@ public:
 	*		Stick sẽ dài ra về hướng bên phải màn hình
 	*		Stick di chuyển ngang, không thay đổi y
 	*
-	* @param left	tung độ gốc trái khung
+	* @param left	hoành độ gốc trái khung
 	* @param width	độ dài của khung
 	* @noreturn
 	**/

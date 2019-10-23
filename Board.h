@@ -3,18 +3,14 @@
 #include <utility>
 
 using std::pair;
-class Board
-{
+class Board {
 private:
 	pair<int, int> topLeft ;
 	pair<int, int> botLeft ;
 	pair<int, int> topRight;
 	pair<int, int> botRight;
 public:
-	Board() = delete;
-	Board(pair<int, int> topLeft, int width, int height);
-
-	~Board();
+	Board();
 	/**
 	* Tạo tọa độ điểm phía trên bên trái của bảng game
 	*
@@ -51,6 +47,22 @@ public:
 	* @noreturn
 	**/
 	void setBotRight(int x, int y);
+
+	/**
+	* Cấu hình khung cho Board
+	*
+	* @note Toạ độ trong Console:	trục hoành hướng sang phải
+	*								trục tung hướng xuống dưới
+	*		Ball sẽ dài ra về hướng bên phải màn hình
+	*
+	* @param left	hoành độ gốc trái trên khung
+	* @param top	tung độ gốc trái trên khung
+	* @param width	độ dài khung
+	* @param height	độ cao khung
+	* @noreturn
+	**/
+	void setBoard(int top, int left, int width, int height);
+
 	/**
 	* Trả lại tọa độ điểm phía trên bên trái của bảng game
 	*

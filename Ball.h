@@ -78,8 +78,10 @@ public:
 	*								trục tung hướng xuống dưới
 	*		Ball sẽ dài ra về hướng bên phải màn hình
 	*
-	* @param left	tung độ gốc trái khung
-	* @param width	độ dài của khung
+	* @param left	hoành độ gốc trái trên khung
+	* @param top	tung độ gốc trái trên khung
+	* @param width	độ dài khung
+	* @param height	độ cao khung
 	* @noreturn
 	**/
 	void setBoard(int left, int top, int width, int height);

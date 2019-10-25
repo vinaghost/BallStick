@@ -6,7 +6,7 @@
 #include <cfloat>
 
 // Khởi tạo tạo độ ban đầu của Ball, giới hạn di chuyển của Ball
-Ball::Ball() : left(0), top(0), width(0), height(0), x(0), y(0), spawned(false), direction(BOT_LEFT) {}
+Ball::Ball() : x(0), y(0), left(0), top(0), width(0), height(0), spawned(false), direction(BOT_LEFT) {}
 
 void Ball::setX(int x) {
 	// Xét điều kiện: tạo độ x nhập vào nằm bên trong bàn chơi
@@ -66,14 +66,14 @@ int Ball::update(Stick top, Stick bot) {
 
 	// đụng vào stick trên
 	// x nằm bên phải top.getX && x nằm bên trái top.getX + top.getsize && y nằm bên dưới 1 ô so với top.getY
-	if ( top.getX() - 1  <= this->x  && this->x <= top.getX() + top.getsize() + 1 && top.getY() + 1 == this->y) {
+	if ( top.getX() - 1  <= this->x  && this->x <= top.getX() + top.getSize() + 1 && top.getY() + 1 == this->y) {
 		directNext = getNext(2);
 		result = 5;
 	}
 
 	// đụng vào stick dưới
 	// x nằm bên phải bot.getX && x nằm bên trái bot.getX + bot.getsize && y nằm bên trên 1 ô so với bot.getY
-	else if (bot.getX() - 1 <= this->x && this->x <= bot.getX() + bot.getsize() + 1 && bot.getY() - 1 == this->y) {
+	else if (bot.getX() - 1 <= this->x && this->x <= bot.getX() + bot.getSize() + 1 && bot.getY() - 1 == this->y) {
 		directNext = getNext(3);
 		result = 6;
 	}

@@ -15,12 +15,7 @@ Game::Game() {
 	this->startTime_ball = 0;
 
 	this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
-
-	board = NULL;
-	player1 = NULL;
-	player2 = NULL;
-	ball = NULL;
-
+	
 	this->mode = true;
 
 	menuMain.addItem("Start");
@@ -30,22 +25,6 @@ Game::Game() {
 	menuMain.setCoordItem(30, 10);
 
 	this->loop();
-}
-
-
-Game::~Game() {
-	if (board != NULL) {
-		delete board;
-	}
-	if (player1 != NULL) {
-		delete player1;
-	}
-	if (player2 != NULL) {
-		delete player2;
-	}
-	if (ball != NULL) {
-		delete ball;
-	}
 }
 
 void Game::loop() {
@@ -59,31 +38,21 @@ void Game::loop() {
 			case 0:
 
 				Utils::showConsoleCursor(false);
-				if (board != NULL) {
-					delete board;
-				}
-				board = new Board(setting::boardTopLeft[menuSetting.getSizeBoard()], setting::boardWidth[menuSetting.getSizeBoard()], setting::boardHeight[menuSetting.getSizeBoard()]);
 				
-				if (player1 != NULL) {
-					delete player1;
-				}
-				player1 = new Stick(board->getTopLeft().first, board->getTopLeft().second, board->getWidth(), board->getHeight(), setting::lengthStick[menuSetting.getLengthStick()]);
+				board.setBoard(setting::boardTopLeft[menuSetting.getSizeBoard()].first, setting::boardTopLeft[menuSetting.getSizeBoard()].second, setting::boardWidth[menuSetting.getSizeBoard()], setting::boardHeight[menuSetting.getSizeBoard()]);
+				
+				player1.setBoard(board.getTopLeft().first, board.getTopLeft().second, board.getWidth(), board.getHeight());
+				player1.setSize(setting::lengthStick[menuSetting.getLengthStick()]);
+				player1.setX(board.getTopLeft().first + board.getWidth() / 2 - player1.getSize() / 2);
+				player1.setY(board.getTopLeft().second + 1);
 
-				if (player2 != NULL) {
-					delete player2;
-				}
-				player2 = new Stick(board->getTopLeft().first, board->getTopLeft().second, board->getWidth(), board->getHeight(), setting::lengthStick[menuSetting.getLengthStick()]);
 
-				player1->setX( board->getTopLeft().first + board->getWidth() / 2 - player1->getsize()/2);
-				player1->setY(board->getTopLeft().second + 1);
+				player2.setBoard(board.getTopLeft().first, board.getTopLeft().second, board.getWidth(), board.getHeight());
+				player2.setSize(setting::lengthStick[menuSetting.getLengthStick()]);
+				player2.setX(board.getBotLeft().first + board.getWidth() / 2 - player2.getSize()/2);
+				player2.setY(board.getBotLeft().second - 1);
 
-				player2->setX(board->getBotLeft().first + board->getWidth() / 2 - player2->getsize()/2);
-				player2->setY(board->getBotLeft().second - 1);
-
-				if (ball != NULL) {
-					delete ball;
-				}
-				ball = new Ball(board->getTopLeft().first, board->getTopLeft().second, board->getWidth(), board->getHeight());
+				ball.setBoard(board.getTopLeft().first, board.getTopLeft().second, board.getWidth(), board.getHeight());
 
 				Utils::clearScreen();
 
@@ -91,18 +60,18 @@ void Game::loop() {
 				point_player1 = 0;
 				point_player2 = 0;
 
-				board->showBoard();
+				board.showBoard();
 
-				player1->spawn();
-				player2->spawn();
+				player1.spawn();
+				player2.spawn();
 
-				ball->spawn();
+				ball.spawn();
 
 
-				Utils::gotoXY(5, board->getTopLeft().second + 5);
+				Utils::gotoXY(5, board.getTopLeft().second + 5);
 				printf("%d\t\t", point_player2);
 
-				Utils::gotoXY(5, board->getBotLeft().second - 5);
+				Utils::gotoXY(5, board.getBotLeft().second - 5);
 				printf("%d\t\t", point_player1);
 
 				this->tiepTuc = true;
@@ -116,19 +85,19 @@ void Game::loop() {
 
 
 						if (GetKeyState('A') & 0x8000) {
-							player1->update(player1->getX() - 1, player1->getY());
+							player1.update(player1.getX() - 1);
 						}
 
 						if (GetKeyState('D') & 0x8000) {
-							player1->update(player1->getX() + 1, player1->getY());
+							player1.update(player1.getX() + 1);
 						}
 
 						if (GetKeyState('J') & 0x8000 && this->mode == 0) {
-							player2->update(player2->getX() - 1, player2->getY());
+							player2.update(player2.getX() - 1);
 						}
 
 						if (GetKeyState('L') & 0x8000 && this->mode == 0) {
-							player2->update(player2->getX() + 1, player2->getY());
+							player2.update(player2.getX() + 1);
 						}
 
 						if (GetKeyState(VK_ESCAPE) & 0x8000) {
@@ -137,10 +106,10 @@ void Game::loop() {
 
 						//xử lí bot
 						if (this->mode == 1) {
-							if (ball->getX() > player2->getX())
-								player2->update(player2->getX() + 1, player2->getY());
-							else if (ball->getX() < player2->getX())
-								player2->update(player2->getX() - 1, player2->getY());
+							if (ball.getX() > player2.getX())
+								player2.update(player2.getX() + 1);
+							else if (ball.getX() < player2.getX())
+								player2.update(player2.getX() - 1);
 						}
 
 
@@ -149,7 +118,7 @@ void Game::loop() {
 
 					if (this->curTime > this->startTime_ball) {
 
-						int result = ball->update(*player1, *player2);
+						int result = ball.update(player1, player2);
 
 						switch (result) {
 							//chạm biên trên, player 2 thua
@@ -157,12 +126,12 @@ void Game::loop() {
 								point_player1++;
 								this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
 
-								ball->despawn();
-								ball->setX(board->getTopLeft().first + board->getWidth() / 2);
-								ball->setY(board->getTopLeft().second + board->getHeight() / 2);
-								ball->spawn();
+								ball.despawn();
+								ball.setX(board.getTopLeft().first + board.getWidth() / 2);
+								ball.setY(board.getTopLeft().second + board.getHeight() / 2);
+								ball.spawn();
 
-								Utils::gotoXY(5, board->getBotLeft().second - 5);
+								Utils::gotoXY(5, board.getBotLeft().second - 5);
 								printf("%d\t\t", point_player1);
 								
 								break;
@@ -170,14 +139,13 @@ void Game::loop() {
 							case 4:
 								point_player2++;
 								this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
-								ball->despawn();
-								ball->setX(board->getTopLeft().first + board->getWidth() / 2);
-								ball->setY(board->getTopLeft().second + board->getHeight() / 2);
-								ball->spawn();
-								ball->update(*player1, *player2);
+								ball.despawn();
+								ball.setX(board.getTopLeft().first + board.getWidth() / 2);
+								ball.setY(board.getTopLeft().second + board.getHeight() / 2);
+								ball.spawn();
 
 
-								Utils::gotoXY(5, board->getTopLeft().second + 5);
+								Utils::gotoXY(5, board.getTopLeft().second + 5);
 								printf("%d\t\t", point_player2);
 								
 
@@ -217,15 +185,15 @@ bool Game::isContinue() {
 }
 
 void Game::moveRight_Player1() {
-	player1->update(player1->getX() + 1, player1->getY());
+	player1.update(player1.getX() + 1);
 }
 void Game::moveLeft_Player1() {
-	player1->update(player1->getX() - 1, player1->getY());
+	player1.update(player1.getX() - 1);
 }
 
 void Game::moveRight_Player2() {
-	player2->update(player2->getX() + 1, player2->getY());
+	player2.update(player2.getX() + 1);
 }
 void Game::moveLeft_Player2() {
-	player2->update(player2->getX() - 1, player2->getY());
+	player2.update(player2.getX() - 1);
 }

@@ -30,11 +30,11 @@ class Game {
 private:
 	int choice;
 	bool tiepTuc;
-	Ball* ball;
-	Stick *player1;
-	Stick *player2;
+	Ball ball;
+	Stick player1;
+	Stick player2;
 
-	Board *board;
+	Board board;
 
 	bool mode;
 
@@ -44,16 +44,16 @@ private:
 	Menu menuMain;
 	MenuSetting menuSetting;
 
+
+	//Biến quản lí thời gian
 	unsigned long startTime_player;
 	unsigned long startTime_ball;
 	unsigned long curTime;
-
-
+	
 	int tick_ball_game;
 
 public:
 	Game();
-	~Game();
 
 	/**
 	* Trả về giá trị của Game::tiepTuc

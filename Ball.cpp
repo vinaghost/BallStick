@@ -2,59 +2,25 @@
 
 #include "Graphic.h"
 
-#include <cmath>
-#include <cfloat>
 
 // Khởi tạo tạo độ ban đầu của Ball, giới hạn di chuyển của Ball
-Ball::Ball() : x(0), y(0), left(0), top(0), width(0), height(0), spawned(false), direction(BOT_LEFT) {}
+Ball::Ball() : Entity(), direction(BOT_LEFT) {}
 
-void Ball::setX(int x) {
-	// Xét điều kiện: tạo độ x nhập vào nằm bên trong bàn chơi
-	if( x > this->left || x < this->left + this->width)
-		this->x = x;
-}
-
-void Ball::setY(int y) {
-	// Xét điều kiện: tạo độ y nhập vào nằm bên trong bàn chơi
-	if (y > this->top || y < this->top + this->height)
-		this->y = y;
-}
 
 void Ball::setDirect(Direction direction) {
 	this->direction = direction;
 }
-void Ball::setBoard(int left, int top, int width, int height) {
-	this->left = left > 0 ? left : 0;
-	this->top = top > 0 ? top : 0;
-	this->width = width > 0 ? width : 0;
-	this->height = height > 0 ? height : 0;
-}
-int Ball::getX() { return this->x; }
-
-int Ball::getY() { return this->y; }
 
 Direction Ball::getDirect() { return this->direction; }
 
-bool Ball::spawn() {
-
-	Graphic::drawBall(*this);
-	this->spawned = true;
-
-	return this->spawned;
-}
-bool Ball::despawn() {
-	Graphic::deleteBall(*this);
-	this->spawned = false;
-	return this->spawned;
-}
 int Ball::update(Stick top, Stick bot) {
 	
 	// đụng biên trên
-	if (this->y <= this->top + 1) {
+	if (this->y <= this->b->getTopLeft().second + 1) {
 		return 3;
 	}
 	// đụng biên dưới
-	if (this->y >= this->top + this->height - 1) {
+	if (this->y >= this->b->getBotLeft().second - 1) {
 		return 4;
 	}
 
@@ -78,12 +44,12 @@ int Ball::update(Stick top, Stick bot) {
 		result = 6;
 	}
 	// đụng vào biên trái
-	else if (this->x <= this->left + 1 ) {
+	else if (this->x <= this->b->getBotLeft().first + 1 ) {
 		directNext = getNext(0);
 		result = 1;
 	}
 	// đụng vào biên phải
-	else if (this->x >= this->left + this->width - 1) {
+	else if (this->x >= this->b->getBotRight().first - 1) {
 		directNext = getNext(1);
 		result = 2;
 	}
@@ -131,7 +97,7 @@ Direction Ball::getNext(int truongHop) {
 	switch (truongHop) {
 		case 0:
 			// chạm biên trái
-			if (this->x <= this->left + 1) {
+			if (this->x <= this->b->getTopLeft().first + 1) {
 				switch (this->direction) {
 					case BOT_LEFT:
 						return BOT_RIGHT;
@@ -143,7 +109,7 @@ Direction Ball::getNext(int truongHop) {
 			break;
 		case 1:
 			// chạm biên phải
-			if (this->x >= this->left + this->width - 1) {
+			if (this->x >= this->b->getTopRight().second - 1) {
 				switch (this->direction) {
 					case BOT_RIGHT:
 						return BOT_LEFT;
@@ -158,14 +124,14 @@ Direction Ball::getNext(int truongHop) {
 			switch (this->direction) {
 				case TOP_LEFT:
 					//góc trái
-					if (this->x <= this->left + 1) 
+					if (this->x <= this->b->getTopLeft().first + 1)
 						return BOT_RIGHT;
 
 					return BOT_LEFT;
 
 				case TOP_RIGHT:
 					//góc phải
-					if (this->x >= this->left + this->width - 1)
+					if (this->x >= this->b->getTopRight().second - 1)
 						return BOT_LEFT;
 
 					return BOT_RIGHT;
@@ -176,13 +142,13 @@ Direction Ball::getNext(int truongHop) {
 			switch (this->direction) {
 				case BOT_LEFT:
 					//góc trái
-					if (this->x <= this->left + 1)
+					if (this->x <= this->b->getTopLeft().first + 1)
 						return TOP_RIGHT;
 					return TOP_LEFT;
 
 				case BOT_RIGHT:
 					//góc phải
-					if (this->x >= this->left + this->width - 1)
+					if (this->x >= this->b->getTopRight().second - 1)
 						return TOP_LEFT;
 					return TOP_RIGHT;
 			}
@@ -191,7 +157,6 @@ Direction Ball::getNext(int truongHop) {
 	return this->direction;
 }
 
-string Ball::getNameClass()
-{
+string Ball::getNameClass() {
 	return "Ball";
 }

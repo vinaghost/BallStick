@@ -40,7 +40,7 @@ public:
 	//static void drawStick(Stick s);
 	//static void deleteStick(Stick s);
 
-	static void Draw (Entity* a);
-	static void Delete (Entity* a);
+	static void draw(Entity* ent);
+	static void remove(Entity* ent);
 };
 

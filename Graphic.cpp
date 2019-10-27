@@ -32,12 +32,7 @@ void Graphic::deleteBall(Ball b) {
 }
 
 void Graphic::drawStick(Stick s) {
-	// Di chuyển đến tọa độ cần vẽ 
-	Utils::gotoXY(s.getX(), s.getY());
-	// Vẽ Stick
-	for (int i = 0; i <= s.getSize(); i++) {
-		putchar('*');
-	}
+	
 }
 
 void Graphic::deleteStick(Stick s) {
@@ -50,27 +45,37 @@ void Graphic::deleteStick(Stick s) {
 }
 */
 
-void Graphic::Draw(Entity* a)
-{
-	if (a->getNameClass() == "Stick")
-	{
-		
-	}
-	else if (a->getNameClass() == "Ball")
-	{
+void Graphic::draw(Entity* ent) {
+	//Tới vị trí
+	Utils::gotoXY(ent->getX(), ent->getY());
 
+	// Vẽ Stick
+	if (ent->getNameClass() == "Stick") {
+		
+		for (int i = 0; i < ent->getSize(); i++) {
+			putchar('*');
+		}
+	}
+	// Vẽ Ball
+	else if (ent->getNameClass() == "Ball") {
+		putchar('O');
 	}
 }
 
-void Graphic::Delete(Entity* a)
-{
-	if (a->getNameClass() == "Stick")
-	{
+void Graphic::remove(Entity* ent) {
+	//Tới vị trí
+	Utils::gotoXY(ent->getX(), ent->getY());
 
+	// Xoá Stick
+	if (ent->getNameClass() == "Stick") {
+
+		for (int i = 0; i < ent->getSize(); i++) {
+			putchar(' ');
+		}
 	}
-	else if (a->getNameClass() == "Ball")
-	{
-
+	// Xoá Ball
+	else if (ent->getNameClass() == "Ball") {
+		putchar(' ');
 	}
 }
 

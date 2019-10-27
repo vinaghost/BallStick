@@ -1,21 +1,38 @@
-#pragma once
+﻿#pragma once
 #include "Board.h"
 
 #include <string>
-using namespace std;
+using std::string;
 class Entity
 {
 protected:
 	Board* b;
 	int x, y;
+	int size;
+
+	bool spawned;
+
 public:
 	Entity();
-	~Entity();
-	void setX(int x);
-	void setY(int y);
-	int getX();
-	int getY();
-	virtual void update() = 0;
+
 	virtual string getNameClass() = 0;
+
+	void setBoard(Board *b);
+
+	virtual void setX(int x);
+
+	virtual void setY(int y);
+
+	void setSize(int size);
+
+	int getX();
+
+	int getY();
+
+	int getSize();
+
+	void spawn();
+
+	void despawn();
 };
 

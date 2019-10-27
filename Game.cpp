@@ -41,18 +41,18 @@ void Game::loop() {
 				
 				board.setBoard(setting::boardTopLeft[menuSetting.getSizeBoard()].first, setting::boardTopLeft[menuSetting.getSizeBoard()].second, setting::boardWidth[menuSetting.getSizeBoard()], setting::boardHeight[menuSetting.getSizeBoard()]);
 				
-				player1.setBoard(board.getTopLeft().first, board.getTopLeft().second, board.getWidth(), board.getHeight());
+				player1.setBoard(&board);
 				player1.setSize(setting::lengthStick[menuSetting.getLengthStick()]);
 				player1.setX(board.getTopLeft().first + board.getWidth() / 2 - player1.getSize() / 2);
 				player1.setY(board.getTopLeft().second + 1);
 
 
-				player2.setBoard(board.getTopLeft().first, board.getTopLeft().second, board.getWidth(), board.getHeight());
+				player2.setBoard(&board);
 				player2.setSize(setting::lengthStick[menuSetting.getLengthStick()]);
 				player2.setX(board.getBotLeft().first + board.getWidth() / 2 - player2.getSize()/2);
 				player2.setY(board.getBotLeft().second - 1);
 
-				ball.setBoard(board.getTopLeft().first, board.getTopLeft().second, board.getWidth(), board.getHeight());
+				ball.setBoard(&board);
 
 				Utils::clearScreen();
 

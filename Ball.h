@@ -1,9 +1,6 @@
 ﻿#pragma once
-
+#include "Entity.h"
 #include "Stick.h"
-
-#include <string>
-using namespace std;
 
 enum Direction {
 	TOP_RIGHT,
@@ -12,15 +9,8 @@ enum Direction {
 	TOP_LEFT
 };
 
-class Ball {
+class Ball : public Entity {
 private:
-	int x, y;
-
-	int left, top;
-	int width, height;
-
-	bool spawned;
-
 	Direction direction;
 
 	/**
@@ -41,27 +31,6 @@ private:
 
 public:
 	Ball();
-	/**
-	* Gán hoành độ cho Ball
-	* 
-	* @note Toạ độ trong Console:	trục hoành hướng sang phải
-	*								trục tung hướng xuống dưới
-	* @param x	hoành độ
-	*
-	* @noreturn
-	**/
-	void setX(int x);
-
-	/**
-	* Gán tung độ cho Ball
-	*
-	* @note Toạ độ trong Console:	trục hoành hướng sang phải
-	*								trục tung hướng xuống dưới
-	* @param y	tung độ
-	*
-	* @noreturn
-	**/
-	void setY(int y);
 
 	/**
 	* Gán hướng cho Ball
@@ -73,44 +42,7 @@ public:
 	* @noreturn
 	**/
 	void setDirect(Direction direction);
-
-	/**
-	* Cấu hình khung cho Ball
-	*
-	* @note Toạ độ trong Console:	trục hoành hướng sang phải
-	*								trục tung hướng xuống dưới
-	*		Ball sẽ dài ra về hướng bên phải màn hình
-	*
-	* @param left	hoành độ gốc trái trên khung
-	* @param top	tung độ gốc trái trên khung
-	* @param width	độ dài khung
-	* @param height	độ cao khung
-	* @noreturn
-	**/
-	void setBoard(int left, int top, int width, int height);
-
-	/**
-	* Trả về hoành độ cho Ball
-	*
-	* @note Toạ độ trong Console:	trục hoành hướng sang phải
-	*								trục tung hướng xuống dưới
-	* @param x	hoành độ
-	*
-	* @return (int) hoành độ cho Ball
-	**/
-	int getX();
-
-	/**
-	* Trả về tung độ cho Ball
-	*
-	* @note Toạ độ trong Console:	trục hoành hướng sang phải
-	*								trục tung hướng xuống dưới
-	* @param y	tung độ
-	*
-	* @return (int) tung độ cho Ball
-	**/
-	int getY();
-
+	
 	/**
 	* Trả về hướng của Ball
 	*
@@ -121,24 +53,6 @@ public:
 	* @return (int) tung độ cho Ball
 	**/
 	Direction getDirect();
-
-	/**
-	* Spawn Ball lên màn hình
-	*
-	* @note 
-	*
-	* @return (bool) tình trạng spawn của Ball
-	**/
-	bool spawn();
-
-	/**
-	* Despawn Ball khỏi màn hình
-	*
-	* @note
-	*
-	* @return (bool) tình trạng spawn của Ball
-	**/
-	bool despawn();
 
 	/**
 	* Thay đổi vị trí của Ball

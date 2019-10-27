@@ -190,3 +190,8 @@ Direction Ball::getNext(int truongHop) {
 	}
 	return this->direction;
 }
+
+string Ball::getNameClass()
+{
+	return "Ball";
+}

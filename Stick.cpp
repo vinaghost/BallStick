@@ -53,3 +53,8 @@ void Stick::update(int x) {
 
 	this->spawn();
 }
+
+string Stick::getNameClass()
+{
+	return "Stick";
+}

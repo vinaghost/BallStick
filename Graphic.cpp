@@ -18,7 +18,7 @@ void Graphic::drawGameName() {
 	cout << "\t\t\t                  |___/\n";
 
 }
-void Graphic::drawBall(Ball b) {
+/* void Graphic::drawBall(Ball b) {
 	// Di chuyển đến tọa độ cần vẽ 
 	Utils::gotoXY(b.getX(), b.getY());
 	// Vẽ Ball
@@ -29,6 +29,49 @@ void Graphic::deleteBall(Ball b) {
 	Utils::gotoXY(b.getX(), b.getY());
 	// Xóa Ball
 	putchar(' ');
+}
+
+void Graphic::drawStick(Stick s) {
+	// Di chuyển đến tọa độ cần vẽ 
+	Utils::gotoXY(s.getX(), s.getY());
+	// Vẽ Stick
+	for (int i = 0; i <= s.getSize(); i++) {
+		putchar('*');
+	}
+}
+
+void Graphic::deleteStick(Stick s) {
+	// Di chuyển đến tọa độ cần xóa
+	Utils::gotoXY(s.getX(), s.getY());
+	// Xóa Stick
+	for (int i = 0; i <= s.getSize(); i++) {
+		putchar(' ');
+	}
+}
+*/
+
+void Graphic::Draw(Entity* a)
+{
+	if (a->getNameClass() == "Stick")
+	{
+		
+	}
+	else if (a->getNameClass() == "Ball")
+	{
+
+	}
+}
+
+void Graphic::Delete(Entity* a)
+{
+	if (a->getNameClass() == "Stick")
+	{
+
+	}
+	else if (a->getNameClass() == "Ball")
+	{
+
+	}
 }
 
 void Graphic::drawBoard(Board a)
@@ -76,23 +119,5 @@ void Graphic::drawBoard(Board a)
 		Utils::gotoXY(b.first, y);
 		// Vẽ rào phải
 		putchar(219);
-	}
-}
-
-void Graphic::drawStick(Stick s) {
-	// Di chuyển đến tọa độ cần vẽ 
-	Utils::gotoXY(s.getX(), s.getY());
-	// Vẽ Stick
-	for (int i = 0; i <= s.getSize(); i++) {
-		putchar('*');
-	}
-}
-
-void Graphic::deleteStick(Stick s) {
-	// Di chuyển đến tọa độ cần xóa
-	Utils::gotoXY(s.getX(), s.getY());
-	// Xóa Stick
-	for (int i = 0; i <= s.getSize(); i++) {
-		putchar(' ');
 	}
 }

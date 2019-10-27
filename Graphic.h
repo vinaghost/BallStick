@@ -6,6 +6,8 @@
 #include "Board.h"
 #include "Utils.h"
 
+#include "Entity.h"
+
 class Graphic {
 public:
 	
@@ -31,11 +33,14 @@ public:
 	**/
 	static void drawBoard(Board board);
 
-	static void drawBall(Ball b);
-	static void deleteBall(Ball b);
+	//static void drawBall(Ball b);
+	//static void deleteBall(Ball b);
 
 
-	static void drawStick(Stick s);
-	static void deleteStick(Stick s);
+	//static void drawStick(Stick s);
+	//static void deleteStick(Stick s);
+
+	static void Draw (Entity* a);
+	static void Delete (Entity* a);
 };
 

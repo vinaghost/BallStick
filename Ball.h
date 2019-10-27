@@ -2,6 +2,9 @@
 
 #include "Stick.h"
 
+#include <string>
+using namespace std;
+
 enum Direction {
 	TOP_RIGHT,
 	BOT_RIGHT,
@@ -155,5 +158,6 @@ public:
 	**/
 	int update(Stick top, Stick boy);
 
+	string getNameClass();
 };
 

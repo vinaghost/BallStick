@@ -1,5 +1,8 @@
 ﻿#pragma once
 
+#include <string>
+using namespace std;
+
 class Stick {
 private:
 	int x, y, size;
@@ -125,4 +128,6 @@ public:
 	* @noreturn
 	**/
 	void update(int x);
+
+	string getNameClass();
 };

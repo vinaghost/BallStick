@@ -18,7 +18,7 @@ void Graphic::drawGameName() {
 	cout << "\t\t\t                  |___/\n";
 	Utils::setColorText(15, 0);
 }
-void Graphic::drawBall(Ball b) {
+/* void Graphic::drawBall(Ball b) {
 	// Di chuyển đến tọa độ cần vẽ 
 	Utils::gotoXY(b.getX(), b.getY());
 
@@ -36,6 +36,60 @@ void Graphic::deleteBall(Ball b) {
 	Utils::gotoXY(b.getX(), b.getY());
 	// Xóa Ball
 	putchar(' ');
+}
+
+void Graphic::drawStick(Stick s) {
+	
+}
+
+void Graphic::deleteStick(Stick s) {
+	// Di chuyển đến tọa độ cần xóa
+	Utils::gotoXY(s.getX(), s.getY());
+	// Xóa Stick
+	for (int i = 0; i <= s.getSize(); i++) {
+		putchar(' ');
+	}
+}
+*/
+
+void Graphic::draw(Entity* ent) {
+	//Tới vị trí
+	Utils::gotoXY(ent->getX(), ent->getY());
+
+	// Vẽ Stick
+	if (ent->getNameClass() == "Stick") {
+		//màu xanh dương
+		Utils::setColorText(3, 0);
+		for (int i = 0; i < ent->getSize(); i++) {
+			putchar('*');
+		}
+	}
+	// Vẽ Ball
+	else if (ent->getNameClass() == "Ball") {
+		//màu đỏ
+		Utils::setColorText(10, 0);
+
+		putchar('O');
+	}
+	//màu trắng
+	Utils::setColorText(15, 0);
+}
+
+void Graphic::remove(Entity* ent) {
+	//Tới vị trí
+	Utils::gotoXY(ent->getX(), ent->getY());
+
+	// Xoá Stick
+	if (ent->getNameClass() == "Stick") {
+
+		for (int i = 0; i < ent->getSize(); i++) {
+			putchar(' ');
+		}
+	}
+	// Xoá Ball
+	else if (ent->getNameClass() == "Ball") {
+		putchar(' ');
+	}
 }
 
 void Graphic::drawBoard(Board a)
@@ -92,29 +146,4 @@ void Graphic::drawBoard(Board a)
 	//màu trắng
 	Utils::setColorText(15, 0);
 
-}
-
-void Graphic::drawStick(Stick s) {
-	// Di chuyển đến tọa độ cần vẽ 
-	Utils::gotoXY(s.getX(), s.getY());
-
-	//màu xanh dương
-	Utils::setColorText(3, 0);
-
-	// Vẽ Stick
-	for (int i = 0; i <= s.getSize(); i++) {
-		putchar('*');
-	}
-
-	//màu trắng
-	Utils::setColorText(15, 0);
-}
-
-void Graphic::deleteStick(Stick s) {
-	// Di chuyển đến tọa độ cần xóa
-	Utils::gotoXY(s.getX(), s.getY());
-	// Xóa Stick
-	for (int i = 0; i <= s.getSize(); i++) {
-		putchar(' ');
-	}
 }

@@ -7,7 +7,7 @@
 using std::cout;
 
 void Graphic::drawGameName() {
-
+	Utils::setColorText(11, 0);
 	cout << "\t\t\t _____\n";
 	cout << "\t\t\t|  __ \\ \n";
 	cout << "\t\t\t| |__) |__  _ __   __ _\n";
@@ -16,13 +16,20 @@ void Graphic::drawGameName() {
 	cout << "\t\t\t|_|   \\___/|_| |_|\\__, |\n";
 	cout << "\t\t\t                   __/ |\n";
 	cout << "\t\t\t                  |___/\n";
-
+	Utils::setColorText(15, 0);
 }
 void Graphic::drawBall(Ball b) {
 	// Di chuyển đến tọa độ cần vẽ 
 	Utils::gotoXY(b.getX(), b.getY());
+
+	//màu đỏ
+	Utils::setColorText(10, 0);
+
 	// Vẽ Ball
 	putchar('O');
+
+	//màu trắng
+	Utils::setColorText(15, 0);
 }
 void Graphic::deleteBall(Ball b) {
 	// Di chuyển đến tọa độ cần xóa 
@@ -37,6 +44,10 @@ void Graphic::drawBoard(Board a)
 	// Rào trên
 	b = a.getTopLeft();
 	c = a.getTopRight();
+
+	//màu đỏ
+	Utils::setColorText(12, 0);
+
 	for (int x = b.first; x <= c.first; x++)
 	{
 		// Di chuyển đến tọa độ cần vẽ 
@@ -77,15 +88,26 @@ void Graphic::drawBoard(Board a)
 		// Vẽ rào phải
 		putchar(219);
 	}
+
+	//màu trắng
+	Utils::setColorText(15, 0);
+
 }
 
 void Graphic::drawStick(Stick s) {
 	// Di chuyển đến tọa độ cần vẽ 
 	Utils::gotoXY(s.getX(), s.getY());
+
+	//màu xanh dương
+	Utils::setColorText(3, 0);
+
 	// Vẽ Stick
 	for (int i = 0; i <= s.getSize(); i++) {
 		putchar('*');
 	}
+
+	//màu trắng
+	Utils::setColorText(15, 0);
 }
 
 void Graphic::deleteStick(Stick s) {

@@ -56,17 +56,17 @@ void Game::loop() {
 
 				Utils::clearScreen();
 
-
-				point_player1 = 0;
-				point_player2 = 0;
-
 				board.showBoard();
 
 				player1.spawn();
 				player2.spawn();
 
+				ball.setX(board.getTopLeft().first + board.getWidth() / 2);
+				ball.setY(board.getTopLeft().second + board.getWidth() / 2);
 				ball.spawn();
 
+				point_player1 = 0;
+				point_player2 = 0;
 
 				Utils::gotoXY(5, board.getTopLeft().second + 5);
 				printf("%d\t\t", point_player2);

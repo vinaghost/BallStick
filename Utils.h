@@ -53,6 +53,35 @@ public:
 	static COORD getCursor();
 
 	/**
+	* Thiết lập màu cho chữ được in ra màn hình console
+	*
+	* @note Chú ý cần phải thiết lập lại chữ màu trắng nền đen sau khi
+	* đã in ra chữ nhằm tránh trường hợp phần sau có màu không theo ý muốn
+	*        0 = đen
+	*        1 = xanh dương đậm
+	*        2 = xanh lá
+	*        3 = xanh dương nhạt
+	*        4 = đỏ
+	*        5 = tím
+	*        6 = vàng đất
+	*        7 = trắng xám
+	*        8 = xám
+	*        9 = xanh dương giữa 1 và 3
+	*        10 = xanh lá mạ
+	*        11 = xanh dương nhạt hơn xanh dương nhạt
+	*        12 = đỏ nhạt
+	*        13 = tím nhạt
+	*        14 = vàng nhạt
+	*        15 = trắng
+	* @param color            màu của chữ
+	* @param colorBacckground màu của nền trong dòng chữ xuất hiện ( không phải 
+	*						  toàn bộ nền của console)
+	*
+	* @noreturn
+	*/
+	static void setColorText(int color, int colorBackground);
+
+	/**
 	* Xoá màn hình
 	*
 	* @note In liên tục 20 '\n' để có xoá màn hình,

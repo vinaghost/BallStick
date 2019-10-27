@@ -91,7 +91,12 @@ COORD Utils::getCursor() {
 		return invalid;
 	}
 }
+/*https://www.daniweb.com/programming/software-development/code/216345/add-a-little-color-to-your-console-text*/
+void Utils::setColorText(int color, int colorBackground) {
 
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color + colorBackground * 16);
+
+}
 void Utils::clearScreen() {
 	
 	for (int i = 0; i < 80; i++) {

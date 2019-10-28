@@ -30,17 +30,15 @@ class Game {
 private:
 	int choice;
 	bool tiepTuc;
-	Ball ball;
-	Stick player1;
-	Stick player2;
 
 	Board board;
 
+	Ball ball;
+	Stick pTop;
+	Stick pBot;
+	
 	bool mode;
-
-	int point_player1;
-	int point_player2;
-
+	
 	Menu menuMain;
 	MenuSetting menuSetting;
 
@@ -83,7 +81,7 @@ public:
 	*
 	* @noreturn
 	**/
-	void moveRight_Player1();
+	void moveRight_pTop();
 
 	/**
 	* Gọi khi nút qua trái của player 2 được bấm
@@ -93,7 +91,7 @@ public:
 	*
 	* @noreturn
 	**/
-	void moveLeft_Player1();
+	void moveLeft_pTop();
 
 	/**
 	* Gọi khi nút qua phải của player 2 được bấm
@@ -103,7 +101,7 @@ public:
 	*
 	* @noreturn
 	**/
-	void moveRight_Player2();
+	void moveRight_pBot();
 
 	/**
 	* Gọi khi nút qua trái của player 2 được bấm
@@ -113,5 +111,5 @@ public:
 	*
 	* @noreturn
 	**/
-	void moveLeft_Player2();
+	void moveLeft_pBot();
 };

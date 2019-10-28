@@ -41,16 +41,17 @@ void Game::loop() {
 				
 				board.setBoard(setting::boardTopLeft[menuSetting.getSizeBoard()].first, setting::boardTopLeft[menuSetting.getSizeBoard()].second, setting::boardWidth[menuSetting.getSizeBoard()], setting::boardHeight[menuSetting.getSizeBoard()]);
 				
-				player1.setBoard(&board);
-				player1.setSize(setting::lengthStick[menuSetting.getLengthStick()]);
-				player1.setX(board.getTopLeft().first + board.getWidth() / 2 - player1.getSize() / 2);
-				player1.setY(board.getTopLeft().second + 1);
+
+				pTop.setBoard(&board);
+				pTop.setSize(setting::lengthStick[menuSetting.getLengthStick()]);
+				pTop.setX(board.getTopLeft().first + board.getWidth() / 2 - pTop.getSize() / 2);
+				pTop.setY(board.getTopLeft().second + 1);
 
 
-				player2.setBoard(&board);
-				player2.setSize(setting::lengthStick[menuSetting.getLengthStick()]);
-				player2.setX(board.getBotLeft().first + board.getWidth() / 2 - player2.getSize()/2);
-				player2.setY(board.getBotLeft().second - 1);
+				pBot.setBoard(&board);
+				pBot.setSize(setting::lengthStick[menuSetting.getLengthStick()]);
+				pBot.setX(board.getBotLeft().first + board.getWidth() / 2 - pBot.getSize()/2);
+				pBot.setY(board.getBotLeft().second - 1);
 
 				ball.setBoard(&board);
 
@@ -58,21 +59,12 @@ void Game::loop() {
 
 				board.showBoard();
 
-				player1.spawn();
-				player2.spawn();
+				pTop.spawn();
+				pBot.spawn();
 
 				ball.setX(board.getTopLeft().first + board.getWidth() / 2);
 				ball.setY(board.getTopLeft().second + board.getWidth() / 2);
 				ball.spawn();
-
-				point_player1 = 0;
-				point_player2 = 0;
-
-				Utils::gotoXY(5, board.getTopLeft().second + 5);
-				printf("%d\t\t", point_player2);
-
-				Utils::gotoXY(5, board.getBotLeft().second - 5);
-				printf("%d\t\t", point_player1);
 
 				this->tiepTuc = true;
 				this->mode = menuSetting.getMode();
@@ -85,19 +77,19 @@ void Game::loop() {
 
 
 						if (GetKeyState('A') & 0x8000) {
-							player1.update(player1.getX() - 1);
+							pTop.update(pTop.getX() - 1);
 						}
 
 						if (GetKeyState('D') & 0x8000) {
-							player1.update(player1.getX() + 1);
+							pTop.update(pTop.getX() + 1);
 						}
 
 						if (GetKeyState('J') & 0x8000 && this->mode == 0) {
-							player2.update(player2.getX() - 1);
+							pBot.update(pBot.getX() - 1);
 						}
 
 						if (GetKeyState('L') & 0x8000 && this->mode == 0) {
-							player2.update(player2.getX() + 1);
+							pBot.update(pBot.getX() + 1);
 						}
 
 						if (GetKeyState(VK_ESCAPE) & 0x8000) {
@@ -106,10 +98,10 @@ void Game::loop() {
 
 						//xử lí bot
 						if (this->mode == 1) {
-							if (ball.getX() > player2.getX())
-								player2.update(player2.getX() + 1);
-							else if (ball.getX() < player2.getX())
-								player2.update(player2.getX() - 1);
+							if (ball.getX() > pBot.getX())
+								pBot.update(pBot.getX() + 1);
+							else if (ball.getX() < pBot.getX())
+								pBot.update(pBot.getX() - 1);
 						}
 
 
@@ -118,36 +110,26 @@ void Game::loop() {
 
 					if (this->curTime > this->startTime_ball) {
 
-						int result = ball.update(player1, player2);
+						int result = ball.update(pTop, pBot);
 
 						switch (result) {
-							//chạm biên trên, player 2 thua
+							//chạm biên trên, pTop thắng
 							case 3:
-								point_player1++;
 								this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
 
 								ball.despawn();
 								ball.setX(board.getTopLeft().first + board.getWidth() / 2);
 								ball.setY(board.getTopLeft().second + board.getHeight() / 2);
 								ball.spawn();
-
-								Utils::gotoXY(5, board.getBotLeft().second - 5);
-								printf("%d\t\t", point_player1);
 								
 								break;
-								//chạm biên dưới, player 1 thua
+								//chạm biên dưới, pBot thắng
 							case 4:
-								point_player2++;
 								this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
 								ball.despawn();
 								ball.setX(board.getTopLeft().first + board.getWidth() / 2);
 								ball.setY(board.getTopLeft().second + board.getHeight() / 2);
-								ball.spawn();
-
-
-								Utils::gotoXY(5, board.getTopLeft().second + 5);
-								printf("%d\t\t", point_player2);
-								
+								ball.spawn();								
 
 								break;
 
@@ -184,16 +166,16 @@ bool Game::isContinue() {
 	return tiepTuc;
 }
 
-void Game::moveRight_Player1() {
-	player1.update(player1.getX() + 1);
+void Game::moveRight_pTop() {
+	pTop.update(pTop.getX() + 1);
 }
-void Game::moveLeft_Player1() {
-	player1.update(player1.getX() - 1);
+void Game::moveLeft_pTop() {
+	pTop.update(pTop.getX() - 1);
 }
 
-void Game::moveRight_Player2() {
-	player2.update(player2.getX() + 1);
+void Game::moveRight_pBot() {
+	pBot.update(pBot.getX() + 1);
 }
-void Game::moveLeft_Player2() {
-	player2.update(player2.getX() - 1);
+void Game::moveLeft_pBot() {
+	pBot.update(pBot.getX() - 1);
 }

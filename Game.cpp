@@ -62,9 +62,7 @@ void Game::loop() {
 				pTop.spawn();
 				pBot.spawn();
 
-				ball.setX(board.getTopLeft().first + board.getWidth() / 2);
-				ball.setY(board.getTopLeft().second + board.getWidth() / 2);
-				ball.spawn();
+				ball.reset();
 
 				this->tiepTuc = true;
 				this->mode = menuSetting.getMode();
@@ -77,31 +75,37 @@ void Game::loop() {
 
 
 						if (GetKeyState('A') & 0x8000) {
-							pTop.update(pTop.getX() - 1);
+							pBot.update(pBot.getX() - 1);							
 						}
 
 						if (GetKeyState('D') & 0x8000) {
-							pTop.update(pTop.getX() + 1);
+							pBot.update(pBot.getX() + 1);
 						}
 
 						if (GetKeyState('J') & 0x8000 && this->mode == 0) {
-							pBot.update(pBot.getX() - 1);
+							pTop.update(pTop.getX() - 1);
 						}
 
 						if (GetKeyState('L') & 0x8000 && this->mode == 0) {
-							pBot.update(pBot.getX() + 1);
+							pTop.update(pTop.getX() + 1);
 						}
 
 						if (GetKeyState(VK_ESCAPE) & 0x8000) {
 							this->tiepTuc = false;
+
+							pTop.despawn();
+							pBot.despawn();
+							ball.despawn();
 						}
 
 						//xử lí bot
 						if (this->mode == 1) {
-							if (ball.getX() > pBot.getX())
-								pBot.update(pBot.getX() + 1);
-							else if (ball.getX() < pBot.getX())
-								pBot.update(pBot.getX() - 1);
+							if (ball.getX() > pTop.getX()) {
+								pTop.update(pTop.getX() + 1);
+							}
+							else if (ball.getX() < pTop.getX()) {
+								pTop.update(pTop.getX() - 1);
+							}
 						}
 
 
@@ -115,22 +119,11 @@ void Game::loop() {
 						switch (result) {
 							//chạm biên trên, pTop thắng
 							case 3:
-								this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
-
-								ball.despawn();
-								ball.setX(board.getTopLeft().first + board.getWidth() / 2);
-								ball.setY(board.getTopLeft().second + board.getHeight() / 2);
-								ball.spawn();
-								
+								this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];								
 								break;
 								//chạm biên dưới, pBot thắng
 							case 4:
 								this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
-								ball.despawn();
-								ball.setX(board.getTopLeft().first + board.getWidth() / 2);
-								ball.setY(board.getTopLeft().second + board.getHeight() / 2);
-								ball.spawn();								
-
 								break;
 
 							//chạm stick trên

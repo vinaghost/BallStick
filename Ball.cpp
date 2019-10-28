@@ -13,6 +13,12 @@ void Ball::setDirect(Direction direction) {
 
 Direction Ball::getDirect() { return this->direction; }
 
+void Ball::reset() {
+	despawn();
+	x = b->getTopLeft().first + b->getWidth() / 2;
+	y = b->getTopLeft().second + b->getHeight() / 2;
+	spawn();
+}
 int Ball::update(Stick top, Stick bot) {
 	
 	// đụng biên trên

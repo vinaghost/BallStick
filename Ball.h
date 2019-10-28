@@ -43,6 +43,8 @@ public:
 	**/
 	void setDirect(Direction direction);
 	
+	void reset();
+
 	/**
 	* Trả về hướng của Ball
 	*

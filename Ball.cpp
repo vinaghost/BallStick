@@ -3,7 +3,7 @@
 #include "Graphic.h"
 
 
-// Khởi tạo tạo độ ban đầu của Ball, giới hạn di chuyển của Ball
+// Khởi tạo tạo độ ban đầu của Ball
 Ball::Ball() : Entity(), direction(BOT_LEFT) {}
 
 
@@ -131,7 +131,7 @@ Direction Ball::getNext(int truongHop) {
 
 				case TOP_RIGHT:
 					//góc phải
-					if (this->x >= this->b->getTopRight().second - 1)
+					if (this->x >= this->b->getTopRight().first - 1)
 						return BOT_LEFT;
 
 					return BOT_RIGHT;
@@ -148,7 +148,7 @@ Direction Ball::getNext(int truongHop) {
 
 				case BOT_RIGHT:
 					//góc phải
-					if (this->x >= this->b->getTopRight().second - 1)
+					if (this->x >= this->b->getTopRight().first - 1)
 						return TOP_LEFT;
 					return TOP_RIGHT;
 			}

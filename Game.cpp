@@ -3,26 +3,29 @@
 #include "Graphic.h"
 #include "Menu.h"
 
-#include <stdio.h>
+#include <iostream>
 #include <Windows.h>
+
+using std::cout;
 
 Game::Game() {
 	Utils::fixConsoleWindow();
-	this->tiepTuc = true;
+	this->newRound = true;
 	this->choice = 0;
 
 	this->startTime_player = 0;
 	this->startTime_ball = 0;
-
-	this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
 	
-	this->mode = true;
-
-	menuMain.addItem("Start");
+	menuMain.addItem("Bat dau");
 	menuMain.addItem("Setting");
-	menuMain.addItem("Exit");
+	menuMain.addItem("Thoat");
 
 	menuMain.setCoordItem(30, 10);
+
+	menuContinue.addItem("Tiep tuc");
+	menuContinue.addItem("Tro lai menu chinh");
+	menuContinue.setCoordItem(25, 20);
+
 
 	this->loop();
 }
@@ -36,114 +39,143 @@ void Game::loop() {
 
 		switch (choice) {
 			case 0:
+				while (isNewRound()) {
+					Utils::showConsoleCursor(false);
 
-				Utils::showConsoleCursor(false);
-				
-				board.setBoard(setting::boardTopLeft[menuSetting.getSizeBoard()].first, setting::boardTopLeft[menuSetting.getSizeBoard()].second, setting::boardWidth[menuSetting.getSizeBoard()], setting::boardHeight[menuSetting.getSizeBoard()]);
-				
+					this->winner = -1;
+					this->tiepTuc = true;
+					this->mode = menuSetting.getMode();
 
-				pTop.setBoard(&board);
-				pTop.setSize(setting::lengthStick[menuSetting.getLengthStick()]);
-				pTop.setX(board.getTopLeft().first + board.getWidth() / 2 - pTop.getSize() / 2);
-				pTop.setY(board.getTopLeft().second + 1);
+					this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
 
 
-				pBot.setBoard(&board);
-				pBot.setSize(setting::lengthStick[menuSetting.getLengthStick()]);
-				pBot.setX(board.getBotLeft().first + board.getWidth() / 2 - pBot.getSize()/2);
-				pBot.setY(board.getBotLeft().second - 1);
+					board.setBoard(setting::boardTopLeft[menuSetting.getSizeBoard()].first, setting::boardTopLeft[menuSetting.getSizeBoard()].second, setting::boardWidth[menuSetting.getSizeBoard()], setting::boardHeight[menuSetting.getSizeBoard()]);
 
-				ball.setBoard(&board);
+					pTop.setBoard(&board);
+					pTop.setSize(setting::lengthStick[menuSetting.getLengthStick()]);
+					pTop.setX(board.getTopLeft().first + board.getWidth() / 2 - pTop.getSize() / 2);
+					pTop.setY(board.getTopLeft().second + 1);
+					pTop.setColor(4); //đỏ
 
-				Utils::clearScreen();
+					pBot.setBoard(&board);
+					pBot.setSize(setting::lengthStick[menuSetting.getLengthStick()]);
+					pBot.setX(board.getBotLeft().first + board.getWidth() / 2 - pBot.getSize() / 2);
+					pBot.setY(board.getBotLeft().second - 1);
+					pBot.setColor(10); //xanh lá
 
-				board.showBoard();
+					ball.setBoard(&board);
 
-				pTop.spawn();
-				pBot.spawn();
+					Utils::clearScreen();
 
-				ball.reset();
+					board.showBoard();
 
-				this->tiepTuc = true;
-				this->mode = menuSetting.getMode();
+					pTop.spawn();
+					pBot.spawn();
 
-				while (isContinue()) {
+					ball.reset();
 
-					this->curTime = GetTickCount();
+					while (isContinue()) {
 
-					if (this->curTime > this->startTime_player) {
+						this->curTime = GetTickCount();
+
+						if (this->curTime > this->startTime_player) {
 
 
-						if (GetKeyState('A') & 0x8000) {
-							pBot.update(pBot.getX() - 1);							
+							if (GetKeyState('A') & 0x8000) {
+								pBot.update(pBot.getX() - 1);
+							}
+
+							if (GetKeyState('D') & 0x8000) {
+								pBot.update(pBot.getX() + 1);
+							}
+
+							if (GetKeyState('J') & 0x8000 && this->mode == 0) {
+								pTop.update(pTop.getX() - 1);
+							}
+
+							if (GetKeyState('L') & 0x8000 && this->mode == 0) {
+								pTop.update(pTop.getX() + 1);
+							}
+
+							if (GetKeyState(VK_ESCAPE) & 0x8000) {
+								this->tiepTuc = false;
+
+								pTop.despawn();
+								pBot.despawn();
+								ball.despawn();
+							}
+
+							//xử lí bot
+							if (this->mode == 1) {
+								if (ball.getX() > pTop.getX()) {
+									pTop.update(pTop.getX() + 1);
+								}
+								else if (ball.getX() < pTop.getX()) {
+									pTop.update(pTop.getX() - 1);
+								}
+							}
+
+
+							this->startTime_player = this->curTime + setting::tick_player[menuSetting.getSpeedStick()];
 						}
 
-						if (GetKeyState('D') & 0x8000) {
-							pBot.update(pBot.getX() + 1);
+						if (this->curTime > this->startTime_ball) {
+
+							int result = ball.update(pTop, pBot);
+
+							switch (result) {
+								//chạm biên trên, pTop thắng
+								case 3:
+									this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
+									this->winner = this->mode == 1 ? 0 : 1;
+									
+									break;
+									//chạm biên dưới, pBot thắng
+								case 4:
+									this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
+									this->winner = 2;
+									break;
+
+									//chạm stick trên
+								case 5:
+									//chạm stick dưới
+								case 6:
+									// tăng 10% tốc độ
+									this->tick_ball_game -= setting::tick_ball[menuSetting.getSpeedBall()] / 10;
+									break;
+							}
+
+
+							this->startTime_ball = this->curTime + this->tick_ball_game;
+
 						}
 
-						if (GetKeyState('J') & 0x8000 && this->mode == 0) {
-							pTop.update(pTop.getX() - 1);
-						}
-
-						if (GetKeyState('L') & 0x8000 && this->mode == 0) {
-							pTop.update(pTop.getX() + 1);
-						}
-
-						if (GetKeyState(VK_ESCAPE) & 0x8000) {
+						if (winner != -1) {
 							this->tiepTuc = false;
 
 							pTop.despawn();
 							pBot.despawn();
 							ball.despawn();
-						}
 
-						//xử lí bot
-						if (this->mode == 1) {
-							if (ball.getX() > pTop.getX()) {
-								pTop.update(pTop.getX() + 1);
+							Utils::clearScreen();
+							for (int i = 0; i < 10; i++) {
+								cout << "\n";
 							}
-							else if (ball.getX() < pTop.getX()) {
-								pTop.update(pTop.getX() - 1);
+							showWinner(winner);
+
+							Utils::gotoXY(0, 0);
+							Utils::showConsoleCursor(true);
+							menuContinue.show();
+
+
+							choice = menuContinue.getChoice();
+
+							if (choice == 1) {
+								this->newRound = false;
 							}
 						}
-
-
-						this->startTime_player = this->curTime + setting::tick_player[menuSetting.getSpeedStick()];
 					}
-
-					if (this->curTime > this->startTime_ball) {
-
-						int result = ball.update(pTop, pBot);
-
-						switch (result) {
-							//chạm biên trên, pTop thắng
-							case 3:
-								this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];								
-								break;
-								//chạm biên dưới, pBot thắng
-							case 4:
-								this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
-								break;
-
-							//chạm stick trên
-							case 5:
-							//chạm stick dưới
-							case 6:
-								// tăng 10% tốc độ
-								this->tick_ball_game -= setting::tick_ball[menuSetting.getSpeedBall()] / 10;
-								break;
-						}
-
-						
-						this->startTime_ball = this->curTime + this->tick_ball_game;
-
-					}
-
 				}
-
-				Utils::showConsoleCursor(true);
-
 				break;
 			case 1:
 				menuSetting.show();
@@ -159,6 +191,10 @@ bool Game::isContinue() {
 	return tiepTuc;
 }
 
+bool Game::isNewRound() {
+	return newRound;
+}
+
 void Game::moveRight_pTop() {
 	pTop.update(pTop.getX() + 1);
 }
@@ -171,4 +207,39 @@ void Game::moveRight_pBot() {
 }
 void Game::moveLeft_pBot() {
 	pBot.update(pBot.getX() - 1);
+}
+
+void Game::showWinner(int who) {
+	switch (who) {
+		case 0: // máy
+			Graphic::drawPlayerLose();
+			break;
+		case 1: // top thắng
+			Utils::setColorText(pTop.getColor(), pTop.getBackgroundColor());
+			Graphic::drawPlayerWin();
+
+			for (int i = 0; i < 14; i++) {
+				cout << "\n";
+			}
+
+			Utils::setColorText(pBot.getColor(), pBot.getBackgroundColor());
+			Graphic::drawPlayerLose();
+
+			Utils::setColorText(15, 0);
+			break;
+		case 2: // bottom thắng
+			Utils::setColorText(pTop.getColor(), pTop.getBackgroundColor());
+			Graphic::drawPlayerLose();
+
+			for (int i = 0; i < 14; i++) {
+				cout << "\n";
+			}
+
+
+			Utils::setColorText(pBot.getColor(), pBot.getBackgroundColor());
+			Graphic::drawPlayerWin();
+
+			Utils::setColorText(15, 0);
+			break;
+	}
 }

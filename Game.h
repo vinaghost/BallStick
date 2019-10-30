@@ -30,6 +30,8 @@ class Game {
 private:
 	int choice;
 	bool tiepTuc;
+	bool newRound;
+	int winner;
 
 	Board board;
 
@@ -41,6 +43,7 @@ private:
 	
 	Menu menuMain;
 	MenuSetting menuSetting;
+	Menu menuContinue;
 
 
 	//Biến quản lí thời gian
@@ -62,6 +65,16 @@ public:
 	* @return giá trị true hoặc false của Game::tiepTuc
 	**/
 	bool isContinue();
+
+	/**
+	* Trả về giá trị của Game::newRound
+	*
+	* @note
+	*
+	*
+	* @return giá trị true hoặc false của Game::newRound
+	**/
+	bool isNewRound();
 
 	/**
 	* Xử lí các sự kiện trong game
@@ -112,4 +125,7 @@ public:
 	* @noreturn
 	**/
 	void moveLeft_pBot();
+
+
+	void showWinner(int who);
 };

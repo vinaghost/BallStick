@@ -38,8 +38,6 @@ void Menu::addItem(string itemName) {
 }
 
 void Menu::show() {
-	// Xóa màn hình
-	Utils::clearScreen();
 	// In tên game
 	Graphic::drawGameName();
 

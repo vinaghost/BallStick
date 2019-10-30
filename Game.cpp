@@ -101,6 +101,7 @@ void Game::loop() {
 
 							if (GetKeyState(VK_ESCAPE) & 0x8000) {
 								this->tiepTuc = false;
+								this->newRound = false;
 
 								pTop.despawn();
 								pBot.despawn();
@@ -108,14 +109,14 @@ void Game::loop() {
 							}
 
 							//xử lí bot
-							if (this->mode == 1) {
+							/*if (this->mode == 1) {
 								if (ball.getX() > pTop.getX()) {
 									pTop.update(pTop.getX() + 1);
 								}
 								else if (ball.getX() < pTop.getX()) {
 									pTop.update(pTop.getX() - 1);
 								}
-							}
+							}*/
 
 
 							this->startTime_player = this->curTime + setting::tick_player[menuSetting.getSpeedStick()];
@@ -126,16 +127,16 @@ void Game::loop() {
 							int result = ball.update(pTop, pBot);
 
 							switch (result) {
-								//chạm biên trên, pTop thắng
+								//chạm biên trên, pBot thắng
 								case 3:
 									this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
-									this->winner = this->mode == 1 ? 0 : 1;
+									this->winner = 2;
 									
 									break;
-									//chạm biên dưới, pBot thắng
+									//chạm biên dưới, pTop thắng
 								case 4:
 									this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
-									this->winner = 2;
+									this->winner = this->mode == 1 ? 0 : 1;
 									break;
 
 									//chạm stick trên
@@ -183,6 +184,7 @@ void Game::loop() {
 							}
 						}
 					}
+					Utils::showConsoleCursor(true);
 				}
 				break;
 			case 1:
@@ -236,13 +238,16 @@ void Game::showWinner(int who) {
 			Utils::setColorText(15, 0);
 			break;
 		case 2: // bottom thắng
-			Utils::setColorText(4, 0);
-			Graphic::drawPlayerLose();
 
-			for (int i = 0; i < 14; i++) {
-				cout << "\n";
+			if (this->mode == 0) {
+				Utils::setColorText(4, 0);
+				Graphic::drawPlayerLose();
+
+
+				for (int i = 0; i < 14; i++) {
+					cout << "\n";
+				}
 			}
-
 
 			Utils::setColorText(10, 0);
 			Graphic::drawPlayerWin();

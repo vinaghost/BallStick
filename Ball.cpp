@@ -38,14 +38,14 @@ int Ball::update(Stick top, Stick bot) {
 
 	// đụng vào stick trên
 	// x nằm bên phải top.getX && x nằm bên trái top.getX + top.getsize && y nằm bên dưới 1 ô so với top.getY
-	if ( top.getX() - 1  <= this->x  && this->x <= top.getX() + top.getSize() + 1 && top.getY() + 1 == this->y) {
+	if ( top.getX() - 1  <= this->x  && this->x <= top.getX() + top.getSize() && top.getY() + 1 == this->y) {
 		directNext = getNext(2);
 		result = 5;
 	}
 
 	// đụng vào stick dưới
 	// x nằm bên phải bot.getX && x nằm bên trái bot.getX + bot.getsize && y nằm bên trên 1 ô so với bot.getY
-	else if (bot.getX() - 1 <= this->x && this->x <= bot.getX() + bot.getSize() + 1 && bot.getY() - 1 == this->y) {
+	else if (bot.getX() - 1 <= this->x && this->x <= bot.getX() + bot.getSize() && bot.getY() - 1 == this->y) {
 		directNext = getNext(3);
 		result = 6;
 	}

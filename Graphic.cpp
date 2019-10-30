@@ -56,10 +56,12 @@ void Graphic::draw(Entity* ent) {
 	//Tới vị trí
 	Utils::gotoXY(ent->getX(), ent->getY());
 
+	Utils::setColorText(ent->getColor(), ent->getBackgroundColor());
+
 	// Vẽ Stick
 	if (ent->getNameClass() == "Stick") {
 		//màu xanh dương
-		Utils::setColorText(3, 0);
+		
 		for (int i = 0; i < ent->getSize(); i++) {
 			putchar('*');
 		}
@@ -67,8 +69,6 @@ void Graphic::draw(Entity* ent) {
 	// Vẽ Ball
 	else if (ent->getNameClass() == "Ball") {
 		//màu đỏ
-		Utils::setColorText(10, 0);
-
 		putchar('O');
 	}
 	//màu trắng

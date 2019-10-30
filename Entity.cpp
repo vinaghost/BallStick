@@ -3,7 +3,7 @@
 #include "Graphic.h"
 
 
-Entity::Entity() : b(NULL), x(0), y(0), size(0), spawned(false) {}
+Entity::Entity() : b(NULL), x(0), y(0), size(0), color(15), color_background(0), spawned(false) {}
 
 void Entity::setBoard(Board *b) {
 	if (b != NULL) {
@@ -29,6 +29,18 @@ void Entity::setSize(int size) {
 	}
 }
 
+void Entity::setColor(int color) {
+	if (color >= 0 && color <= 15) {
+		this->color = color;
+	}
+}
+
+void Entity::setBackgroundColor(int color_background) {
+	if (color_background >= 0 && color_background <= 15) {
+		this->color_background = color_background;
+	}
+}
+
 int Entity::getX() {
 	return this->x;
 }
@@ -39,6 +51,14 @@ int Entity::getY() {
 
 int Entity::getSize() {
 	return this->size;
+}
+
+int Entity::getColor() {
+	return this->color;
+}
+
+int Entity::getBackgroundColor() {
+	return this->color_background;
 }
 
 void Entity::spawn() {

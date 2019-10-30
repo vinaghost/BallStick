@@ -12,6 +12,8 @@ protected:
 
 	bool spawned;
 
+	int color, color_background;
+
 public:
 	Entity();
 
@@ -23,7 +25,15 @@ public:
 
 	virtual void setY(int y);
 
+	void setColor(int color);
+
+	void setBackgroundColor(int color_background);
+
 	void setSize(int size);
+
+	int getColor();
+
+	int getBackgroundColor();
 
 	int getX();
 

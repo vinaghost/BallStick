@@ -1,9 +1,6 @@
-//#include "Game.h"
-#include "Graphic.h"
+#include "Game.h"
+
 int main() {
-	//Game g;
-	Graphic::drawPlayerWin();
-	Graphic::drawPlayerLose();
-	getchar();
+	Game g;
 	return 0;
 }

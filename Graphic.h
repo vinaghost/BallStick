@@ -42,5 +42,8 @@ public:
 
 	static void draw(Entity* ent);
 	static void remove(Entity* ent);
+
+	static void drawPlayerWin();
+	static void drawPlayerLose();
 };
 

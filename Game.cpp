@@ -10,7 +10,7 @@ using std::cout;
 
 Game::Game() {
 	Utils::fixConsoleWindow();
-	this->newRound = true;
+	
 	this->choice = 0;
 
 	this->startTime_player = 0;
@@ -39,6 +39,8 @@ void Game::loop() {
 
 		switch (choice) {
 			case 0:
+
+				this->newRound = true;
 				while (isNewRound()) {
 					Utils::showConsoleCursor(false);
 
@@ -151,6 +153,12 @@ void Game::loop() {
 						}
 
 						if (winner != -1) {
+							if (winner == 0) {
+								Utils::playSound("music\\lose_music.wav");
+							}
+							else {
+								Utils::playSound("music\\win_music.wav");
+							}
 							this->tiepTuc = false;
 
 							pTop.despawn();
@@ -215,20 +223,20 @@ void Game::showWinner(int who) {
 			Graphic::drawPlayerLose();
 			break;
 		case 1: // top thắng
-			Utils::setColorText(pTop.getColor(), pTop.getBackgroundColor());
+			Utils::setColorText(10, 0);
 			Graphic::drawPlayerWin();
 
 			for (int i = 0; i < 14; i++) {
 				cout << "\n";
 			}
 
-			Utils::setColorText(pBot.getColor(), pBot.getBackgroundColor());
+			Utils::setColorText(4, 0);
 			Graphic::drawPlayerLose();
 
 			Utils::setColorText(15, 0);
 			break;
 		case 2: // bottom thắng
-			Utils::setColorText(pTop.getColor(), pTop.getBackgroundColor());
+			Utils::setColorText(4, 0);
 			Graphic::drawPlayerLose();
 
 			for (int i = 0; i < 14; i++) {
@@ -236,7 +244,7 @@ void Game::showWinner(int who) {
 			}
 
 
-			Utils::setColorText(pBot.getColor(), pBot.getBackgroundColor());
+			Utils::setColorText(10, 0);
 			Graphic::drawPlayerWin();
 
 			Utils::setColorText(15, 0);

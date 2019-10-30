@@ -1,8 +1,9 @@
-﻿
-#define _CRT_SECURE_NO_WARNINGS
+﻿#pragma comment(lib, "winmm.lib")
+
 #include "utils.h"
 
-#include <windows.h>
+#include <Windows.h>
+#include <mmsystem.h>
 #include <cstdio>
 
 void Utils::fixConsoleWindow() {
@@ -54,7 +55,7 @@ void Utils::fixConsoleWindow() {
 	cfi.FontFamily = FF_DONTCARE;
 	cfi.FontWeight = FW_NORMAL;
 	//Font chạy ổn định nhất: Lucida Console
-	wcscpy(cfi.FaceName, L"Lucida Console");
+	wcscpy_s(cfi.FaceName, L"Lucida Console");
 
 	SetCurrentConsoleFontEx(handle, FALSE, &cfi);
 
@@ -103,4 +104,8 @@ void Utils::clearScreen() {
 		printf("\n");
 	}
 	gotoXY(0, 0);
+}
+
+void Utils::playSound(const char fileName[]) {
+	PlaySound(fileName, NULL, SND_FILENAME | SND_ASYNC);
 }

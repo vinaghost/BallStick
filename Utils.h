@@ -91,5 +91,15 @@ public:
 	* @noreturn
 	*/
 	static void clearScreen();
+
+	/**
+	* Phát file nhạc
+	*
+	* @note Chỉ file đuôi wav
+	*
+	* @param fileName tên file name
+	* @noreturn
+	*/
+	static void playSound(const char fileName[]);
 };
 

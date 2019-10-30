@@ -78,4 +78,12 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="music\lose_music.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="music\win_music.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+  </ItemGroup>
 </Project>

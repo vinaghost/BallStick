@@ -109,14 +109,14 @@ void Game::loop() {
 							}
 
 							//xử lí bot
-							/*if (this->mode == 1) {
+							if (this->mode == 1) {
 								if (ball.getX() > pTop.getX()) {
 									pTop.update(pTop.getX() + 1);
 								}
 								else if (ball.getX() < pTop.getX()) {
 									pTop.update(pTop.getX() - 1);
 								}
-							}*/
+							}
 
 
 							this->startTime_player = this->curTime + setting::tick_player[menuSetting.getSpeedStick()];
@@ -182,6 +182,7 @@ void Game::loop() {
 							if (choice == 1) {
 								this->newRound = false;
 							}
+							Utils::playSound(NULL);
 						}
 					}
 					Utils::showConsoleCursor(true);

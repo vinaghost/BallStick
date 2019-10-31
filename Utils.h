@@ -79,7 +79,7 @@ public:
 	*
 	* @noreturn
 	*/
-	static void setColorText(int color, int colorBackground);
+	static void setColorText(int color = 15, int colorBackground = 0);
 
 	/**
 	* Xoá màn hình

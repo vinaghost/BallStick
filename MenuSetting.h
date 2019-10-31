@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "Menu.h"
-
 /*
 Setting:
 - đối kháng
@@ -21,29 +20,16 @@ enum itemSetting {
 
 class MenuSetting :	public Menu {
 private:
+	
+	char szSetting[SAVE][3][11] = {
+		{ "PVP", "PVE" },
+		{ "Ngan", "Trung binh", "Dai"},
+		{ "Nho", "Trung binh",	"To" },
+		{ "Cham", "Trung binh", "Nhanh"},
+		{ "Cham", "Trung binh", "Nhanh"},
 
-	char mode[2][4] = {
-		"PVP",
-		"PVE"
 	};
 
-	char length[3][11] = {
-		"Ngan",
-		"Trung binh",
-		"Dai"
-	};
-
-	char size[3][11] = {
-		"Nho",
-		"Trung binh",
-		"To"
-	};
-
-	const char speed[3][11] = {
-		"Cham",
-		"Trung binh",
-		"Nhanh"
-	};
 
 	vector<int>itemSetting;
 

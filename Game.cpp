@@ -131,12 +131,20 @@ void Game::loop() {
 								case 3:
 									this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
 									this->winner = 2;
-									
+									Utils::playSound("music\\win_music.wav");
 									break;
 									//chạm biên dưới, pTop thắng
 								case 4:
 									this->tick_ball_game = setting::tick_ball[menuSetting.getSpeedBall()];
-									this->winner = this->mode == 1 ? 0 : 1;
+									
+									if (this->mode == 1) {
+										this->winner = 0;
+										Utils::playSound("music\\lose_music.wav");
+									}
+									else {
+										this->winner = 1;
+										Utils::playSound("music\\win_music.wav");
+									}
 									break;
 
 									//chạm stick trên
@@ -154,12 +162,7 @@ void Game::loop() {
 						}
 
 						if (winner != -1) {
-							if (winner == 0) {
-								Utils::playSound("music\\lose_music.wav");
-							}
-							else {
-								Utils::playSound("music\\win_music.wav");
-							}
+							
 							this->tiepTuc = false;
 
 							pTop.despawn();

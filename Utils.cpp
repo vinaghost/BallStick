@@ -1,6 +1,4 @@
-﻿#pragma comment(lib, "winmm.lib")
-
-#include "utils.h"
+﻿#include "utils.h"
 
 #include <Windows.h>
 #include <mmsystem.h>

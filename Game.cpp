@@ -41,7 +41,7 @@ void Game::loop() {
 		switch (choice) {
 			case 0:
 
-				Utils::playSound("");
+				Utils::playSound(NULL);
 				this->newRound = true;
 				while (isNewRound()) {
 					Utils::showConsoleCursor(false);
@@ -127,7 +127,9 @@ void Game::loop() {
 						if (this->curTime > this->startTime_ball) {
 
 							int result = ball.update(pTop, pBot);
-
+							if (result != 3 && result != 4 && result != 0) {
+								Utils::playSound("music\\ball_hit.wav");
+							}
 							switch (result) {
 								//chạm biên trên, pBot thắng
 								case 3:
@@ -250,7 +252,7 @@ void Game::showWinner(int who) {
 				Graphic::drawPlayerLose();
 
 
-				for (int i = 0; i < 14; i++) {
+				for (int i = 0; i < 19; i++) {
 					cout << "\n";
 				}
 			}

@@ -88,5 +88,8 @@
     <Media Include="music\background.wav">
       <Filter>Resource Files</Filter>
     </Media>
+    <Media Include="music\ball_hit.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

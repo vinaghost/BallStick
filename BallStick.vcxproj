@@ -142,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="music\background.wav" />
+    <Media Include="music\ball_hit.wav" />
     <Media Include="music\lose_music.wav" />
     <Media Include="music\win_music.wav" />
   </ItemGroup>

@@ -6,6 +6,8 @@
 #include <cstdio>
 
 void Utils::fixConsoleWindow() {
+	/*Thay đổi tên chương trình console*/
+	SetConsoleTitle(TEXT("Pong"));
 
 	/* Khoá phóng to và co giãn cửa sổ console */
 

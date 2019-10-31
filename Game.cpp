@@ -32,9 +32,13 @@ Game::Game() {
 
 void Game::loop() {
 
+	bool soundPlayed = false;
 	while (true) {
 		Utils::clearScreen();
-		Utils::playSound("music\\background.wav", true);
+		if (!soundPlayed) {
+			Utils::playSound("music\\background.wav", true);
+			soundPlayed = true;
+		}
 		menuMain.show();
 		choice = menuMain.getChoice();
 
@@ -42,6 +46,7 @@ void Game::loop() {
 			case 0:
 
 				Utils::playSound(NULL);
+				soundPlayed = false;
 				this->newRound = true;
 				while (isNewRound()) {
 					Utils::showConsoleCursor(false);

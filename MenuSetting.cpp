@@ -86,8 +86,8 @@ void MenuSetting::show() {
 
 		cout << this->itemName[item];
 
-		//xanh dương
-		Utils::setColorText(1);
+		//vàng đất
+		Utils::setColorText(6);
 		cout << szSetting[item][this->itemSetting[item]];
 		Utils::setColorText();
 
@@ -174,8 +174,8 @@ void MenuSetting::changeItem(int item, int direction) {
 
 	cout << this->itemName[item];
 
-	//xanh dương
-	Utils::setColorText(1);
+	//vàng đất
+	Utils::setColorText(6);
 	cout << szSetting[item][this->itemSetting[item]];
 	Utils::setColorText();
 

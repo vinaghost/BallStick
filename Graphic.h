@@ -40,10 +40,46 @@ public:
 	//static void drawStick(Stick s);
 	//static void deleteStick(Stick s);
 
+	/**
+	* Hiện thị Stick và Ball lên màn hình console
+	*
+	* @note Entity là đa hình của Stick và Ball
+	*
+	* @param Entity   đối tượng Entity để vẽ lên bảng
+	*
+	* @noreturn
+	**/
 	static void draw(Entity* ent);
+
+	/**
+	* Xóa Stick và Ball lên màn hình console
+	*
+	* @note Entity là đa hình của Stick và Ball
+	*
+	* @param Entity   đối tượng Entity để vẽ lên bảng
+	*
+	* @noreturn
+	**/
 	static void remove(Entity* ent);
 
+	/**
+	* Hiện thị người thắng
+	*
+	* @note 
+	*
+	*
+	* @noreturn
+	**/
 	static void drawPlayerWin();
+
+	/**
+	* Hiện thị người thua
+	*
+	* @note
+	*
+	*
+	* @noreturn
+	**/
 	static void drawPlayerLose();
 };
 

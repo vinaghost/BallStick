@@ -126,6 +126,13 @@ public:
 	**/
 	void moveLeft_pBot();
 
-
+	/**
+	* Hiển thị người chiến thắng
+	*
+	* @note
+	*
+	*
+	* @noreturn
+	**/
 	void showWinner(int who);
 };

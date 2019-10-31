@@ -43,6 +43,15 @@ public:
 	**/
 	void setDirect(Direction direction);
 	
+
+	/**
+	* Khởi tạo lại Ball
+	*
+	* @note khởi tạo lại vị trí lúc bắt đầu game
+	*
+	*
+	* @noreturn
+	**/
 	void reset();
 
 	/**
@@ -74,6 +83,14 @@ public:
 	**/
 	int update(Stick top, Stick boy);
 
+	/**
+	* Trả lại tên class
+	*
+	* @note 
+	*
+	*
+	* @return (string) tên Class
+	**/
 	string getNameClass();
 };
 

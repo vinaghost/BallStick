@@ -34,12 +34,14 @@ void Game::loop() {
 
 	while (true) {
 		Utils::clearScreen();
+		Utils::playSound("music\\background.wav", true);
 		menuMain.show();
 		choice = menuMain.getChoice();
 
 		switch (choice) {
 			case 0:
 
+				Utils::playSound("");
 				this->newRound = true;
 				while (isNewRound()) {
 					Utils::showConsoleCursor(false);

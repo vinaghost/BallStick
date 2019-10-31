@@ -100,6 +100,6 @@ public:
 	* @param fileName tên file name
 	* @noreturn
 	*/
-	static void playSound(const char fileName[]);
+	static void playSound(const char fileName[], bool loop = false);
 };
 

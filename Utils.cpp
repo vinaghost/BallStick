@@ -1,4 +1,5 @@
-﻿#include "utils.h"
+﻿#pragma comment(lib, "winmm.lib")
+#include "utils.h"
 
 #include <Windows.h>
 #include <mmsystem.h>
@@ -104,6 +105,8 @@ void Utils::clearScreen() {
 	gotoXY(0, 0);
 }
 
-void Utils::playSound(const char fileName[]) {
-	PlaySound(fileName, NULL, SND_FILENAME | SND_ASYNC);
+void Utils::playSound(const char fileName[], bool loop) {
+	int flag = SND_FILENAME | SND_ASYNC;
+	if (loop) flag |= SND_LOOP;
+	PlaySound(fileName, NULL, flag);
 }

@@ -141,6 +141,7 @@
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="music\background.wav" />
     <Media Include="music\lose_music.wav" />
     <Media Include="music\win_music.wav" />
   </ItemGroup>
